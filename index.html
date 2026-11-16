@@ -115,8 +115,10 @@ section.block{padding:72px 0;border-bottom:1px solid var(--line)}
 .app .genre{color:var(--muted);font-size:.88rem}
 .app p{margin:0;font-size:.96rem;color:var(--muted);flex:1}
 .app-foot{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.app-foot .more{flex:none;white-space:nowrap}
 .more{font-size:.88rem;font-weight:600;color:var(--accent)}
-.status{align-self:flex-start;font:500 .78rem var(--mono);padding:3px 9px;border-radius:99px;border:1px solid currentColor;white-space:nowrap}
+.status{align-self:flex-start;font:500 .78rem var(--mono);padding:3px 9px;border-radius:12px;border:1px solid currentColor;white-space:normal;line-height:1.35;max-width:100%;min-width:0;overflow-wrap:anywhere}
+.icon.img{background:none!important;overflow:hidden;padding:0}.icon.img img{width:100%;height:100%;object-fit:cover;display:block}
 .status.test{color:var(--ok)}
 .status.soon{color:var(--accent)}
 .status.dev{color:var(--muted)}
@@ -700,7 +702,7 @@ const LIVE = !!(BACKEND.url && BACKEND.anonKey);
 /* status: test = geschlossener Test bei Google Play, soon = Upload steht an, dev = in Arbeit
    play: Link zur Play-Store-Seite, sobald vorhanden */
 const APPS = [
-  {id:"kratzbaum-krawall", name:"Kratzbaum-Krawall", status:"test", badge:{de:"Google-Play-Test · iOS freigegeben",en:"Play testing · approved for iOS"}, color:"#d9682b", letter:"K",
+  {id:"kratzbaum-krawall", img:"icons/kratzbaum-krawall.webp", name:"Kratzbaum-Krawall", status:"test", badge:{de:"Google-Play-Test · iOS freigegeben",en:"Play testing · approved for iOS"}, color:"#d9682b", letter:"K",
    genre:{de:"3D-Bauspiel",en:"3D building game"},
    text:{de:"Bau mit deinem Leckerli-Budget einen Kratzbaum. Dann kommen Archie, May, Dori, Leopold und Nala und testen ihn, ohne Gnade.",en:"Build a cat tree on a budget of treats. Then Archie, May, Dori, Leopold and Nala arrive and test it. Without mercy."},
    dict:{art:{de:"der",en:"noun"},pron:"/ˈkʁatsbaʊ̯m kʁaˈval/",def:{de:"Lautstarker Belastungstest eines selbst gebauten Kratzbaums durch mehrere Katzen. Endet selten leise.",en:"A noisy stress test of a home-built cat tree by several cats. Rarely ends quietly."}},
@@ -710,7 +712,7 @@ const APPS = [
         {v:"iOS",d:"13.11.2026",t:{de:"Apple-Prüfung bestanden",en:"Passed Apple review"}},
         {v:"1.0",d:"Nov 2026",t:{de:"Erste Version im geschlossenen Test bei Google Play",en:"First version in closed testing on Google Play"}}],
    faq:[], words:["kratzbaum","katze"], play:""},
-  {id:"flatterhoernchen", name:"Flatterhörnchen", status:"test", color:"#c8783a", letter:"F",
+  {id:"flatterhoernchen", img:"icons/flatterhoernchen.webp", name:"Flatterhörnchen", status:"test", color:"#c8783a", letter:"F",
    genre:{de:"Arcade",en:"Arcade"},
    text:{de:"Ein Flughörnchen, ein Wald voller Baumstämme und zwei Daumen. Flattern, gleiten, Eicheln sammeln.",en:"A flying squirrel, a forest full of tree trunks and two thumbs. Flap, glide, collect acorns."},
    dict:{art:{de:"das",en:"noun"},pron:"/ˈflatɐˌhœʁnçən/",def:{de:"Flughörnchen, das deutlich öfter flattert, als ihm guttut.",en:"A flying squirrel that flaps a lot more often than is good for it."}},
@@ -719,7 +721,7 @@ const APPS = [
    log:[{v:"next",d:"bald",t:{de:"Im nächsten Update: Leben bis zu dreimal pro Versuch per Werbevideo retten",en:"Next update: revive up to three times per run via an ad video"}},
         {v:"1.0",d:"Nov 2026",t:{de:"Erste Version im geschlossenen Test bei Google Play",en:"First version in closed testing on Google Play"}}],
    faq:[], words:["hoernchen"], play:""},
-  {id:"troedelradar", name:"Trödelradar", status:"test", color:"#2f8f6b", letter:"T",
+  {id:"troedelradar", img:"icons/troedelradar.webp", name:"Trödelradar", status:"test", color:"#2f8f6b", letter:"T",
    genre:{de:"Flohmarkt-App",en:"Flea market app"},
    text:{de:"Rund 1.800 Flohmärkte mit über 9.000 Terminen. Postleitzahl eingeben, Märkte in der Nähe finden, Route planen, losgehen.",en:"Around 1,800 flea markets with more than 9,000 dates. Enter your postcode, find markets nearby, plan a route, off you go."},
    dict:{art:{de:"das",en:"noun"},pron:"/ˈtʁøːdl̩ʁaˌdaːɐ̯/",def:{de:"Gerät zum Aufspüren von Flohmärkten in der Umgebung. Schlägt besonders samstags früh aus.",en:"A device for detecting flea markets nearby. Most active early on Saturday mornings."}},
@@ -729,7 +731,7 @@ const APPS = [
    faq:[{q:{de:"Gibt es auch eine Webseite?",en:"Is there a website too?"},a:{de:"Ja, unter troedelradar.de. Trödelradar hat auch eigene Kanäle bei Instagram, TikTok und Facebook.",en:"Yes, at troedelradar.de. Trödelradar also has its own channels on Instagram, TikTok and Facebook."}},
         {q:{de:"Kommen auch Weihnachtsmärkte rein?",en:"Will Christmas markets be included?"},a:{de:"Saisonmärkte wie Pfingst- und Weihnachtsmärkte kommen im Januar 2027 dazu.",en:"Seasonal markets like Whitsun and Christmas markets arrive in January 2027."}}],
    words:["flohmarkt"], play:""},
-  {id:"hoerspur", name:"Hörspur", status:"test", badge:{de:"Im App Store · Android im Test",en:"On the App Store · Android in testing"}, color:"#2a3be8", letter:"H",
+  {id:"hoerspur", img:"icons/hoerspur.webp", name:"Hörspur", status:"test", badge:{de:"Im App Store · Android im Test",en:"On the App Store · Android in testing"}, color:"#2a3be8", letter:"H",
    genre:{de:"Podcast-Tracker",en:"Podcast tracker"},
    text:{de:"Wie eine Serien-App, nur für Podcasts: Folgen abhaken, Fortschritt sehen, Neues entdecken. Hörspur spielt nichts ab, es merkt sich alles.",en:"Like a TV tracker, but for podcasts: tick off episodes, see your progress, discover new shows. Hörspur doesn't play anything, it remembers everything."},
    dict:{art:{de:"die",en:"noun"},pron:"/ˈhøːɐ̯ˌʃpuːɐ̯/",def:{de:"Spur, die jede gehörte Folge hinterlässt. Führt meistens zur nächsten.",en:"The trail every episode you've heard leaves behind. Usually leads to the next one."}},
@@ -739,7 +741,7 @@ const APPS = [
         {v:"1.0",d:"13.11.2026",t:{de:"Geschlossener Test bei Google Play",en:"Closed testing on Google Play"}}],
    faq:[{q:{de:"Spielt Hörspur Podcasts ab?",en:"Does Hörspur play podcasts?"},a:{de:"Nein, Hörspur ist ein reiner Tracker. Hören kannst du weiter in deiner Lieblings-App.",en:"No, Hörspur is purely a tracker. Keep listening in your favourite app."}}],
    words:["podcast"], play:""},
-  {id:"top-fragger", name:"Top Fragger", status:"test", color:"#ff5a36", letter:"TF",
+  {id:"top-fragger", img:"icons/top-fragger.webp", name:"Top Fragger", status:"test", color:"#ff5a36", letter:"TF",
    genre:{de:"E-Sport-Manager Idle",en:"Esports manager idle"},
    text:{de:"Gründe deine E-Sport-Organisation, hol Talente in die Akademie, steig durch die Ligen auf und schau deinen Teams live beim Spielen zu.",en:"Found your esports organisation, bring talent into the academy, climb the leagues and watch your teams play live."},
    dict:{art:{de:"der",en:"noun"},pron:"/tɔp ˈfʁɛɡɐ/",def:{de:"Spieler mit den meisten Abschüssen im Team. Will trotzdem mehr Gehalt.",en:"The player with the most eliminations on the team. Still wants a raise."}},
@@ -747,7 +749,7 @@ const APPS = [
          en:["A classic league system with tables","Long matches with live broadcasts","Academy instead of training, season review","Rankings for world, country and city"]},
    log:[{v:"1.0",d:"Nov 2026",t:{de:"Geschlossener Test bei Google Play",en:"Closed testing on Google Play"}}],
    faq:[], words:["team"], play:""},
-  {id:"schlittensause", name:"Schlittensause", status:"soon", badge:{de:"Eingereicht · zu Weihnachten",en:"Submitted · for Christmas"}, color:"#1f8fd6", letter:"S",
+  {id:"schlittensause", img:"icons/schlittensause.webp", name:"Schlittensause", status:"soon", badge:{de:"Eingereicht · zu Weihnachten",en:"Submitted · for Christmas"}, color:"#1f8fd6", letter:"S",
    genre:{de:"3D-Rennspiel",en:"3D racing game"},
    text:{de:"Ein Schlittenrennen im Schnee, mit Abkürzungen, Raketenstart und Windschatten. Ziel: als Erster unten ankommen.",en:"A sled race in the snow, with shortcuts, rocket starts and slipstreams. Goal: reach the bottom first."},
    dict:{art:{de:"die",en:"noun"},pron:"/ˈʃlɪtn̩ˌzaʊ̯zə/",def:{de:"Fahrt bergab, bei der niemand bremst. Am wenigsten der Schlitten.",en:"A ride downhill where nobody brakes. Least of all the sled."}},
@@ -1156,6 +1158,7 @@ document.addEventListener("click", e => {
   const b = e.target.closest("[data-copy],[data-copy-el]"); if(!b) return;
   copyText(b.dataset.copy || document.getElementById(b.dataset.copyEl).textContent);
 });
+const iconHtml = (a,extra="") => a.img ? `<div class="icon img ${extra}" aria-hidden="true"><img src="${a.img}" alt="" loading="lazy" width="56" height="56"></div>` : `<div class="icon ${extra}" style="background:${a.color}" aria-hidden="true">${a.letter}</div>`;
 const statusLabel = a => a.badge ? L(a.badge) : a.status==="soon" && !a.date ? t("st_soon2") : a.status==="soon" ? `${t("st_soon")} ${new Date(a.date+"T12:00:00").toLocaleDateString(lang==="en"?"en-GB":"de-DE",{day:"numeric",month:"short"})}` : t("st_"+a.status);
 const appById = id => APPS.find(a => a.id===id);
 const wordChip = w => `<a class="word" href="#wort-${w}">${esc(L(WORDS[w]))}</a>`;
@@ -1177,7 +1180,7 @@ function renderApps(filter){
   document.getElementById("app-grid").innerHTML = list.map(a => `
     <a class="app" href="#app-${a.id}">
       <div class="app-top">
-        <div class="icon" style="background:${a.color}" aria-hidden="true">${a.letter}</div>
+        ${iconHtml(a)}
         <div><h3>${esc(a.name)}</h3><div class="genre">${esc(L(a.genre))}</div></div>
       </div>
       <p>${esc(L(a.text))}</p>
@@ -1205,7 +1208,7 @@ function renderAppPage(a){
   document.getElementById("app-body").innerHTML = `
     <a class="btn back small" href="#apps">${t("back_apps")}</a>
     <div class="app-hero">
-      <div class="icon big" style="background:${a.color}" aria-hidden="true">${a.letter}</div>
+      ${iconHtml(a,"big")}
       <div><h1>${esc(a.name)}</h1><div class="muted">${esc(L(a.genre))} · <span class="status ${a.status}" style="display:inline-block">${statusLabel(a)}</span></div></div>
     </div>
     <div class="dict">
@@ -1258,7 +1261,7 @@ function renderRoad(){
   document.getElementById("road").innerHTML = dev.map(a => {
     const c = counts[a.id]||0, mine = myVote===a.id;
     return `<div class="road-item">
-      <div class="icon" style="background:${a.color}" aria-hidden="true">${a.letter}</div>
+      ${iconHtml(a)}
       <div><h3><a href="#app-${a.id}">${esc(a.name)}</a></h3><div class="muted" style="font-size:.9rem">${esc(L(a.genre))}</div>${phaseHtml(a.phase)}</div>
       <div class="vote-box">
         <div class="bar" aria-hidden="true"><i style="width:${Math.round(c/max*100)}%"></i></div>
@@ -1349,7 +1352,7 @@ function renderWordPage(w){
     <div class="mono muted">${t("word_h")}</div>
     <h1>${esc(L(WORDS[w]))}</h1>
     <h2 style="font-size:1.3rem;margin:28px 0 14px">${t("word_apps")}</h2>
-    ${apps.length ? `<div class="apps">${apps.map(a=>`<a class="app" href="#app-${a.id}"><div class="app-top"><div class="icon" style="background:${a.color}">${a.letter}</div><div><h3>${esc(a.name)}</h3><div class="genre">${esc(L(a.genre))}</div></div></div></a>`).join("")}</div>` : `<p class="muted">${t("none")}</p>`}
+    ${apps.length ? `<div class="apps">${apps.map(a=>`<a class="app" href="#app-${a.id}"><div class="app-top">${iconHtml(a)}<div><h3>${esc(a.name)}</h3><div class="genre">${esc(L(a.genre))}</div></div></div></a>`).join("")}</div>` : `<p class="muted">${t("none")}</p>`}
     <h2 style="font-size:1.3rem;margin:34px 0 6px">${t("word_posts")}</h2>
     ${posts.length ? `<div class="posts">${posts.map(p=>`<a class="post-row" href="#${p.id}"><time class="mono">${fmt(p.date)}</time><div><h3>${esc(L(p.title))}</h3><p>${esc(L(p.teaser))}</p></div><span class="tag">${esc(L(p.tag))}</span></a>`).join("")}</div>` : `<p class="muted">${t("none")}</p>`}`;
 }
