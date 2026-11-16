@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOUN Studio</title>
+<meta name="description" content="NOUN Studio – Apps und Spiele für Android aus Rothenburg ob der Tauber.">
+<!-- Vorschaubild für geteilte Links. Bei anderer Domain hier die Adresse ändern. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NOUN Studio">
+<meta property="og:title" content="NOUN Studio">
+<meta property="og:description" content="Apps und Spiele für Android aus Rothenburg ob der Tauber. Jede Idee beginnt mit einem Ding.">
+<meta property="og:url" content="https://nounstudio.de/">
+<meta property="og:image" content="https://nounstudio.de/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#14121F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: Wörterbuch-Eintrag als Leitidee – jede App und jede Sektion ist ein "Substantiv" mit Lautschrift, Wortart und Bedeutung */
+:root{
+  --paper:#f4f3ee; --ink:#14121F; --muted:#5d6068; --line:#d9d7cf; --card:#ffffff;
+  --accent:#2A3BE8; --accent-ink:#ffffff; --hi:#FFC400; --orange:#FF5A36; --ok:#1f8a4c;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Figtree","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--paper:#111318;--ink:#eceae4;--muted:#9a9ca3;--line:#2a2d35;--card:#181b22;--accent:#7d8fff;--accent-ink:#0d0f14;--hi:#e8c33a;--ok:#5fd391;color-scheme:dark}
+}
+:root[data-theme="dark"]{--paper:#111318;--ink:#eceae4;--muted:#9a9ca3;--line:#2a2d35;--card:#181b22;--accent:#7d8fff;--accent-ink:#0d0f14;--hi:#e8c33a;--ok:#5fd391;color-scheme:dark}
+*{box-sizing:border-box}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0}
+.mono{font-family:var(--mono);font-size:.82rem;letter-spacing:.02em}
+.muted{color:var(--muted)}
+[hidden]{display:none!important}
+
+/* Kopf */
+header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:1.2rem;letter-spacing:-.01em;flex:none}
+.logo-mark{width:30px;height:30px;border-radius:7px;overflow:hidden;display:block;flex:none}
+.logo-mark svg{width:100%;height:100%;display:block}
+.top-right{display:flex;align-items:center;gap:6px;min-width:0}
+nav.main{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.main::-webkit-scrollbar{display:none}
+nav.main a{text-decoration:none;font-weight:500;font-size:.93rem;padding:6px 9px;border-radius:6px;color:var(--muted);white-space:nowrap}
+nav.main a[aria-current="true"]{color:var(--ink);background:var(--line)}
+.lang{flex:none;font:600 .8rem var(--mono);border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:6px;padding:4px 8px;cursor:pointer}
+@media (max-width:820px){
+  .top .wrap{flex-wrap:wrap;padding-top:10px;padding-bottom:6px;gap:4px}
+  .top-right{order:3;width:100%;margin-left:-9px}
+  .logo{flex:1}
+  .lang{order:2}
+}
+
+/* Hero */
+.hero{padding:60px 0 40px;border-bottom:1px solid var(--line)}
+.entry-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px}
+.hero h1{font-size:clamp(3.2rem,11vw,7.5rem);font-weight:800;letter-spacing:-.035em}
+.pron{font-family:var(--mono);color:var(--muted);font-size:1.05rem}
+.pos{font-style:italic;color:var(--muted);font-size:1.05rem}
+.defs{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:12px;max-width:62ch}
+.defs li{display:grid;grid-template-columns:2rem 1fr;align-items:baseline;font-size:1.15rem}
+.defs li b{font-family:var(--mono);font-weight:500;color:var(--accent);font-size:.95rem}
+.defs mark,.rand mark{background:var(--hi);color:#16181d;padding:0 .2em;border-radius:3px}
+.rand{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:28px 0 0;font-size:1.15rem}
+.rand .mono{color:var(--muted)}
+.rand mark{font-family:var(--display);font-weight:700;font-size:1.5rem;display:inline-block;transition:transform .25s}
+.rand mark.pop{transform:rotate(-3deg) scale(1.06)}
+.linkbtn{font:500 .9rem var(--body);background:none;border:none;color:var(--accent);cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:600;padding:11px 18px;border-radius:8px;border:1.5px solid var(--ink);font-size:.98rem;background:transparent;color:var(--ink);cursor:pointer;font-family:var(--body)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.small{padding:7px 12px;font-size:.88rem}
+.btn[disabled]{opacity:.55;cursor:default;transform:none}
+.facts{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:38px;color:var(--muted)}
+.facts strong{color:var(--ink);font-family:var(--display);font-size:1.5rem;display:block;line-height:1.1;font-variant-numeric:tabular-nums}
+
+/* Sektionen */
+section.block{padding:72px 0;border-bottom:1px solid var(--line)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px 24px;margin-bottom:30px}
+.sec-head h2{font-size:clamp(2rem,5vw,3rem);font-weight:700;letter-spacing:-.02em}
+.sec-head .mono{color:var(--muted)}
+.lead{color:var(--muted);max-width:60ch;margin:8px 0 0}
+
+/* Apps */
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+.chip{font:500 .9rem var(--body);padding:6px 12px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-decoration:none}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.app{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;text-decoration:none;transition:border-color .15s}
+.app-top{display:flex;gap:14px;align-items:center}
+.icon{width:56px;height:56px;border-radius:14px;flex:none;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.35rem;color:#fff}
+.icon.big{width:88px;height:88px;border-radius:22px;font-size:2.1rem}
+.app h3{font-size:1.2rem;font-weight:700}
+.app .genre{color:var(--muted);font-size:.88rem}
+.app p{margin:0;font-size:.96rem;color:var(--muted);flex:1}
+.app-foot{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.more{font-size:.88rem;font-weight:600;color:var(--accent)}
+.status{align-self:flex-start;font:500 .78rem var(--mono);padding:3px 9px;border-radius:99px;border:1px solid currentColor;white-space:nowrap}
+.status.test{color:var(--ok)}
+.status.soon{color:var(--accent)}
+.status.dev{color:var(--muted)}
+
+
+/* Werkstatt-Ticker */
+.ticker{display:flex;align-items:center;gap:10px;margin:0 0 30px;padding:8px 8px 8px 12px;border-radius:10px;background:var(--card);border:1px solid var(--line);max-width:720px}
+.tk-label{flex:none;font:600 .72rem var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent-ink);background:var(--accent);padding:3px 8px;border-radius:5px}
+.tk-label::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--hi);margin-right:6px;vertical-align:1px;animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+#tk-text{flex:1;min-width:0;text-decoration:none;font-size:.95rem;transition:opacity .22s,transform .22s}
+#tk-text.out{opacity:0;transform:translateY(4px)}
+.tk-date{font:500 .78rem var(--mono);color:var(--muted);margin-right:8px}
+.tk-next{flex:none;border:none;background:none;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:2px 6px;border-radius:6px}
+@media (max-width:560px){.ticker{flex-wrap:wrap}.tk-label{order:0}.tk-next{order:1;margin-left:auto}#tk-text{order:2;flex-basis:100%}}
+/* Ding des Monats */
+.ding{display:grid;grid-template-columns:1.3fr .9fr;gap:24px;align-items:start}
+@media (max-width:820px){.ding{grid-template-columns:1fr}}
+.ding-list{display:grid;gap:12px}
+.ding-item{display:grid;grid-template-columns:1fr auto;gap:10px 18px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--hi);border-radius:12px;padding:14px 16px}
+.ding-noun{display:grid;gap:2px}
+.ding-noun b{font-family:var(--display);font-size:1.25rem}
+.ding-noun .muted{font-size:.92rem}
+@media (max-width:640px){.ding-item{grid-template-columns:1fr}.ding-item .vote-box{justify-items:stretch;grid-template-columns:1fr auto;align-items:center}.ding-item .bar{width:100%}}
+.ding-win{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+
+/* Social */
+.soc{display:grid;grid-template-columns:.8fr 1.4fr;gap:24px;align-items:start}
+@media (max-width:820px){.soc{grid-template-columns:1fr}}
+.soc-profiles{display:grid;gap:10px}
+.soc-card{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none}
+.soc-card b{display:block;font-family:var(--display);font-size:1.05rem}
+.soc-card .muted{font-size:.9rem}
+.soc-go{font-size:.85rem;font-weight:600;color:var(--accent)}
+.soc-ico{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:#fff}
+.soc-ico.small{width:22px;height:22px;border-radius:6px}
+.soc-soon{font-size:.88rem;color:var(--muted);padding:4px 2px}
+.soc-feed{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.post-card{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-decoration:none;overflow:hidden}
+.post-card img{width:calc(100% + 24px);margin:-12px -12px 0;aspect-ratio:1;object-fit:cover;background:var(--line)}
+.post-card p{margin:0;font-size:.94rem;flex:1;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.post-meta{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600}
+.post-meta .muted{font-weight:400}
+#foot-social{display:flex;gap:10px}
+#foot-social a{display:grid;place-items:center;width:32px;height:32px;border-radius:8px;border:1px solid var(--line);color:var(--ink)}
+/* Werkstatt / Roadmap */
+.road{display:grid;gap:12px}
+.road-item{display:grid;grid-template-columns:auto 1fr auto;gap:10px 18px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.road-item h3{font-size:1.15rem}
+.road-item h3 a{text-decoration:none}
+.phases{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
+.phase{font:500 .72rem var(--mono);padding:2px 7px;border-radius:4px;background:var(--paper);color:var(--muted);border:1px solid var(--line)}
+.phase.done{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.phase.now{background:var(--hi);color:#16181d;border-color:var(--hi)}
+.vote-box{display:grid;justify-items:end;gap:6px;min-width:140px}
+.bar{width:140px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+.vote-count{font:500 .8rem var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.vote-btn[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+@media (max-width:640px){
+  .road-item{grid-template-columns:auto 1fr}
+  .vote-box{grid-column:1/-1;justify-items:stretch;grid-template-columns:1fr auto;align-items:center}
+  .bar{width:100%}
+  .vote-count{grid-column:1}
+}
+.preview-note{font-size:.88rem;color:var(--muted);border-left:3px solid var(--hi);padding:4px 0 4px 12px;margin:18px 0 0;max-width:70ch}
+
+/* Spiel: Summstau Mini */
+.game{display:grid;grid-template-columns:minmax(0,400px) 1fr;gap:36px;align-items:start}
+@media (max-width:760px){.game{grid-template-columns:1fr}}
+.ss{background:#fff4d6;border-radius:20px;padding:12px;display:grid;gap:10px;box-shadow:inset 0 0 0 3px #f0d48a;color:#3a2a10;position:relative;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.ss-top{display:flex;justify-content:space-between;align-items:center;font:600 .85rem var(--body)}
+.ss-top b{font-family:var(--display);font-size:1.05rem}
+.pic{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;aspect-ratio:1;background:#fbe9b7;padding:8px;border-radius:12px}
+.px{border-radius:3px;transition:transform .22s,opacity .22s}
+.px.ex{box-shadow:inset 0 0 0 2px #fff}
+.px.gone{transform:scale(0);opacity:0}
+.docks{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.dock{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;position:relative;
+  background:radial-gradient(circle,#ffe27a 0 22%,#ffffff 23% 62%,transparent 63%),radial-gradient(circle,#f7c6d9 0 70%,transparent 71%)}
+.dock.locked{opacity:.3;filter:grayscale(1)}
+.dock .bee{width:100%;height:100%}
+.jam{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;background:#ecd590;padding:8px;border-radius:12px;position:relative}
+.jam::before{content:"";position:absolute;left:8px;right:8px;top:-4px;height:4px;border-radius:2px;background:#f5b700}
+.cell{aspect-ratio:1;border-radius:10px;background:#e3c877}
+.bee{display:grid;place-items:center;position:relative;border:none;background:none;padding:0;cursor:pointer;width:100%;height:100%}
+.bee svg{width:92%;height:92%;filter:drop-shadow(0 2px 1.5px rgba(0,0,0,.25))}
+.bee .n{position:absolute;left:50%;top:58%;translate:-50% -50%;font:800 .78rem var(--body);color:#2b1d05;background:#fff;border-radius:99px;min-width:1.35em;padding:0 3px;line-height:1.35em;text-align:center}
+.bee .ice{position:absolute;inset:6%;border-radius:12px;background:rgba(186,225,255,.72);box-shadow:inset 0 0 0 2px #fff;display:grid;place-items:center;font:800 .9rem var(--body);color:#1b4d7a}
+.bee.wobble{animation:wob .3s}
+@keyframes wob{25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.ss-btns{display:flex;gap:8px;flex-wrap:wrap}
+.ss-btn{flex:1;font:700 .88rem var(--body);border:none;border-radius:10px;padding:9px 10px;background:#3a2a10;color:#fff4d6;cursor:pointer}
+.ss-btn.alt{background:#f5b700;color:#3a2a10}
+.ss-btn[disabled]{opacity:.4;cursor:default}
+.ss-hint{text-align:center;font-size:.82rem;min-height:1.2em;margin:0;color:#6b5320}
+.ss-over{position:absolute;inset:0;border-radius:20px;background:rgba(58,42,16,.82);display:grid;place-items:center;text-align:center;color:#fff4d6;padding:24px}
+.ss-over h3{font-size:1.7rem;margin-bottom:8px;color:#ffd84a}
+.ss-over p{margin:0 0 16px}
+.fly{position:fixed;z-index:60;pointer-events:none}
+.how{margin:0;padding-left:1.1em;display:grid;gap:6px}
+
+/* Blog */
+.posts{display:grid;border-top:1px solid var(--line)}
+.post-row{display:grid;grid-template-columns:120px 1fr auto;gap:8px 24px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.post-row time{color:var(--muted)}
+.post-row h3{font-size:1.35rem;font-weight:700;margin-bottom:4px}
+.post-row p{margin:0;color:var(--muted);font-size:.96rem;max-width:62ch}
+.tag{font:500 .78rem var(--mono);color:var(--muted);white-space:nowrap}
+@media (max-width:640px){.post-row{grid-template-columns:1fr}.tag{order:-1}}
+.lexikon{margin-top:40px}
+.lexikon h3{font-size:1.2rem;margin-bottom:12px}
+.words{display:flex;flex-wrap:wrap;gap:6px}
+.word{font:500 .85rem var(--mono);padding:4px 10px;border-radius:6px;border:1px dashed var(--muted);text-decoration:none;color:var(--ink)}
+
+/* Unterseiten */
+.view{display:none;padding:48px 0 80px}
+body[data-view="app"] #view-app,body[data-view="post"] #view-post,body[data-view="word"] #view-word,body[data-view="legal"] #view-legal{display:block}
+body:not([data-view="home"]) .site-sections{display:none}
+.back{margin-bottom:28px}
+.prose{max-width:66ch}
+.prose p{margin:0 0 1.1em}
+.prose h2{font-size:1.5rem;margin:1.8em 0 .6em}
+#view-post h1,#view-word h1,#view-legal h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.025em;margin:10px 0 18px}
+
+.app-hero{display:flex;flex-wrap:wrap;gap:22px;align-items:center;margin-bottom:30px}
+.app-hero h1{font-size:clamp(2.4rem,7vw,4rem);font-weight:800;letter-spacing:-.03em}
+.dict{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--hi);border-radius:10px;padding:18px 20px;max-width:70ch;margin-bottom:34px}
+.dict .head{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}
+.dict .head b{font-family:var(--display);font-size:1.4rem}
+.dict p{margin:8px 0 0}
+.shots{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;margin-bottom:36px}
+.phone{flex:none;width:170px;aspect-ratio:9/19;border-radius:24px;border:6px solid var(--ink);display:grid;place-items:center;text-align:center;padding:14px;color:#fff;font-family:var(--display);font-weight:700;position:relative}
+.phone small{display:block;font:500 .72rem var(--mono);opacity:.85;margin-top:6px}
+.app-grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media (max-width:760px){.app-grid2{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.panel h2{font-size:1.35rem;margin-bottom:14px}
+.feat{margin:0;padding-left:1.1em}
+.feat li{margin-bottom:6px}
+.log{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.log li{display:grid;grid-template-columns:auto 1fr;gap:4px 14px}
+.log .v{font:500 .82rem var(--mono);color:var(--accent)}
+details{border-top:1px solid var(--line);padding:12px 0}
+details:first-of-type{border-top:none;padding-top:0}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0;color:var(--muted)}
+.store-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:30px}
+
+/* Über mich */
+.about{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 18px}
+.card dt{color:var(--muted);font-size:.9rem}
+.card dd{margin:0;font-weight:500}
+.timeline{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:14px}
+.timeline li{display:grid;grid-template-columns:86px 1fr;gap:12px}
+.timeline .mono{color:var(--accent)}
+@media (max-width:760px){.about{grid-template-columns:1fr}}
+
+/* Mitmachen */
+.join{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.join{grid-template-columns:1fr}}
+.join .panel{display:flex;flex-direction:column;gap:14px}
+.join .panel > p{margin:0;color:var(--muted);font-size:.96rem}
+form{display:grid;gap:12px}
+label{font-weight:600;font-size:.9rem;display:block;margin-bottom:4px}
+input[type=text],input[type=email],textarea,select{width:100%;font:inherit;font-size:1rem;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+textarea{min-height:100px;resize:vertical}
+.check{display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:.88rem;color:var(--muted)}
+.check input{margin-top:4px;accent-color:var(--accent)}
+.checks{display:grid;gap:4px}
+.checks .check{color:var(--ink);font-size:.92rem}
+.notice{display:none;padding:12px 14px;border-radius:10px;border:1px solid var(--accent);font-size:.92rem}
+.notice.show{display:block}
+.notice.err{border-color:#d33}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px;padding-top:40px;border-top:1px solid var(--line)}
+.contact h3{font-size:1.6rem;margin-bottom:6px}
+.mailbox{font-family:var(--display);font-size:clamp(1.2rem,3.4vw,1.8rem);font-weight:700;word-break:break-all;margin:6px 0 14px}
+@media (max-width:760px){.contact{grid-template-columns:1fr}}
+
+/* Presse */
+.press{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.press{grid-template-columns:1fr}}
+.logo-prev{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.logo-prev div{border-radius:10px;display:grid;place-items:center;padding:22px 10px;border:1px solid var(--line)}
+.logo-prev svg{width:100%;max-width:190px;height:auto}
+.copy-block{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:.95rem;margin:0 0 10px}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px}
+.factsheet{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:.95rem}
+.factsheet dt{color:var(--muted)}
+.factsheet dd{margin:0}
+
+@media (hover:hover){
+  nav.main a:hover{color:var(--ink);background:var(--line)}
+  .btn:hover{transform:translateY(-1px)}
+  .app:hover{border-color:var(--ink)}
+  .road-item h3 a:hover,.post-row:hover h3{color:var(--accent)}
+  .word:hover{border-style:solid;border-color:var(--accent);color:var(--accent)}
+}
+a,button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+footer{padding:40px 0 60px;color:var(--muted);font-size:.92rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+footer a{color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:22px;translate:-50% 0;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-size:.92rem;z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+</style>
+</head>
+<body data-view="home">
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#start"><span class="logo-mark"><svg viewBox="0 0 512 512" aria-hidden="true"><rect width="256" height="256" fill="#2A3BE8"/><rect x="256" width="256" height="256" fill="#FFC400"/><rect y="256" width="256" height="256" fill="#FF5A36"/><rect x="256" y="256" width="256" height="256" fill="#14121F"/><g transform="translate(76 76) scale(1.24)"><path d="M0 0H28L72 56V0H100V100H72L28 44V100H0Z" fill="#FFFFFF"/></g><g transform="translate(312 76) scale(1.24)"><circle cx="50" cy="50" r="50" fill="#14121F"/><circle cx="50" cy="50" r="22" fill="#FFC400"/></g><g transform="translate(76 312) scale(1.24)"><path d="M0 0H28V52A22 22 0 0 0 72 52V0H100V50A50 50 0 0 1 0 50Z" fill="#14121F"/></g><g transform="translate(312 312) scale(1.24)"><path d="M0 0H28L72 56V0H100V100H72L28 44V100H0Z" fill="#FFFFFF"/></g></svg></span>NOUN Studio</a>
+    <div class="top-right">
+      <nav class="main" aria-label="Navigation">
+        <a href="#apps" data-i="nav_apps">Apps</a>
+        <a href="#werkstatt" data-i="nav_shop">Werkstatt</a>
+        <a href="#ding" data-i="nav_ding">Ding des Monats</a>
+        <a href="#spielen" data-i="nav_play">Spielen</a>
+        <a href="#blog" data-i="nav_blog">Blog</a>
+        <a href="#social">Social</a>
+        <a href="#ueber-mich" data-i="nav_about">Über mich</a>
+        <a href="#mitmachen" data-i="nav_join">Mitmachen</a>
+        <a href="#presse" data-i="nav_press">Presse</a>
+      </nav>
+    </div>
+    <button class="lang" id="lang-btn" type="button" aria-label="Sprache wechseln / Switch language">EN</button>
+  </div>
+</header>
+
+<main>
+<div class="site-sections">
+
+  <section class="hero" id="start">
+    <div class="wrap">
+      <div class="ticker" role="status">
+        <span class="tk-label" data-i="tk_label">Werkstatt</span>
+        <a id="tk-text" href="#werkstatt"></a>
+        <button class="tk-next" id="tk-next" type="button" aria-label="Nächste Meldung">›</button>
+      </div>
+      <div class="entry-head">
+        <h1>noun</h1>
+        <span class="pron">/naʊn/</span>
+        <span class="pos" data-i="hero_pos">Substantiv · Studio aus Rothenburg ob der Tauber</span>
+      </div>
+      <ol class="defs">
+        <li><b>1.</b><span data-i="hero_d1">Ein Wort für ein <mark>Ding</mark>. Ameisenhaus, Kratzbaum, Eieruhr, Flohmarkt.</span></li>
+        <li><b>2.</b><span data-i="hero_d2">Ein Ein-Mann-Studio, das genau aus solchen Dingen Apps und Spiele für Android macht.</span></li>
+        <li><b>3.</b><span data-i="hero_d3"><em>umgangssprachlich:</em> der Grund, warum es hier gleich um Bienen im Stau geht.</span></li>
+      </ol>
+      <p class="rand"><span class="mono" data-i="rand_label">noun, zufällig:</span> <mark id="rand-noun">Ameisenhaus</mark> <button class="linkbtn" id="rand-btn" type="button" data-i="rand_btn">Noch ein Ding</button></p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#apps" data-i="hero_cta1">Apps ansehen</a>
+        <a class="btn" href="#spielen" data-i="hero_cta2">Summstau Mini spielen</a>
+      </div>
+      <div class="facts">
+        <span><strong>3</strong><span data-i="fact1">Apps bei Google Play</span></span>
+        <span><strong>4</strong><span data-i="fact2">neue Apps diese Woche</span></span>
+        <span><strong>30+</strong><span data-i="fact3">Projekte in der Werkstatt</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="apps">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 data-i="apps_h">Apps &amp; Spiele</h2>
+          <p class="lead" data-i="apps_lead">Was schon im Play Store ist, was gerade fertig wird und was noch in der Werkstatt liegt. Tipp auf eine App für alle Details.</p>
+        </div>
+        <span class="mono" data-i="apps_side">Plural: die Apps</span>
+      </div>
+      <div class="filters" role="group" aria-label="Filter">
+        <button class="chip" type="button" data-filter="alle" aria-pressed="true" data-i="f_all">Alle</button>
+        <button class="chip" type="button" data-filter="live" aria-pressed="false" data-i="f_live">Im Store</button>
+        <button class="chip" type="button" data-filter="dev" aria-pressed="false" data-i="f_dev">In Arbeit</button>
+      </div>
+      <div class="apps" id="app-grid"></div>
+    </div>
+  </section>
+
+  <section class="block" id="werkstatt">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 data-i="shop_h">In der Werkstatt</h2>
+          <p class="lead" data-i="shop_lead">Daran arbeite ich gerade. Stimm ab, auf welches Projekt du dich am meisten freust. Eine Stimme pro Person, du kannst sie jederzeit ändern.</p>
+        </div>
+        <span class="mono" data-i="shop_side">die Roadmap</span>
+      </div>
+      <div class="road" id="road"></div>
+      <p class="preview-note" data-preview data-i="preview_note">Vorschau-Modus: Stimmen und Formulare werden erst gespeichert, wenn die Seite mit dem Server verbunden ist. Bis dahin merkt sich nur dein Browser deine Eingaben.</p>
+    </div>
+  </section>
+
+  <section class="block" id="spielen">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 data-i="play_h">Summstau Mini</h2>
+          <p class="lead" data-i="play_lead">Eine kleine Version von Summstau zum Ausprobieren. Ernte das Pixelbild ab, bevor die Landeblumen voll sind.</p>
+        </div>
+        <span class="mono" data-i="play_side">das Minispiel</span>
+      </div>
+      <div class="game">
+        <div class="ss" id="ss">
+          <div class="ss-top"><span><span data-i="g_level">Level</span> <b id="g-level">1</b> · <span id="g-pic"></span></span><span><b id="g-px">0</b> <span data-i="g_px">Pixel übrig</span></span></div>
+          <div class="pic" id="pic" aria-label="Pixelbild"></div>
+          <div class="docks" id="docks"></div>
+          <div class="jam" id="jam"></div>
+          <p class="ss-hint" id="g-hint"></p>
+          <div class="ss-btns">
+            <button class="ss-btn alt" id="g-extra" type="button" data-i="g_extra">+1 Landeblume</button>
+            <button class="ss-btn" id="g-reset" type="button" data-i="g_reset">Neu starten</button>
+          </div>
+          <div class="ss-over" id="g-over" hidden><div><h3 id="g-over-h"></h3><p id="g-over-p"></p><button class="ss-btn alt" id="g-over-btn" type="button" style="flex:none;padding:11px 22px"></button></div></div>
+        </div>
+        <div>
+          <h3 style="font-size:1.3rem;margin-bottom:12px" data-i="g_how_h">So geht's</h3>
+          <ol class="how" data-i="g_how">
+            <li>Tipp eine Biene an. Sie fliegt nur los, wenn sie einen <b>freien Weg nach oben</b> hat.</li>
+            <li>Sie landet auf einer <b>Landeblume</b> und baut Pixel ihrer Farbe vom Bild ab, immer <b>von außen nach innen</b>. Freiliegende Pixel sind weiß umrandet.</li>
+            <li>Die Zahl zeigt, wie viele Pixel die Biene noch tragen kann. Ist sie voll, fliegt sie zurück in den Stock.</li>
+            <li>Ab Level 3 gibt es <b>Eis-Bienen</b>. Sie tauen auf, wenn andere Bienen losfliegen.</li>
+            <li>Sind alle Landeblumen besetzt und keine Biene findet mehr passende Pixel, gibt es <b>Summstau</b>.</li>
+          </ol>
+          <p class="muted" style="margin-top:22px" data-i="g_more">Die ganze App hat mehr Bilder, Honig, Booster, einen Stock zum Ausbauen und ein Album.</p>
+          <a class="btn small" href="#app-summstau" data-i="g_link">Zu Summstau</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="blog">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>Blog</h2>
+          <p class="lead" data-i="blog_lead">Werkstattnotizen: wie die Apps entstehen, was schiefgeht und was als Nächstes kommt.</p>
+        </div>
+        <span class="mono" data-i="blog_side">das Logbuch</span>
+      </div>
+      <div class="posts" id="post-list"></div>
+      <div class="lexikon" id="lexikon">
+        <h3 data-i="lex_h">Werkstatt-Lexikon</h3>
+        <p class="muted" style="margin:0 0 12px" data-i="lex_lead">Alle Dinge, um die es hier geht. Tipp auf ein Wort, um alles dazu zu sehen.</p>
+        <div class="words" id="all-words"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="social">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>Social</h2>
+          <p class="lead" data-i="soc_lead">Folg NOUN Studio, und sieh hier alle neuen Posts von allen Plattformen an einem Ort.</p>
+        </div>
+        <span class="mono" data-i="soc_side">die neuesten Posts</span>
+      </div>
+      <div class="soc">
+        <div class="soc-profiles" id="soc-profiles"></div>
+        <div>
+          <p class="preview-note" id="soc-demo" style="margin:0 0 14px" data-i="soc_demo">Beispiele: Deine echten Posts erscheinen hier automatisch, sobald die Verbindung eingerichtet ist.</p>
+          <div class="soc-feed" id="soc-feed"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ueber-mich">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 data-i="about_h">Über mich</h2>
+        <span class="mono" data-i="about_side">der Mensch hinter dem Substantiv</span>
+      </div>
+      <div class="about">
+        <div class="prose" style="font-size:1.05rem" data-i="about_text">
+          <p>Ich bin Jason Wühr und mache unter dem Namen NOUN Studio Apps und Spiele für Android. Mein Studio ist mein Schreibtisch in Rothenburg ob der Tauber, mein Testgerät ist mein Handy.</p>
+          <p>Meine Ideen fangen fast immer mit einem Ding an: einem Kratzbaum, einem Ameisenhaus, einer Eieruhr, einem Gorilla aus Gummi. Dann frage ich mich, was man daraus machen kann, das es so noch nicht gibt. Manchmal wird daraus ein gemütliches Spiel, manchmal ein nützliches Werkzeug, manchmal etwas ziemlich Albernes.</p>
+          <p>Was mir wichtig ist: Apps, die man versteht, ohne ein Handbuch zu lesen, faire Werbung statt Abzocke und Ideen, die sich trauen, anders zu sein.</p>
+        </div>
+        <div class="card">
+          <dl>
+            <dt>Name</dt><dd>Jason Wühr</dd>
+            <dt>Studio</dt><dd>NOUN Studio</dd>
+            <dt data-i="ab_place">Ort</dt><dd>Rothenburg ob der Tauber</dd>
+            <dt data-i="ab_plat">Plattform</dt><dd data-i="ab_plat_v">Android, iOS geplant</dd>
+            <dt data-i="ab_fav">Am liebsten</dt><dd data-i="ab_fav_v">Spiele mit ungewöhnlichen Themen</dd>
+          </dl>
+          <ol class="timeline">
+            <li><span class="mono">Nov 2026</span><span data-i="tl1">Gewerbe angemeldet, Google-Play-Konto eingerichtet</span></li>
+            <li><span class="mono">Nov 2026</span><span data-i="tl2">Kratzbaum-Krawall, Flatterhörnchen und Trödelradar im geschlossenen Test</span></li>
+            <li><span class="mono">9.–11.11.</span><span data-i="tl3">Summstau, 1 Million Spiele, Spieleschrank und Schnapszahl 55.555</span></li>
+            <li><span class="mono">Jan 2027</span><span data-i="tl4">Saisonmärkte in Trödelradar</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ding">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 data-i="ding_h">Ding des Monats</h2>
+          <p class="lead" data-i="ding_lead">Aus dem Ideenkasten wähle ich jeden Monat ein paar Dinge aus. Ihr stimmt ab, und aus dem Gewinner baue ich einen Prototyp, über den ich im Blog berichte.</p>
+        </div>
+        <span class="mono" id="ding-month"></span>
+      </div>
+      <div class="ding">
+        <div>
+          <p class="preview-note" id="ding-demo" style="margin:0 0 14px" data-i="ding_demo">Beispiele: Die echten Kandidaten erscheinen, sobald die ersten Ideen eingeworfen sind.</p>
+          <div class="ding-list" id="ding-list"></div>
+          <a class="btn small" href="#mitmachen" style="margin-top:16px" data-i="ding_submit">Eigenes Ding einwerfen</a>
+        </div>
+        <div class="panel">
+          <h3 style="font-size:1.15rem;margin-bottom:10px" data-i="ding_hist">Bisherige Gewinner</h3>
+          <ul class="ding-win" id="ding-winners"></ul>
+          <ol class="how" style="margin-top:18px;font-size:.92rem" data-i="ding_how">
+            <li>Du wirfst ein Ding in den Ideenkasten.</li>
+            <li>Zum Monatsanfang kommen die besten Ideen zur Abstimmung.</li>
+            <li>Das Gewinner-Ding bekommt einen Prototyp und einen Blogbeitrag.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="mitmachen">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 data-i="join_h">Mitmachen</h2>
+          <p class="lead" data-i="join_lead">Schick mir ein Ding, teste neue Apps vor allen anderen oder erfahr als Erstes, wenn etwas Neues erscheint.</p>
+        </div>
+        <span class="mono" data-i="join_side">das Mitmachen</span>
+      </div>
+      <div class="join">
+        <div class="panel">
+          <h2 data-i="idea_h">Ideenkasten</h2>
+          <p data-i="idea_lead">Nenn mir ein Ding. Vielleicht wird daraus die nächste App.</p>
+          <form id="idea-form" novalidate>
+            <div><label for="i-noun" data-i="idea_l1">Dein Ding (ein Substantiv)</label><input type="text" id="i-noun" maxlength="60" data-ph="idea_ph1" placeholder="z. B. Gießkanne"></div>
+            <div><label for="i-text" data-i="idea_l2">Was könnte man daraus machen? (optional)</label><textarea id="i-text" maxlength="600"></textarea></div>
+            <button class="btn primary" type="submit" data-i="idea_btn">Idee einwerfen</button>
+            <div class="notice" role="status"></div>
+          </form>
+        </div>
+        <div class="panel">
+          <h2 data-i="test_h">Tester werden</h2>
+          <p data-i="test_lead">Spiel neue Apps, bevor sie erscheinen, und hilf mit deinem Feedback. Du brauchst ein Android-Handy und die E-Mail-Adresse deines Google-Kontos.</p>
+          <form id="tester-form" novalidate>
+            <div><label for="t-mail" data-i="test_l1">E-Mail deines Google-Kontos</label><input type="email" id="t-mail" autocomplete="email"></div>
+            <fieldset style="border:none;padding:0;margin:0"><legend style="font-weight:600;font-size:.9rem;margin-bottom:4px" data-i="test_l2">Welche Apps willst du testen?</legend><div class="checks" id="tester-apps"></div></fieldset>
+            <label class="check"><input type="checkbox" id="t-ok"> <span data-i="consent_test">Ich bin einverstanden, dass NOUN Studio meine E-Mail für Testeinladungen speichert. Abmelden geht jederzeit per Mail.</span></label>
+            <button class="btn primary" type="submit" data-i="test_btn">Als Tester melden</button>
+            <div class="notice" role="status"></div>
+          </form>
+        </div>
+        <div class="panel">
+          <h2 data-i="news_h">Newsletter</h2>
+          <p data-i="news_lead">Höchstens eine Mail pro Release. Neue Apps, große Updates, sonst nichts.</p>
+          <form id="news-form" novalidate>
+            <div><label for="n-mail" data-i="news_l1">Deine E-Mail</label><input type="email" id="n-mail" autocomplete="email"></div>
+            <div><label for="n-lang" data-i="news_l2">Sprache</label><select id="n-lang"><option value="de">Deutsch</option><option value="en">English</option></select></div>
+            <label class="check"><input type="checkbox" id="n-ok"> <span data-i="consent_news">Ich möchte den Newsletter erhalten. Ich bekomme eine Mail zur Bestätigung und kann mich jederzeit abmelden.</span></label>
+            <button class="btn primary" type="submit" data-i="news_btn">Anmelden</button>
+            <div class="notice" role="status"></div>
+          </form>
+        </div>
+      </div>
+      <p class="preview-note" data-preview data-i="preview_note">Vorschau-Modus: Stimmen und Formulare werden erst gespeichert, wenn die Seite mit dem Server verbunden ist. Bis dahin merkt sich nur dein Browser deine Eingaben.</p>
+
+      <div class="contact" id="kontakt">
+        <div>
+          <h3 data-i="contact_h">Kontakt</h3>
+          <p class="lead" style="margin-top:0" data-i="contact_lead">Du hast einen Fehler gefunden oder willst einfach Hallo sagen? Schreib mir.</p>
+          <p class="mailbox">nounnounstudio@gmail.com</p>
+          <div class="btn-row">
+            <a class="btn primary" href="mailto:nounnounstudio@gmail.com" data-i="contact_mail">E-Mail schreiben</a>
+            <button class="btn" type="button" data-copy="nounnounstudio@gmail.com" data-i="copy_mail">Adresse kopieren</button>
+          </div>
+        </div>
+        <form id="contact-form" novalidate>
+          <div><label for="c-name" data-i="c_name">Dein Name</label><input type="text" id="c-name" autocomplete="name"></div>
+          <div><label for="c-topic" data-i="c_topic">Worum geht es?</label>
+            <select id="c-topic"></select></div>
+          <div><label for="c-msg" data-i="c_msg">Nachricht</label><textarea id="c-msg"></textarea></div>
+          <button class="btn primary" type="submit" data-i="c_btn">Nachricht vorbereiten</button>
+          <div class="notice" role="status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="presse">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2 data-i="press_h">Presse &amp; Creator</h2>
+          <p class="lead" data-i="press_lead">Für YouTube, TikTok, Blogs und Zeitungen: Logo, Texte und Fakten zum freien Verwenden, wenn du über NOUN Studio oder eine der Apps berichtest.</p>
+        </div>
+        <span class="mono" data-i="press_side">das Pressekit</span>
+      </div>
+      <div class="press">
+        <div class="panel">
+          <h2>Logo</h2>
+          <div class="logo-prev">
+            <div style="background:#f4f3ee" id="logo-light"></div>
+            <div style="background:#16181d" id="logo-dark"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn small" type="button" data-dl="light" data-i="dl_light">Logo hell (SVG)</button>
+            <button class="btn small" type="button" data-dl="dark" data-i="dl_dark">Logo dunkel (SVG)</button>
+          </div>
+        </div>
+        <div class="panel">
+          <h2 data-i="fact_h">Fakten</h2>
+          <dl class="factsheet">
+            <dt>Studio</dt><dd>NOUN Studio</dd>
+            <dt data-i="fs_founder">Gründer</dt><dd>Jason Wühr</dd>
+            <dt data-i="fs_seat">Sitz</dt><dd>Rothenburg ob der Tauber</dd>
+            <dt data-i="fs_since">Seit</dt><dd data-i="fs_since_v">November 2026</dd>
+            <dt data-i="fs_plat">Plattform</dt><dd data-i="ab_plat_v">Android, iOS geplant</dd>
+            <dt data-i="fs_apps">Im Test bei Google Play</dt><dd>Kratzbaum-Krawall, Flatterhörnchen, Trödelradar</dd>
+            <dt data-i="fs_press">Pressekontakt</dt><dd>nounnounstudio@gmail.com</dd>
+          </dl>
+        </div>
+        <div class="panel" style="grid-column:1/-1">
+          <h2 data-i="texts_h">Texte</h2>
+          <p class="mono muted" style="margin:0 0 6px" data-i="short_l">Kurz</p>
+          <p class="copy-block" id="press-short"></p>
+          <p class="mono muted" style="margin:14px 0 6px" data-i="long_l">Lang</p>
+          <p class="copy-block" id="press-long"></p>
+          <div class="btn-row">
+            <button class="btn small" type="button" data-copy-el="press-short" data-i="copy_short">Kurztext kopieren</button>
+            <button class="btn small" type="button" data-copy-el="press-long" data-i="copy_long">Langtext kopieren</button>
+          </div>
+          <p class="muted" style="margin:16px 0 0;font-size:.92rem" data-i="press_note">App-Icons und Screenshots in hoher Auflösung schicke ich dir gern per Mail.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="view" id="view-app"><div class="wrap" id="app-body"></div></div>
+<div class="view" id="view-post"><div class="wrap">
+  <a class="btn back small" href="#blog" data-i="back_blog">← Zurück zum Blog</a>
+  <div class="mono muted" id="p-meta"></div>
+  <h1 id="p-title"></h1>
+  <div class="prose" id="p-body"></div>
+  <div class="words" id="p-words" style="margin-top:28px"></div>
+</div></div>
+<div class="view" id="view-word"><div class="wrap" id="word-body"></div></div>
+<div class="view" id="view-legal"><div class="wrap prose">
+  <a class="btn back small" href="#start" data-i="back">← Zurück</a>
+  <div id="legal-body"></div>
+</div></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 NOUN Studio · Jason Wühr</span>
+    <span id="foot-social"></span>
+    <span><a href="#impressum" data-i="imp">Impressum</a> · <a href="#datenschutz" data-i="priv">Datenschutz</a></span>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ============ Server-Anbindung ============
+   Sobald die Seite auf eigener Domain läuft: Supabase-Projekt-URL und
+   den öffentlichen "anon"-Schlüssel eintragen. Leer = Vorschau-Modus. */
+const BACKEND = { url: "", anonKey: "" };
+const LIVE = !!(BACKEND.url && BACKEND.anonKey);
+
+/* ============ Inhalte ============ */
+/* status: test = geschlossener Test bei Google Play, soon = Upload steht an, dev = in Arbeit
+   play: Link zur Play-Store-Seite, sobald vorhanden */
+const APPS = [
+  {id:"kratzbaum-krawall", name:"Kratzbaum-Krawall", status:"test", color:"#d9682b", letter:"K",
+   genre:{de:"3D-Bauspiel",en:"3D building game"},
+   text:{de:"Bau mit deinem Leckerli-Budget einen Kratzbaum. Dann kommen Archie, May, Dori, Leopold und Nala und testen ihn, ohne Gnade.",en:"Build a cat tree on a budget of treats. Then Archie, May, Dori, Leopold and Nala arrive and test it. Without mercy."},
+   dict:{art:{de:"der",en:"noun"},pron:"/ˈkʁatsbaʊ̯m kʁaˈval/",def:{de:"Lautstarker Belastungstest eines selbst gebauten Kratzbaums durch mehrere Katzen. Endet selten leise.",en:"A noisy stress test of a home-built cat tree by several cats. Rarely ends quietly."}},
+   feat:{de:["Über 30 Level in Themenräumen, vom Wohnzimmer bis ins Weltall","19 Rettungsmissionen","Modi wie Katzen-Stampede, 2-Spieler-Duell, Katzen-Olympiade und Freies Bauen","Katzenhaus mit Pflege, Einrichtung, Tierarzt und Kätzchen"],
+         en:["30+ levels in themed rooms, from the living room to outer space","19 rescue missions","Modes like Cat Stampede, 2-player duel, Cat Olympics and Free Build","A cat house with care, decorating, a vet and kittens"]},
+   log:[{v:"1.0",d:"Nov 2026",t:{de:"Erste Version im geschlossenen Test bei Google Play",en:"First version in closed testing on Google Play"}}],
+   faq:[], words:["kratzbaum","katze"], play:""},
+  {id:"flatterhoernchen", name:"Flatterhörnchen", status:"test", color:"#c8783a", letter:"F",
+   genre:{de:"Arcade",en:"Arcade"},
+   text:{de:"Ein Flughörnchen, ein Wald voller Baumstämme und zwei Daumen. Flattern, gleiten, Eicheln sammeln.",en:"A flying squirrel, a forest full of tree trunks and two thumbs. Flap, glide, collect acorns."},
+   dict:{art:{de:"das",en:"noun"},pron:"/ˈflatɐˌhœʁnçən/",def:{de:"Flughörnchen, das deutlich öfter flattert, als ihm guttut.",en:"A flying squirrel that flaps a lot more often than is good for it."}},
+   feat:{de:["Pixel-Grafik mit Tag und Nacht","Flattern und Gleiten, wahlweise mit zwei Bildschirmseiten oder einem Finger","Power-ups: Schild, Magnet und Zeitlupe","Laden, Tagesaufgaben und Medaillen"],
+         en:["Pixel art with day and night","Flap and glide, with two screen halves or one finger","Power-ups: shield, magnet and slow motion","Shop, daily tasks and medals"]},
+   log:[{v:"1.0",d:"Nov 2026",t:{de:"Erste Version im geschlossenen Test bei Google Play",en:"First version in closed testing on Google Play"}}],
+   faq:[], words:["hoernchen"], play:""},
+  {id:"troedelradar", name:"Trödelradar", status:"test", color:"#2f8f6b", letter:"T",
+   genre:{de:"Flohmarkt-App",en:"Flea market app"},
+   text:{de:"Rund 1.800 Flohmärkte mit über 9.000 Terminen. Postleitzahl eingeben, Märkte in der Nähe finden, Route planen, losgehen.",en:"Around 1,800 flea markets with more than 9,000 dates. Enter your postcode, find markets nearby, plan a route, off you go."},
+   dict:{art:{de:"das",en:"noun"},pron:"/ˈtʁøːdl̩ʁaˌdaːɐ̯/",def:{de:"Gerät zum Aufspüren von Flohmärkten in der Umgebung. Schlägt besonders samstags früh aus.",en:"A device for detecting flea markets nearby. Most active early on Saturday mornings."}},
+   feat:{de:["Flohmärkte in der Nähe per Postleitzahl","Route über mehrere Märkte planen, Navigation mit Google Maps","Märkte selbst eintragen und bewerten","Funde teilen und Preise checken"],
+         en:["Flea markets near you by postcode","Plan a route across several markets, navigate with Google Maps","List and review markets yourself","Share finds and check prices"]},
+   log:[{v:"1.0",d:"Nov 2026",t:{de:"Erste Version im geschlossenen Test bei Google Play",en:"First version in closed testing on Google Play"}}],
+   faq:[{q:{de:"Gibt es auch eine Webseite?",en:"Is there a website too?"},a:{de:"Ja, Trödelradar bekommt eine eigene Webseite unter troedelradar.de.",en:"Yes, Trödelradar is getting its own website at troedelradar.de."}}],
+   words:["flohmarkt"], play:""},
+  {id:"summstau", name:"Summstau", status:"soon", date:"2026-11-09", color:"#e0a800", letter:"S",
+   genre:{de:"Puzzle",en:"Puzzle"},
+   text:{de:"Stau im Bienenstock: Schick die Bienen auf die Landeblumen und ernte Pixelbilder ab, Schicht für Schicht.",en:"Traffic jam in the beehive: send the bees to the landing flowers and harvest pixel pictures, layer by layer."},
+   dict:{art:{de:"der",en:"noun"},pron:"/ˈzʊmʃtaʊ̯/",def:{de:"Verkehrsstörung im Bienenstock, bei der alle gleichzeitig raus wollen.",en:"A traffic jam in the beehive, caused by everyone wanting to get out at once."}},
+   feat:{de:["Bienen fliegen nur mit freiem Weg nach oben los","Pixelbilder werden von außen nach innen abgebaut","Eis-Bienen und knappe Landeblumen","Honig für Booster und den Ausbau des Stocks, Album für fertige Bilder"],
+         en:["Bees only take off with a clear path upwards","Pixel pictures are harvested from the outside in","Ice bees and scarce landing flowers","Honey for boosters and hive upgrades, an album for finished pictures"]},
+   log:[], faq:[{q:{de:"Kann ich Summstau vorher ausprobieren?",en:"Can I try Summstau first?"},a:{de:"Ja, hier auf der Seite gibt es eine Mini-Version im Bereich Spielen.",en:"Yes, there is a mini version right here on the site in the Play section."}}],
+   words:["biene","stau"], play:""},
+  {id:"1-million-spiele", name:"1 Million Spiele", status:"soon", date:"2026-11-09", color:"#7a3cff", letter:"1M",
+   genre:{de:"Spielgenerator",en:"Game generator"},
+   text:{de:"Jede Nummer von #1 bis #1.000.000 ist ein eigenes Spiel. Gleiche Nummer, gleiches Spiel, auf jedem Handy.",en:"Every number from #1 to #1,000,000 is its own game. Same number, same game, on every phone."},
+   dict:{art:{de:"die",en:"noun"},pron:"/aɪ̯nə mɪˈli̯oːn ˈʃpiːlə/",def:{de:"Zahl, die man erst glaubt, wenn man Spiel #483.112 selbst gespielt hat.",en:"A number you only believe once you've played game #483,112 yourself."}},
+   feat:{de:["Spielgenerator: Mechanik, Ziel, Tempo, Sonderregel und Welt kommen aus der Nummer","Qualitätsfilter sortiert unspielbare Kombinationen aus","Spiel des Tages","Komplett offline"],
+         en:["Game generator: mechanic, goal, speed, special rule and world come from the number","A quality filter removes unplayable combinations","Game of the day","Fully offline"]},
+   log:[], faq:[{q:{de:"Sind das wirklich eine Million Spiele?",en:"Is it really a million games?"},a:{de:"Ja. Die App speichert keine fertigen Spiele, sondern baut jedes aus seiner Nummer zusammen. Wie das funktioniert, steht offen in der App.",en:"Yes. The app doesn't store finished games, it builds each one from its number. How that works is explained openly in the app."}}],
+   words:["spiel","zahl"], play:""},
+  {id:"spieleschrank", name:"Spieleschrank", status:"soon", date:"2026-11-10", color:"#8a5a3b", letter:"SK",
+   genre:{de:"Spielesammlung",en:"Game collection"},
+   text:{de:"555 Spiele in einem Schrank, von Schach und Mühle bis Sudoku und Kniffel. Gegen den Bot oder zu zweit am selben Handy.",en:"555 games in one cupboard, from chess and nine men's morris to sudoku and dice. Against the bot or two players on one phone."},
+   dict:{art:{de:"der",en:"noun"},pron:"/ˈʃpiːləˌʃʁaŋk/",def:{de:"Möbelstück, aus dem beim Öffnen immer genau das Spiel fällt, das man nicht gesucht hat.",en:"A piece of furniture that, when opened, always drops exactly the game you weren't looking for."}},
+   feat:{de:["Brett-, Karten-, Würfel-, Rätsel- und Sportspiele","Vier Stufen bis Hardcore, mit Krone für jeden Hardcore-Sieg","2-Spieler-Modus, Speichern und Fortsetzen","Spiel des Tages, Erfolge und fünf Farbthemen"],
+         en:["Board, card, dice, puzzle and sports games","Four levels up to Hardcore, with a crown for every Hardcore win","2-player mode, save and resume","Game of the day, achievements and five colour themes"]},
+   log:[], faq:[], words:["spiel","schach"], play:""},
+  {id:"schnapszahl", name:"Schnapszahl 55.555", status:"soon", date:"2026-11-11", color:"#e2456b", letter:"55",
+   genre:{de:"Spielesammlung",en:"Game collection"},
+   text:{de:"55.555 eigene Spielvarianten auf einer Sammelkarte voller Schnaps-Inseln. Komplett offline.",en:"55,555 original game variants on a collection map full of islands. Completely offline."},
+   dict:{art:{de:"die",en:"noun"},pron:"/ˈʃnapsˌtsaːl/",def:{de:"Zahl aus lauter gleichen Ziffern. Hier: die Anzahl der Spiele in einer einzigen App.",en:"A number made of identical digits. Here: the number of games in a single app."}},
+   feat:{de:["55.555 echte Regelvarianten mit eigenen Namen und Logos","Sammelkarte mit Inseln als roter Faden","Vier Bot-Stufen in jedem Spiel","Deutsch und Englisch, komplett offline"],
+         en:["55,555 real rule variants with their own names and logos","A map of islands ties it all together","Four bot levels in every game","German and English, fully offline"]},
+   log:[], faq:[{q:{de:"Brauche ich Internet?",en:"Do I need internet?"},a:{de:"Nein, alle Spiele laufen komplett offline.",en:"No, every game runs completely offline."}}],
+   words:["insel","zahl","spiel"], play:""},
+  {id:"zeitzauberer", name:"Zeitzauberer", status:"dev", phase:2, color:"#6a4cd6", letter:"Z",
+   genre:{de:"Idle-Spiel",en:"Idle game"},
+   text:{de:"Ein Zauberer, sehr viele Zeitkristalle und noch mehr Epochen. Tippen, sammeln, Zeitbosse besiegen.",en:"A wizard, a great many time crystals and even more eras. Tap, collect, defeat time bosses."},
+   dict:{art:{de:"der",en:"noun"},pron:"/ˈtsaɪ̯tˌtsaʊ̯bəʁɐ/",def:{de:"Person, die Zeit in Kristalle verwandelt. Hat trotzdem nie welche.",en:"A person who turns time into crystals. Still never has any."}},
+   feat:{de:["Reise durch viele Epochen mit eigenen Welten","Zeitbosse mit Beute, Schmiede und Zauberlabor","Haustiere, vier Mini-Spiele und 38 Erfolge","Tagesaufgaben, Glücksrad und 30-Tage-Kalender"],
+         en:["Travel through many eras, each with its own world","Time bosses with loot, a forge and a spell lab","Pets, four mini games and 38 achievements","Daily quests, a lucky wheel and a 30-day calendar"]},
+   log:[], faq:[], words:["zeit","kristall"], play:""},
+  {id:"saunameister", name:"Saunameister", status:"dev", phase:2, color:"#b4532a", letter:"S",
+   genre:{de:"3D-Tycoon",en:"3D tycoon"},
+   text:{de:"Vom Waldhüttchen zur Polar-Therme: Lauf selbst zur Kasse, hol Handtücher, mach den Aufguss und stell Personal ein.",en:"From a forest hut to a polar spa: run to the till yourself, fetch towels, do the steam ritual and hire staff."},
+   dict:{art:{de:"der",en:"noun"},pron:"/ˈzaʊ̯naˌmaɪ̯stɐ/",def:{de:"Person, die mit einem Handtuch Wind macht und dafür Applaus bekommt.",en:"A person who makes wind with a towel and gets applause for it."}},
+   feat:{de:["Fünf Häuser: Waldhütte, Seebad, Bergresort, Kurhaus, Polar-Therme","Aufgaben erledigst du, indem du in leuchtende Kreise läufst","Personal für jede Station, Stammgäste und Hausschatz"],
+         en:["Five houses: forest hut, lake spa, mountain resort, spa house, polar spa","Do jobs by walking into glowing circles","Staff for every station, regular guests and a house safe"]},
+   log:[], faq:[], words:["sauna"], play:""},
+  {id:"der-letzte-zug", name:"Der letzte Zug", status:"dev", phase:2, color:"#2b2f3a", letter:"Z",
+   genre:{de:"Schach-Krimi",en:"Chess mystery"},
+   text:{de:"Eine verlassene Partie, ein Diebstahl im Café Zugzwang. Finde heraus, welcher Zug zuletzt gespielt wurde.",en:"An abandoned game, a theft at Café Zugzwang. Work out which move was played last."},
+   dict:{art:{de:"der",en:"noun"},pron:"/deːɐ̯ ˈlɛtstə tsuːk/",def:{de:"Zug, nach dem nichts mehr kommt. Außer der Frage, wer ihn gespielt hat.",en:"The move after which nothing follows. Except the question of who played it."}},
+   feat:{de:["Rückwärts-Schach: Rekonstruiere den letzten Zug statt vorwärts zu spielen","Krimi-Geschichte im Film-noir-Stil","47 Rätsel und 158 Tagesfälle","Deutsch und Englisch, offline"],
+         en:["Retro chess: reconstruct the last move instead of playing forward","A film-noir detective story","47 puzzles and 158 daily cases","German and English, offline"]},
+   log:[], faq:[], words:["schach"], play:""},
+  {id:"dotter", name:"Dotter", status:"dev", phase:2, color:"#f2a900", letter:"D",
+   genre:{de:"Eieruhr",en:"Egg timer"},
+   text:{de:"Die Eieruhr, die rechnet: Größe, Temperatur aus dem Kühlschrank, Höhe über dem Meer und Eiersorte fließen in die Kochzeit ein.",en:"The egg timer that does the maths: size, fridge temperature, altitude and type of egg all go into the cooking time."},
+   dict:{art:{de:"der",en:"noun"},pron:"/ˈdɔtɐ/",def:{de:"Gelber Kern eines Eis. Entscheidet, ob der Morgen gelingt.",en:"The yellow heart of an egg. Decides whether the morning goes well."}},
+   feat:{de:["Kochzeit nach wissenschaftlicher Formel","Hühner-, Wachtel-, Enten- und Gänseeier","Mehrere Eier markieren, jedes mit eigenem Wunsch","„Fertig um“-Planung und Eiervorrat"],
+         en:["Cooking time from a scientific formula","Hen, quail, duck and goose eggs","Mark several eggs, each cooked its own way","'Ready by' planning and egg stock"]},
+   log:[], faq:[], words:["ei"], play:""},
+  {id:"kruemelbuch", name:"Krümelbuch", status:"dev", phase:2, color:"#5a8f3d", letter:"K",
+   genre:{de:"Für Tagesmütter",en:"For childminders"},
+   text:{de:"Zeiten erfassen, Monatsnachweise als PDF, Abrechnung mit den Eltern. Gemacht für Tagesmütter und Tagesväter.",en:"Track times, monthly attendance as PDF, billing for parents. Made for childminders."},
+   dict:{art:{de:"das",en:"noun"},pron:"/ˈkʁyːml̩ˌbuːx/",def:{de:"Buch, in dem steht, wer wann gebracht und abgeholt wurde. Krümel inklusive.",en:"A book recording who was dropped off and picked up when. Crumbs included."}},
+   feat:{de:["Bringen und Abholen mit einem Tipp","Monatsnachweis und Rechnung als PDF","Feiertage nach Bundesland, Jahresübersicht","Mit PIN gesperrt und verschlüsselt, ohne Server"],
+         en:["Drop-off and pick-up with one tap","Monthly record and invoice as PDF","Public holidays by German state, yearly overview","PIN lock and encryption, no server"]},
+   log:[], faq:[], words:["buch"], play:""},
+  {id:"wackelturm", name:"Wackelturm", status:"dev", phase:1, color:"#3a7bd5", letter:"W",
+   genre:{de:"3D-Stapelspiel",en:"3D stacking game"},
+   text:{de:"Du sitzt am Küchentisch und stapelst, was gerade herumliegt. Bücher, Dosen, Quietscheentchen. Nur umfallen darf nichts.",en:"You sit at the kitchen table and stack whatever is lying around. Books, cans, rubber ducks. Just don't let anything fall."},
+   dict:{art:{de:"der",en:"noun"},pron:"/ˈvakl̩ˌtʊʁm/",def:{de:"Turm, der genau einen Gegenstand zu hoch ist.",en:"A tower that is exactly one object too tall."}},
+   feat:{de:["Echte Physik in 3D","Über 20 Gegenstände in drei Schwierigkeitsstufen","Höhenrekorde und verschiedene Orte"],en:["Real physics in 3D","20+ objects in three difficulty tiers","Height records and different places"]},
+   log:[], faq:[], words:["turm"], play:""},
+  {id:"das-ameisenhaus", name:"Das Ameisenhaus", status:"dev", phase:1, color:"#7a3d1e", letter:"A",
+   genre:{de:"Simulation",en:"Simulation"},
+   text:{de:"Eine Ameisenkolonie in Echtzeit, so nah an der Realität wie möglich. Deckel ab, umbauen, beobachten.",en:"An ant colony in real time, as close to reality as possible. Lift the lid, rearrange, observe."},
+   dict:{art:{de:"das",en:"noun"},pron:"/ˈaːmaɪ̯zn̩ˌhaʊ̯s/",def:{de:"Durchsichtiges Nest, in das eine Kolonie über eine Röhre einzieht. Zum Umbauen muss der Deckel ab.",en:"A transparent nest a colony moves into through a tube. To rearrange it, the lid has to come off."}},
+   feat:{de:["Kolonie wie in echt: Ameisenhaus, Röhre, Arena","Tageslicht nach der echten Uhrzeit","Benachrichtigungen und Replays für wichtige Momente"],en:["A colony like the real thing: nest, tube, arena","Daylight follows the real time of day","Notifications and replays for key moments"]},
+   log:[], faq:[], words:["ameise"], play:""},
+  {id:"only-1-match", name:"Only 1 Match", status:"dev", phase:1, color:"#22252c", letter:"1",
+   genre:{de:"Schach",en:"Chess"},
+   text:{de:"Ein Gegner. Ein extrem starker Bot. Und eine Statistik, die jeden deiner Versuche festhält.",en:"One opponent. An extremely strong bot. And statistics that record every single attempt."},
+   dict:{art:{de:"das",en:"noun"},pron:"/ˈoʊnli wʌn mætʃ/",def:{de:"Eine einzige Partie gegen einen einzigen Gegner, die man so lange spielt, bis man gewinnt. Oder auch nicht.",en:"A single game against a single opponent that you keep playing until you win. Or don't."}},
+   feat:{de:["Nur ein Gegner: ein Bot auf Weltklasse-Niveau","Statistik zu Versuchen, geschlagenen und verlorenen Figuren"],en:["Only one opponent: a world-class bot","Stats on attempts, captured and lost pieces"]},
+   log:[], faq:[], words:["schach"], play:""},
+  {id:"feierabendwerkstatt", name:"Feierabendwerkstatt", status:"dev", phase:1, color:"#9a6b4b", letter:"F",
+   genre:{de:"ASMR-Spiel",en:"ASMR game"},
+   text:{de:"Alte Dinge reinigen und restaurieren, in 3D drehen, in Ruhe. Gemütliches ASMR zum Abschalten.",en:"Clean and restore old things, turn them in 3D, take your time. Cosy ASMR to switch off."},
+   dict:{art:{de:"die",en:"noun"},pron:"/ˈfaɪ̯ɐʔaːbn̩tˌvɛʁkʃtat/",def:{de:"Ort, an dem man nach getaner Arbeit alte Dinge wieder schön macht.",en:"A place where, after a day's work, you make old things beautiful again."}},
+   feat:{de:["Gegenstände in 3D drehen und sauber machen","Aufträge annehmen oder ablehnen","Ruhige Geräusche zum Entspannen"],en:["Turn objects in 3D and clean them up","Accept or decline jobs","Calm sounds to unwind"]},
+   log:[], faq:[], words:["werkstatt"], play:""},
+  {id:"flitsch-kampf", name:"Flitsch-Kampf", status:"dev", phase:1, color:"#4a9a8a", letter:"F",
+   genre:{de:"3D-Kampfspiel",en:"3D fighting game"},
+   text:{de:"Dehnbare Gummi-Gorillas im Ring. Ziehen, zielen, loslassen, aus der Ego-Perspektive.",en:"Stretchy rubber gorillas in the ring. Pull, aim, let go, in first person."},
+   dict:{art:{de:"der",en:"noun"},pron:"/ˈflɪtʃˌkampf/",def:{de:"Ringkampf zwischen dehnbaren Gummigorillas. Gewonnen hat, wer zuletzt zurückschnalzt.",en:"A wrestling match between stretchy rubber gorillas. Whoever snaps back last wins."}},
+   feat:{de:["Ring-Kampf in 3D","Ziehen hat echten Sinn: Spannung bestimmt den Treffer","Ego-Perspektive"],en:["Ring fights in 3D","Pulling matters: tension decides the hit","First-person view"]},
+   log:[], faq:[], words:["gorilla"], play:""}
+];
+const PHASES = {de:["Idee","Prototyp","Feinschliff","Testphase"],en:["Idea","Prototype","Polish","Testing"]};
+const FAQ_ALL = [
+  {q:{de:"Wie komme ich jetzt schon an die App?",en:"How can I get the app now?"},a:{de:"Melde dich unter Mitmachen als Tester. Du bekommst dann eine Einladung zum Test bei Google Play.",en:"Sign up as a tester under Join in. You'll get an invite to the test on Google Play."}},
+  {q:{de:"Wo melde ich einen Fehler?",en:"Where do I report a bug?"},a:{de:"Schreib an nounnounstudio@gmail.com, am besten mit Handymodell und kurzer Beschreibung.",en:"Write to nounnounstudio@gmail.com, ideally with your phone model and a short description."}},
+  {q:{de:"Gibt es die App auch fürs iPhone?",en:"Is there an iPhone version?"},a:{de:"Zuerst erscheint alles für Android. iOS ist geplant.",en:"Everything comes to Android first. iOS is planned."}}
+];
+
+const WORDS = {
+  kratzbaum:{de:"Kratzbaum",en:"cat tree"}, katze:{de:"Katze",en:"cat"}, hoernchen:{de:"Flughörnchen",en:"flying squirrel"},
+  kristall:{de:"Kristall",en:"crystal"}, zeit:{de:"Zeit",en:"time"}, biene:{de:"Biene",en:"bee"}, stau:{de:"Stau",en:"traffic jam"},
+  flohmarkt:{de:"Flohmarkt",en:"flea market"}, insel:{de:"Insel",en:"island"}, zahl:{de:"Zahl",en:"number"}, spiel:{de:"Spiel",en:"game"},
+  schach:{de:"Schach",en:"chess"}, werkstatt:{de:"Werkstatt",en:"workshop"}, ameise:{de:"Ameise",en:"ant"}, gorilla:{de:"Gorilla",en:"gorilla"},
+  sauna:{de:"Sauna",en:"sauna"}, ei:{de:"Ei",en:"egg"}, buch:{de:"Buch",en:"book"}, turm:{de:"Turm",en:"tower"},
+  studio:{de:"Studio",en:"studio"}, ding:{de:"Ding",en:"thing"}
+};
+
+const POSTS = [
+  {id:"vier-releases", date:"2026-11-09", tag:{de:"Release",en:"Release"}, words:["spiel","biene","zahl"],
+   title:{de:"Vier Apps in drei Tagen",en:"Four apps in three days"},
+   teaser:{de:"Summstau, 1 Million Spiele, Spieleschrank und Schnapszahl 55.555 gehen diese Woche zu Google Play.",en:"Summstau, 1 Million Games, Spieleschrank and Schnapszahl 55,555 go to Google Play this week."},
+   body:{de:`<p>Diese Woche wird voll. Von Montag bis Mittwoch lade ich vier neue Apps bei Google Play hoch:</p><p><b>9. November:</b> Summstau, mein Bienen-Puzzle, und 1 Million Spiele, ein Spielgenerator, bei dem jede Nummer ein eigenes Spiel ist.<br><b>10. November:</b> Spieleschrank mit 555 Spielen, von Schach bis Sudoku.<br><b>11. November:</b> Schnapszahl 55.555 mit 55.555 eigenen Spielvarianten auf einer Inselkarte.</p><p>Alle vier starten zuerst im Test. Wenn du dabei sein willst, meld dich unter Mitmachen als Tester.</p>`,
+         en:`<p>Busy week ahead. From Monday to Wednesday I'm uploading four new apps to Google Play:</p><p><b>9 November:</b> Summstau, my bee puzzle, and 1 Million Games, a game generator where every number is its own game.<br><b>10 November:</b> Spieleschrank with 555 games, from chess to sudoku.<br><b>11 November:</b> Schnapszahl 55,555 with 55,555 original game variants on an island map.</p><p>All four start in testing first. If you want in, sign up as a tester under Join in.</p>`}},
+  {id:"summstau-ist-da", date:"2026-11-09", tag:{de:"Werkstatt",en:"Workshop"}, words:["biene","stau"],
+   title:{de:"Wie Summstau entstanden ist",en:"How Summstau came about"},
+   teaser:{de:"Aus einem Bus-Puzzle wurde ein Bienenstock. Und die Pixel verschwinden nicht einfach, sie werden abgebaut.",en:"A bus puzzle turned into a beehive. And the pixels don't just vanish, they get harvested."},
+   body:{de:`<p>Ich mag die Stau-Puzzles, bei denen Busse und Fahrgäste in der richtigen Reihenfolge loslegen müssen. Das Prinzip ist genial, das Thema eher nicht. Also wurde aus dem Parkplatz ein Bienenstock.</p><h2>Die Regeln</h2><p>Die Bienen stecken im Stau. Losfliegen kann nur, wer einen freien Weg nach oben hat. Draußen landet die Biene auf einer Landeblume und baut vom Pixelbild ab, was ihre Farbe hat, immer von außen nach innen. Sind alle Blumen besetzt und keine Biene findet mehr etwas, heißt es: Summstau.</p><h2>Abbauen statt verschwinden</h2><p>Mir war wichtig, dass sich jeder Zug gut anfühlt. Deshalb fliegen die Pixel sichtbar zur Biene, statt einfach zu verschwinden. Eine kleine Version kannst du hier auf der Seite spielen.</p>`,
+         en:`<p>I love those traffic-jam puzzles where buses and passengers have to move in the right order. Brilliant mechanic, less brilliant theme. So the car park became a beehive.</p><h2>The rules</h2><p>The bees are stuck in a jam. Only a bee with a clear path upwards can take off. Outside, it lands on a landing flower and harvests its colour from the pixel picture, always from the outside in. If every flower is taken and no bee finds anything, it's a Summstau.</p><h2>Harvesting instead of vanishing</h2><p>I wanted every move to feel good. So the pixels visibly fly to the bee instead of just disappearing. You can play a small version right here on the site.</p>`}},
+  {id:"troedelradar-im-test", date:"2026-11-07", tag:{de:"Test",en:"Testing"}, words:["flohmarkt"],
+   title:{de:"Trödelradar ist im Test",en:"Trödelradar is in testing"},
+   teaser:{de:"Rund 1.800 Flohmärkte, über 9.000 Termine und eine App, die sie alle findet.",en:"Around 1,800 flea markets, more than 9,000 dates and one app that finds them all."},
+   body:{de:`<p>Trödelradar beantwortet eine einfache Frage: Wo ist am Wochenende ein Flohmarkt in meiner Nähe? Du gibst deine Postleitzahl ein und siehst, was in der Umgebung los ist.</p><p>Drin sind rund 1.800 Märkte mit über 9.000 Terminen bis ins Jahr 2027. Viele davon habe ich bei den Veranstaltern bestätigen lassen. Mit der Routenplanung klapperst du mehrere Märkte an einem Tag ab, die Navigation übernimmt Google Maps.</p><p>Gestartet wird in Wellen: erst Märkte, Routen und Funde, später Standplätze und mehr. Die App ist jetzt im geschlossenen Test bei Google Play.</p>`,
+         en:`<p>Trödelradar answers one simple question: where is a flea market near me this weekend? Enter your postcode and see what's on nearby.</p><p>It covers around 1,800 markets with more than 9,000 dates into 2027, many of them confirmed with the organisers. Route planning lets you visit several markets in one day, Google Maps handles the navigation.</p><p>The launch comes in waves: markets, routes and finds first, stalls and more later. The app is now in closed testing on Google Play.</p>`}},
+  {id:"warum-noun", date:"2026-11-05", tag:{de:"Studio",en:"Studio"}, words:["studio","ding"],
+   title:{de:"Warum mein Studio NOUN heißt",en:"Why my studio is called NOUN"},
+   teaser:{de:"Ein Substantiv ist ein Wort für ein Ding. Und fast jede meiner Ideen fängt mit einem Ding an.",en:"A noun is a word for a thing. And almost every idea of mine starts with a thing."},
+   body:{de:`<p>Ein Kratzbaum. Ein Ameisenhaus. Eine Eieruhr. Wenn ich auf meine Projektliste schaue, steht da fast immer zuerst ein Gegenstand. Daraus entsteht dann die Frage, welches Spiel oder welche App darin steckt.</p><p>Deshalb NOUN, englisch für Substantiv. Der Name erinnert mich daran, bei den Dingen anzufangen und nicht bei dem, was gerade alle anderen machen.</p><p>Und falls du ein Ding hast, aus dem eine App werden sollte: Dafür gibt es den Ideenkasten.</p>`,
+         en:`<p>A cat tree. An ant nest. An egg timer. When I look at my project list, there is almost always an object first. Then comes the question of what game or app is hiding inside it.</p><p>Hence NOUN. The name reminds me to start with things, not with whatever everyone else is doing right now.</p><p>And if you have a thing that should become an app: that is what the idea box is for.</p>`}},
+  {id:"die-erste-app", date:"2026-11-01", tag:{de:"Werkstatt",en:"Workshop"}, words:["kratzbaum","katze","werkstatt"],
+   title:{de:"Die erste App: Kratzbaum-Krawall",en:"The first app: Kratzbaum-Krawall"},
+   teaser:{de:"Fünf Katzen, ein Leckerli-Budget und ein Chromebook. Wie mein erstes Spiel zu Google Play kam.",en:"Five cats, a budget of treats and a Chromebook. How my first game made it to Google Play."},
+   body:{de:`<p>Kratzbaum-Krawall war das Projekt, mit dem ich mein Google-Play-Konto eingeweiht habe. Du baust mit einem Leckerli-Budget einen Kratzbaum, und dann kommen Archie, May, Dori, Leopold und Nala und testen ihn. Nicht vorsichtig.</p><p>Aus der Idee wurde schnell ein großes Spiel: über 30 Level vom Wohnzimmer bis ins Weltall, Rettungsmissionen, ein Duell zu zweit und ein Katzenhaus, in dem man die Katzen pflegt.</p><h2>Bauen ohne Android Studio</h2><p>Ich arbeite am Chromebook und am Handy, Android Studio läuft da nicht. Deshalb baue ich meine Apps über GitHub und Codemagic in der Cloud. Es war nicht alles glatt, aber es ist online. Und das war das Ziel.</p>`,
+         en:`<p>Kratzbaum-Krawall was the project that christened my Google Play account. You build a cat tree on a budget of treats, and then Archie, May, Dori, Leopold and Nala come along and test it. Not gently.</p><p>The idea quickly grew into a big game: 30+ levels from the living room to outer space, rescue missions, a two-player duel and a cat house where you look after the cats.</p><h2>Building without Android Studio</h2><p>I work on a Chromebook and my phone, where Android Studio doesn't run. So I build my apps in the cloud with GitHub and Codemagic. Not everything went smoothly, but it is online. And that was the goal.</p>`}}
+];
+
+const NOUNS = {
+  de:["Ameisenhaus","Kratzbaum","Eieruhr","Bienenstock","Flohmarkt","Sauna","Döner","Maulwurf","Uhrwerk","Gummigorilla","Schachbrett","Zeitkristall","Wackelturm","Flughörnchen","Gartenladen","Getränkeautomat","Spieleschrank","Torwand"],
+  en:["ant nest","cat tree","egg timer","beehive","flea market","sauna","kebab","mole","clockwork","rubber gorilla","chessboard","time crystal","wobbly tower","flying squirrel","garden shop","vending machine","games cupboard","goal wall"]
+};
+
+const PRESS = {
+  short:{de:"NOUN Studio ist ein Ein-Mann-Studio aus Rothenburg ob der Tauber, das Apps und Spiele für Android entwickelt. Jede Idee beginnt mit einem Ding.",
+         en:"NOUN Studio is a one-person studio from Rothenburg ob der Tauber, Germany, making apps and games for Android. Every idea starts with a thing."},
+  long:{de:"NOUN Studio wurde im November 2026 von Jason Wühr in Rothenburg ob der Tauber gegründet. Der Name kommt vom englischen Wort für Substantiv: Fast jede App des Studios beginnt mit einem Gegenstand, vom Kratzbaum über den Bienenstock bis zum Flohmarkt. Im geschlossenen Test bei Google Play sind das 3D-Bauspiel Kratzbaum-Krawall, das Arcade-Spiel Flatterhörnchen und die Flohmarkt-App Trödelradar. Im November 2026 folgen das Bienen-Puzzle Summstau, der Spielgenerator 1 Million Spiele, die Sammlung Spieleschrank und Schnapszahl 55.555.",
+        en:"NOUN Studio was founded in November 2026 by Jason Wühr in Rothenburg ob der Tauber, Germany. The name says it all: almost every app the studio makes starts with an object, from a cat tree to a beehive to a flea market. In closed testing on Google Play are the 3D building game Kratzbaum-Krawall, the arcade game Flatterhörnchen and the flea market app Trödelradar. In November 2026 they are joined by the bee puzzle Summstau, the game generator 1 Million Games, the collection Spieleschrank and Schnapszahl 55,555."}
+};
+
+const LEGAL = {
+  impressum:{de:`<h1>Impressum</h1><p>Angaben gemäß § 5 DDG</p><p>Jason Wühr<br>NOUN Studio<br>Milchmarkt 6<br>91541 Rothenburg ob der Tauber</p><h2>Kontakt</h2><p>E-Mail: nounnounstudio@gmail.com</p><h2>Verantwortlich für den Inhalt</h2><p>Jason Wühr, Anschrift wie oben</p>`,
+             en:`<h1>Legal notice</h1><p>Information according to § 5 DDG (German Digital Services Act)</p><p>Jason Wühr<br>NOUN Studio<br>Milchmarkt 6<br>91541 Rothenburg ob der Tauber<br>Germany</p><h2>Contact</h2><p>Email: nounnounstudio@gmail.com</p><h2>Responsible for content</h2><p>Jason Wühr, address as above</p>`},
+  datenschutz:{de:`<h1>Datenschutz</h1><p>Diese Webseite setzt keine Tracking-Cookies und nutzt keine Analyse-Dienste.</p><h2>Verantwortlicher</h2><p>Jason Wühr, NOUN Studio, Milchmarkt 6, 91541 Rothenburg ob der Tauber, nounnounstudio@gmail.com</p><h2>Newsletter</h2><p>Wenn du dich für den Newsletter anmeldest, speichere ich deine E-Mail-Adresse und die gewünschte Sprache, um dir Neuigkeiten zu NOUN Studio zu schicken. Grundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die du jederzeit per Mail widerrufen kannst. Die Anmeldung wird per Bestätigungsmail abgesichert.</p><h2>Tester-Anmeldung</h2><p>Für Testeinladungen speichere ich die E-Mail-Adresse deines Google-Kontos und die gewählten Apps. Grundlage ist deine Einwilligung, die du jederzeit widerrufen kannst.</p><h2>Ideenkasten und Abstimmung</h2><p>Ideen werden ohne Namen gespeichert. Für die Abstimmung speichert dein Browser eine zufällige Kennung, damit jede Person nur einmal abstimmt.</p><h2>Speicherort</h2><p>Die Daten liegen bei Supabase, einem Datenbank-Anbieter, mit dem ein Vertrag zur Auftragsverarbeitung besteht.</p><h2>Kontakt per E-Mail</h2><p>Wenn du mir schreibst, verwende ich deine Angaben nur, um deine Anfrage zu beantworten.</p><h2>Schriftarten</h2><p>Für die Darstellung werden Schriftarten von Google Fonts geladen. Dabei wird deine IP-Adresse an Google übertragen.</p><h2>Social-Media-Posts</h2><p>Im Bereich Social zeigt die Seite meine neuesten Instagram-Posts über den Dienst Behold (behold.so) an. Beim Laden werden die Bilder von dort und von Servern von Meta abgerufen, dabei wird deine IP-Adresse übertragen. Links zu Instagram, X und anderen Plattformen öffnen deren Seiten, dort gelten deren Datenschutzbestimmungen.</p><h2>Deine Rechte</h2><p>Du hast das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung sowie auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde.</p>`,
+                en:`<h1>Privacy</h1><p>This website sets no tracking cookies and uses no analytics services.</p><h2>Controller</h2><p>Jason Wühr, NOUN Studio, Milchmarkt 6, 91541 Rothenburg ob der Tauber, Germany, nounnounstudio@gmail.com</p><h2>Newsletter</h2><p>If you sign up for the newsletter, I store your email address and preferred language to send you NOUN Studio news. The legal basis is your consent (Art. 6(1)(a) GDPR), which you can withdraw at any time by email. Sign-up is confirmed by email.</p><h2>Tester sign-up</h2><p>For test invitations I store the email address of your Google account and the apps you chose, based on your consent, which you can withdraw at any time.</p><h2>Idea box and voting</h2><p>Ideas are stored without names. For voting, your browser stores a random ID so each person votes only once.</p><h2>Where data is stored</h2><p>Data is stored with Supabase, a database provider under a data processing agreement.</p><h2>Email contact</h2><p>If you write to me, I only use your details to answer your request.</p><h2>Fonts</h2><p>Fonts are loaded from Google Fonts, which transmits your IP address to Google.</p><h2>Social media posts</h2><p>The Social section shows my latest Instagram posts via the service Behold (behold.so). Images are loaded from there and from Meta servers, which transmits your IP address. Links to Instagram, X and other platforms open their sites, where their privacy policies apply.</p><h2>Your rights</h2><p>You have the right to access, rectification, erasure and restriction of processing, and to lodge a complaint with a data protection authority.</p>`}
+};
+
+/* ============ Oberflächentexte ============ */
+const I = {
+  nav_apps:["Apps","Apps"], nav_shop:["Werkstatt","Workshop"], nav_play:["Spielen","Play"], nav_blog:["Blog","Blog"],
+  nav_about:["Über mich","About"], nav_join:["Mitmachen","Join in"], nav_press:["Presse","Press"],
+  hero_pos:["Substantiv · Studio aus Rothenburg ob der Tauber","noun · studio from Rothenburg ob der Tauber"],
+  hero_d1:["Ein Wort für ein <mark>Ding</mark>. Ameisenhaus, Kratzbaum, Eieruhr, Flohmarkt.","A word for a <mark>thing</mark>. Ant nest, cat tree, egg timer, flea market."],
+  hero_d2:["Ein Ein-Mann-Studio, das genau aus solchen Dingen Apps und Spiele für Android macht.","A one-person studio that turns exactly those things into apps and games for Android."],
+  hero_d3:["<em>umgangssprachlich:</em> der Grund, warum es hier gleich um Bienen im Stau geht.","<em>informal:</em> the reason this page is about to talk about bees stuck in traffic."],
+  rand_label:["noun, zufällig:","noun, at random:"], rand_btn:["Noch ein Ding","Another thing"],
+  hero_cta1:["Apps ansehen","See the apps"], hero_cta2:["Direkt spielen","Play right now"],
+  fact1:["Apps bei Google Play","apps on Google Play"], fact2:["Projekte in der Werkstatt","projects in the workshop"], fact3:["Mensch dahinter","human behind it"],
+  apps_h:["Apps &amp; Spiele","Apps &amp; games"],
+  apps_lead:["Was schon im Play Store ist, was gerade fertig wird und was noch in der Werkstatt liegt. Tipp auf eine App für alle Details.","What's already on the Play Store, what's nearly done and what's still in the workshop. Tap an app for all the details."],
+  apps_side:["Plural: die Apps","plural: apps"], f_all:["Alle","All"], f_live:["Im Store","In the store"], f_dev:["In Arbeit","In progress"],
+  shop_h:["In der Werkstatt","In the workshop"],
+  shop_lead:["Daran arbeite ich gerade. Stimm ab, auf welches Projekt du dich am meisten freust. Eine Stimme pro Person, du kannst sie jederzeit ändern.","This is what I'm working on. Vote for the project you're most looking forward to. One vote per person, you can change it any time."],
+  shop_side:["die Roadmap","the roadmap"],
+  preview_note:["Vorschau-Modus: Stimmen und Formulare werden erst gespeichert, wenn die Seite mit dem Server verbunden ist. Bis dahin merkt sich nur dein Browser deine Eingaben.","Preview mode: votes and forms are only saved once the site is connected to its server. Until then, only your browser remembers what you entered."],
+  play_h:["Summstau Mini","Summstau Mini"],
+  play_lead:["Ein kleiner Vorgeschmack auf Summstau. Tipp eine Biene an, und sie fliegt in Blickrichtung los. Steht eine andere Biene im Weg, gibt es einen Zusammenstoß. Bring alle Bienen aus der Wabe.","A small taste of Summstau. Tap a bee and it flies off the way it's facing. If another bee is in the way, they bump. Get every bee out of the comb."],
+  play_side:["das Minispiel","the mini game"], win:["Geschafft! Alle Bienen sind ausgeflogen.","Done! Every bee has flown out."],
+  g_level:["Level","Level"], g_left:["Bienen übrig","bees left"], g_bumps:["Zusammenstöße","bumps"],
+  g_next:["Neues Level","New level"], g_reset:["Level neu starten","Restart level"],
+  g_more:["Das ganze Spiel mit Pixel-Waben, Farben und vielen Leveln gibt es in der App.","The full game with pixel combs, colours and lots of levels is in the app."], g_link:["Zu Summstau","Go to Summstau"],
+  blog_lead:["Werkstattnotizen: wie die Apps entstehen, was schiefgeht und was als Nächstes kommt.","Workshop notes: how the apps come together, what goes wrong and what's next."],
+  blog_side:["das Logbuch","the logbook"], lex_h:["Werkstatt-Lexikon","Workshop glossary"],
+  lex_lead:["Alle Dinge, um die es hier geht. Tipp auf ein Wort, um alles dazu zu sehen.","All the things this site is about. Tap a word to see everything about it."],
+  about_h:["Über mich","About me"], about_side:["der Mensch hinter dem Substantiv","the human behind the noun"],
+  about_text:[null,`<p>I'm Jason Wühr, and under the name NOUN Studio I make apps and games for Android. My studio is my desk in Rothenburg ob der Tauber, my test device is my phone.</p><p>My ideas almost always start with a thing: a cat tree, an ant nest, an egg timer, a rubber gorilla. Then I ask myself what I could make from it that doesn't exist yet. Sometimes it becomes a cosy game, sometimes a useful tool, sometimes something rather silly.</p><p>What matters to me: apps you understand without reading a manual, fair ads instead of rip-offs, and ideas that dare to be different.</p>`],
+  ab_place:["Ort","Based in"], ab_plat:["Plattform","Platform"], ab_plat_v:["Android, iOS geplant","Android, iOS planned"],
+  ab_fav:["Am liebsten","Favourite"], ab_fav_v:["Spiele mit ungewöhnlichen Themen","Games with unusual themes"],
+  tl1:["Gewerbe angemeldet, Google-Play-Konto eingerichtet","Business registered, Google Play account set up"],
+  tl2:["Erste Apps im Play Store, darunter Kratzbaum-Krawall","First apps on the Play Store, including Kratzbaum-Krawall"],
+  tl3:["Release von Summstau","Summstau released"], tl4:["Trödelradar startet","Trödelradar launches"],
+  join_h:["Mitmachen","Join in"], join_side:["das Mitmachen","the joining in"],
+  join_lead:["Schick mir ein Ding, teste neue Apps vor allen anderen oder erfahr als Erstes, wenn etwas Neues erscheint.","Send me a thing, test new apps before anyone else or be the first to hear when something new comes out."],
+  idea_h:["Ideenkasten","Idea box"], idea_lead:["Nenn mir ein Ding. Vielleicht wird daraus die nächste App.","Name a thing. Maybe it becomes the next app."],
+  idea_l1:["Dein Ding (ein Substantiv)","Your thing (a noun)"], idea_ph1:["z. B. Gießkanne","e.g. watering can"],
+  idea_l2:["Was könnte man daraus machen? (optional)","What could it become? (optional)"], idea_btn:["Idee einwerfen","Drop in idea"],
+  test_h:["Tester werden","Become a tester"],
+  test_lead:["Spiel neue Apps, bevor sie erscheinen, und hilf mit deinem Feedback. Du brauchst ein Android-Handy und die E-Mail-Adresse deines Google-Kontos.","Play new apps before release and help with your feedback. You need an Android phone and the email address of your Google account."],
+  test_l1:["E-Mail deines Google-Kontos","Your Google account email"], test_l2:["Welche Apps willst du testen?","Which apps do you want to test?"],
+  consent_test:["Ich bin einverstanden, dass NOUN Studio meine E-Mail für Testeinladungen speichert. Abmelden geht jederzeit per Mail.","I agree that NOUN Studio stores my email for test invitations. I can unsubscribe by email at any time."],
+  test_btn:["Als Tester melden","Sign up as tester"],
+  news_h:["Newsletter","Newsletter"], news_lead:["Höchstens eine Mail pro Release. Neue Apps, große Updates, sonst nichts.","At most one email per release. New apps, big updates, nothing else."],
+  news_l1:["Deine E-Mail","Your email"], news_l2:["Sprache","Language"],
+  consent_news:["Ich möchte den Newsletter erhalten. Ich bekomme eine Mail zur Bestätigung und kann mich jederzeit abmelden.","I'd like to receive the newsletter. I'll get a confirmation email and can unsubscribe at any time."],
+  news_btn:["Anmelden","Sign up"],
+  contact_h:["Kontakt","Contact"], contact_lead:["Du hast einen Fehler gefunden oder willst einfach Hallo sagen? Schreib mir.","Found a bug or just want to say hello? Write to me."],
+  contact_mail:["E-Mail schreiben","Write an email"], copy_mail:["Adresse kopieren","Copy address"],
+  c_name:["Dein Name","Your name"], c_topic:["Worum geht es?","What's it about?"], c_msg:["Nachricht","Message"], c_btn:["Nachricht vorbereiten","Prepare message"],
+  press_h:["Presse &amp; Creator","Press &amp; creators"],
+  press_lead:["Für YouTube, TikTok, Blogs und Zeitungen: Logo, Texte und Fakten zum freien Verwenden, wenn du über NOUN Studio oder eine der Apps berichtest.","For YouTube, TikTok, blogs and newspapers: logo, copy and facts, free to use when you cover NOUN Studio or one of its apps."],
+  press_side:["das Pressekit","the press kit"], dl_light:["Logo hell (SVG)","Logo light (SVG)"], dl_dark:["Logo dunkel (SVG)","Logo dark (SVG)"],
+  fact_h:["Fakten","Facts"], fs_founder:["Gründer","Founder"], fs_seat:["Sitz","Based in"], fs_since:["Seit","Since"], fs_since_v:["November 2026","November 2026"],
+  fs_plat:["Plattform","Platform"], fs_apps:["Apps im Store","Apps in store"], fs_press:["Pressekontakt","Press contact"],
+  texts_h:["Texte","Copy"], short_l:["Kurz","Short"], long_l:["Lang","Long"], copy_short:["Kurztext kopieren","Copy short text"], copy_long:["Langtext kopieren","Copy long text"],
+  press_note:["App-Icons und Screenshots in hoher Auflösung schicke ich dir gern per Mail.","Happy to email you high-resolution app icons and screenshots."],
+  back_blog:["← Zurück zum Blog","← Back to the blog"], back:["← Zurück","← Back"], imp:["Impressum","Legal notice"], priv:["Datenschutz","Privacy"],
+  /* nur im Skript */
+  more:["Details","Details"], st_live:["Bei Google Play","On Google Play"], st_neu:["Neu · 9. Nov","New · 9 Nov"], st_dev:["In Arbeit","In progress"],
+  vote:["Freu mich drauf","Can't wait"], voted:["Deine Stimme","Your vote"], votes:["Stimmen","votes"],
+  back_apps:["← Alle Apps","← All apps"], dict_word:["Wort des Tages","Word of the day"],
+  shots:["Screenshot folgt","Screenshot coming"], features:["Was dich erwartet","What to expect"], changelog:["Changelog","Changelog"],
+  no_log:["Noch nicht erschienen. Aktuelle Phase:","Not released yet. Current phase:"], faq:["Häufige Fragen","FAQ"],
+  get_play:["Bei Google Play laden","Get it on Google Play"], link_soon:["Store-Link folgt","Store link coming"],
+  want_test:["Als Tester melden","Sign up to test"], vote_this:["Abstimmen in der Werkstatt","Vote in the workshop"],
+  word_h:["Alles zum Wort","Everything about"], word_apps:["Apps","Apps"], word_posts:["Blogbeiträge","Blog posts"], none:["Noch nichts.","Nothing yet."],
+  copied:["Kopiert","Copied"], copy_fail:["Kopieren hat nicht geklappt. Bitte markieren und selbst kopieren.","Copying didn't work. Please select and copy it yourself."],
+  ok_idea:["Danke! Deine Idee liegt im Kasten.","Thanks! Your idea is in the box."], err_idea:["Bitte nenn zuerst ein Ding.","Please name a thing first."],
+  ok_test:["Danke! Du stehst auf der Testerliste. Die Einladung kommt per Mail, sobald ein Test startet.","Thanks! You're on the tester list. You'll get an email invite as soon as a test starts."],
+  ok_news:["Fast geschafft! Bitte bestätige die Anmeldung in der Mail, die gleich kommt.","Almost there! Please confirm your sign-up in the email that's on its way."],
+  ok_preview:["Im Vorschau-Modus nur in deinem Browser gemerkt.","In preview mode this is only kept in your browser."],
+  err_mail:["Bitte gib eine gültige E-Mail-Adresse ein.","Please enter a valid email address."],
+  err_consent:["Bitte bestätige das Häkchen.","Please tick the consent box."], err_apps:["Bitte wähl mindestens eine App.","Please pick at least one app."],
+  err_send:["Das hat leider nicht geklappt. Bitte versuch es später noch mal oder schreib mir eine Mail.","That didn't work. Please try again later or send me an email."],
+  err_msg:["Bitte schreib zuerst eine Nachricht.","Please write a message first."],
+  ok_msg:["Deine Nachricht ist vorbereitet.","Your message is ready."], open_mail:["Im Mailprogramm öffnen","Open in mail app"], or_send:["oder direkt an nounnounstudio@gmail.com schicken.","or send it straight to nounnounstudio@gmail.com."],
+  topics:[["Feedback zu einer App","Fehler melden","Spielidee","Presse oder Kooperation","Sonstiges"],["Feedback on an app","Report a bug","Game idea","Press or collaboration","Other"]],
+  dl_fail:["Download ist hier nicht möglich. Das SVG wurde stattdessen in die Zwischenablage kopiert.","Download isn't possible here. The SVG was copied to your clipboard instead."],
+  bump:["Bumm! Da sitzt eine Biene im Weg.","Bump! A bee is in the way."], bee_label:["Biene, schaut nach","Bee facing"], dirs:[["oben","rechts","unten","links"],["up","right","down","left"]]
+};
+
+Object.assign(I, {
+  soc_lead:["Folg NOUN Studio, und sieh hier alle neuen Posts von allen Plattformen an einem Ort.","Follow NOUN Studio and see every new post from every platform in one place."],
+  soc_side:["die neuesten Posts","the latest posts"], soc_follow:["Folgen","Follow"], soc_soon:["Bald auch auf:","Coming soon:"],
+  soc_open:["Auf","Open on"], soc_empty:["Noch keine Posts.","No posts yet."],
+  soc_demo:["Beispiele: Deine echten Posts erscheinen hier automatisch, sobald die Verbindung eingerichtet ist.","Examples: real posts appear here automatically once the connection is set up."],
+  vote1:["Stimme","vote"],
+  nav_ding:["Ding des Monats","Thing of the month"], tk_label:["Werkstatt","Workshop"],
+  ding_h:["Ding des Monats","Thing of the month"],
+  ding_lead:["Aus dem Ideenkasten wähle ich jeden Monat ein paar Dinge aus. Ihr stimmt ab, und aus dem Gewinner baue ich einen Prototyp, über den ich im Blog berichte.","Every month I pick a few things from the idea box. You vote, and I build a prototype of the winner and write about it on the blog."],
+  ding_demo:["Beispiele: Die echten Kandidaten erscheinen, sobald die ersten Ideen eingeworfen sind.","Examples: the real candidates appear once the first ideas are in."],
+  ding_submit:["Eigenes Ding einwerfen","Submit your own thing"], ding_hist:["Bisherige Gewinner","Past winners"],
+  ding_how:[null,"<li>You drop a thing into the idea box.</li><li>At the start of the month the best ideas go to a vote.</li><li>The winning thing gets a prototype and a blog post.</li>"],
+  ding_vote:["Dafür stimmen","Vote for this"], ding_more:["Zum Beitrag","Read more"],
+  ding_empty:["Diesen Monat stehen noch keine Kandidaten fest.","No candidates picked for this month yet."],
+  ding_first:["Das erste Ding des Monats wird im Dezember gekürt.","The first thing of the month will be crowned in December."],
+  hero_cta2:["Summstau Mini spielen","Play Summstau Mini"],
+  fact1:["Apps im Test bei Google Play","apps in testing on Google Play"], fact2:["neue Apps diese Woche","new apps this week"], fact3:["Projekte in der Werkstatt","projects in the workshop"],
+  f_live:["Bei Google Play","On Google Play"],
+  play_lead:["Eine kleine Version von Summstau zum Ausprobieren. Ernte das Pixelbild ab, bevor die Landeblumen voll sind.","A small version of Summstau to try out. Harvest the pixel picture before the landing flowers fill up."],
+  g_level:["Level","Level"], g_px:["Pixel übrig","pixels left"], g_extra:["+1 Landeblume","+1 landing flower"], g_reset:["Neu starten","Restart"],
+  g_how_h:["So geht's","How to play"],
+  g_how:[null,`<li>Tap a bee. It only takes off if it has a <b>clear path upwards</b>.</li><li>It lands on a <b>landing flower</b> and harvests pixels of its colour from the picture, always <b>from the outside in</b>. Exposed pixels have a white outline.</li><li>The number shows how many pixels the bee can still carry. Once full, it flies back to the hive.</li><li>From level 3 there are <b>ice bees</b>. They thaw when other bees take off.</li><li>If every landing flower is taken and no bee finds a matching pixel, it's a <b>Summstau</b>.</li>`],
+  g_more:["Die ganze App hat mehr Bilder, Honig, Booster, einen Stock zum Ausbauen und ein Album.","The full app has more pictures, honey, boosters, a hive to upgrade and an album."],
+  g_hint_start:["Welche Biene hat einen freien Weg nach oben?","Which bee has a clear path upwards?"],
+  g_hint_blocked:["Diese Biene ist zugeparkt.","This bee is blocked in."], g_hint_ice:["Eis-Biene: taut auf, wenn andere losfliegen.","Ice bee: thaws when others take off."],
+  g_hint_full:["Alle Landeblumen besetzt. Warte, bis eine Biene voll ist.","All landing flowers taken. Wait until a bee is full."],
+  g_win_h:["Bild geerntet!","Picture harvested!"], g_win_p:["ist fertig.","is done."], g_win_btn:["Nächstes Level","Next level"],
+  g_lose_h:["Summstau!","Summstau!"], g_lose_p:["Alle Landeblumen sind besetzt und keine Biene findet mehr passende Pixel.","Every landing flower is taken and no bee can find a matching pixel."], g_lose_btn:["Nochmal versuchen","Try again"],
+  ab_plat_v:["Android, iOS geplant","Android, iOS planned"],
+  tl1:["Gewerbe angemeldet, Google-Play-Konto eingerichtet","Business registered, Google Play account set up"],
+  tl2:["Kratzbaum-Krawall, Flatterhörnchen und Trödelradar im geschlossenen Test","Kratzbaum-Krawall, Flatterhörnchen and Trödelradar in closed testing"],
+  tl3:["Summstau, 1 Million Spiele, Spieleschrank und Schnapszahl 55.555","Summstau, 1 Million Games, Spieleschrank and Schnapszahl 55,555"],
+  tl4:["Saisonmärkte in Trödelradar","Seasonal markets in Trödelradar"],
+  test_lead:["Spiel neue Apps vor allen anderen und hilf mit deinem Feedback. Du brauchst ein Android-Handy und die E-Mail-Adresse deines Google-Kontos.","Play new apps before anyone else and help with your feedback. You need an Android phone and the email address of your Google account."],
+  fs_apps:["Im Test bei Google Play","In testing on Google Play"],
+  st_test:["Im Test bei Google Play","In testing on Google Play"], st_soon:["Upload","Upload"], st_dev:["In Arbeit","In progress"],
+  want_test:["Als Tester melden","Sign up to test"], test_join:["Jetzt mittesten","Join the test"]
+});
+
+/* ============ Sprache ============ */
+let lang = "de";
+try{ const s = localStorage.getItem("noun-lang"); if(s==="en"||s==="de") lang = s; }catch(e){}
+const t = k => { const v = I[k]; return v ? (lang==="en" ? v[1] : v[0]) : k; };
+const L = o => (o && typeof o==="object" && !Array.isArray(o)) ? (o[lang] ?? o.de) : o;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+const originals = new Map();
+function applyStatic(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i]").forEach(el => {
+    if(!originals.has(el)) originals.set(el, el.innerHTML);
+    const v = I[el.dataset.i];
+    el.innerHTML = lang==="de" || !v || v[1]==null ? originals.get(el) : v[1];
+  });
+  document.querySelectorAll("[data-ph]").forEach(el => el.placeholder = t(el.dataset.ph));
+  document.getElementById("lang-btn").textContent = lang==="de" ? "EN" : "DE";
+  document.getElementById("press-short").textContent = L(PRESS.short);
+  document.getElementById("press-long").textContent = L(PRESS.long);
+  const sel = document.getElementById("c-topic");
+  sel.innerHTML = I.topics[lang==="en"?1:0].map(o => `<option>${esc(o)}</option>`).join("");
+  document.querySelectorAll("[data-preview]").forEach(el => el.hidden = LIVE);
+}
+function renderAll(){
+  applyStatic(); renderApps(currentFilter); renderRoad(); renderPosts(); renderWords(); renderTesterApps();
+  rollNoun(false); ssRelabel(); renderDing(); tickerShow(); renderSocialProfiles(); renderSocialFeed(); route(true);
+}
+document.getElementById("lang-btn").addEventListener("click", () => {
+  lang = lang==="de" ? "en" : "de";
+  try{ localStorage.setItem("noun-lang", lang); }catch(e){}
+  renderAll();
+});
+
+/* ============ Hilfen ============ */
+const fmt = d => new Date(d+"T12:00:00").toLocaleDateString(lang==="en"?"en-GB":"de-DE",{day:"2-digit",month:"2-digit",year:"numeric"});
+function toast(msg){ const el = document.getElementById("toast"); el.textContent = msg; el.classList.add("show"); clearTimeout(toast.t); toast.t = setTimeout(()=>el.classList.remove("show"), 2600); }
+async function copyText(txt){ try{ await navigator.clipboard.writeText(txt); toast(t("copied")); return true; }catch(e){ toast(t("copy_fail")); return false; } }
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-copy],[data-copy-el]"); if(!b) return;
+  copyText(b.dataset.copy || document.getElementById(b.dataset.copyEl).textContent);
+});
+const statusLabel = a => a.status==="soon" ? `${t("st_soon")} ${new Date(a.date+"T12:00:00").toLocaleDateString(lang==="en"?"en-GB":"de-DE",{day:"numeric",month:"short"})}` : t("st_"+a.status);
+const appById = id => APPS.find(a => a.id===id);
+const wordChip = w => `<a class="word" href="#wort-${w}">${esc(L(WORDS[w]))}</a>`;
+
+/* ============ Zufälliges noun ============ */
+let nounIdx = Math.floor(Math.random()*NOUNS.de.length);
+function rollNoun(next){
+  if(next){ let n; do{ n = Math.floor(Math.random()*NOUNS.de.length); }while(n===nounIdx); nounIdx = n; }
+  const el = document.getElementById("rand-noun");
+  el.textContent = NOUNS[lang][nounIdx];
+  if(next){ el.classList.add("pop"); setTimeout(()=>el.classList.remove("pop"), 250); }
+}
+document.getElementById("rand-btn").addEventListener("click", () => rollNoun(true));
+
+/* ============ Apps ============ */
+let currentFilter = "alle";
+function renderApps(filter){
+  const list = APPS.filter(a => filter==="alle" || (filter==="live" ? a.status!=="dev" : a.status==="dev"));
+  document.getElementById("app-grid").innerHTML = list.map(a => `
+    <a class="app" href="#app-${a.id}">
+      <div class="app-top">
+        <div class="icon" style="background:${a.color}" aria-hidden="true">${a.letter}</div>
+        <div><h3>${esc(a.name)}</h3><div class="genre">${esc(L(a.genre))}</div></div>
+      </div>
+      <p>${esc(L(a.text))}</p>
+      <div class="app-foot"><span class="status ${a.status}">${statusLabel(a)}</span><span class="more">${t("more")} →</span></div>
+    </a>`).join("");
+}
+document.querySelectorAll(".chip[data-filter]").forEach(c => c.addEventListener("click", () => {
+  document.querySelectorAll(".chip[data-filter]").forEach(x => x.setAttribute("aria-pressed","false"));
+  c.setAttribute("aria-pressed","true"); currentFilter = c.dataset.filter; renderApps(currentFilter);
+}));
+
+function phaseHtml(p){
+  return `<div class="phases">${PHASES[lang].map((n,i)=>`<span class="phase ${i<p?"done":i===p?"now":""}">${n}</span>`).join("")}</div>`;
+}
+
+function renderAppPage(a){
+  const faqs = [...a.faq, ...FAQ_ALL];
+  const shots = [1,2,3].map(i => `<div class="phone" style="background:linear-gradient(160deg,${a.color},#16181d)">${esc(a.name)}<small>${t("shots")}</small></div>`).join("");
+  const store = a.status==="dev"
+    ? `<a class="btn primary" href="#mitmachen">${t("want_test")}</a><a class="btn" href="#werkstatt">${t("vote_this")}</a>`
+    : (a.play ? `<a class="btn primary" href="${esc(a.play)}" target="_blank" rel="noopener">${t("get_play")}</a>` : `<a class="btn primary" href="#mitmachen">${t("test_join")}</a>`);
+  const log = a.log.length
+    ? `<ol class="log">${a.log.map(l=>`<li><span class="v">v${l.v}</span><span><b>${esc(l.d)}</b><br>${esc(L(l.t))}</span></li>`).join("")}</ol>`
+    : `<p class="muted" style="margin:0 0 4px">${t("no_log")}</p>${phaseHtml(a.phase ?? 3)}`;
+  document.getElementById("app-body").innerHTML = `
+    <a class="btn back small" href="#apps">${t("back_apps")}</a>
+    <div class="app-hero">
+      <div class="icon big" style="background:${a.color}" aria-hidden="true">${a.letter}</div>
+      <div><h1>${esc(a.name)}</h1><div class="muted">${esc(L(a.genre))} · <span class="status ${a.status}" style="display:inline-block">${statusLabel(a)}</span></div></div>
+    </div>
+    <div class="dict">
+      <div class="mono muted">${t("dict_word")}</div>
+      <div class="head"><b>${esc(a.name)}</b><span class="pos">${esc(L(a.dict.art))}</span><span class="pron">${esc(a.dict.pron)}</span></div>
+      <p>${esc(L(a.dict.def))}</p>
+    </div>
+    <p style="font-size:1.15rem;max-width:62ch;margin:0 0 24px">${esc(L(a.text))}</p>
+    <div class="store-row">${store}</div>
+    <div class="shots" aria-label="Screenshots">${shots}</div>
+    <div class="app-grid2">
+      <div class="panel"><h2>${t("features")}</h2><ul class="feat">${L(a.feat).map(f=>`<li>${esc(f)}</li>`).join("")}</ul></div>
+      <div class="panel"><h2>${t("changelog")}</h2>${log}</div>
+      <div class="panel" style="grid-column:1/-1"><h2>${t("faq")}</h2>${faqs.map(f=>`<details><summary>${esc(L(f.q))}</summary><p>${esc(L(f.a))}</p></details>`).join("")}</div>
+    </div>
+    <div class="words" style="margin-top:28px">${a.words.map(wordChip).join("")}</div>`;
+}
+
+/* ============ Server oder Vorschau ============ */
+function localList(key){ try{ return JSON.parse(localStorage.getItem(key)||"[]"); }catch(e){ return []; } }
+function localPush(key, row){ try{ const l = localList(key); l.push(row); localStorage.setItem(key, JSON.stringify(l.slice(-50))); }catch(e){} }
+async function sb(path, opts={}){
+  const r = await fetch(BACKEND.url.replace(/\/$/,"")+"/rest/v1/"+path, {
+    ...opts, headers:{apikey:BACKEND.anonKey, Authorization:"Bearer "+BACKEND.anonKey, "Content-Type":"application/json", ...(opts.headers||{})}
+  });
+  if(!r.ok && r.status!==409) throw new Error(r.status);
+  return r;
+}
+async function save(table, row){
+  if(!LIVE){ localPush("noun-preview-"+table, {...row, at:new Date().toISOString()}); return "preview"; }
+  await sb(table, {method:"POST", headers:{Prefer:"return=minimal"}, body:JSON.stringify(row)});
+  return "live";
+}
+
+/* ============ Werkstatt + Abstimmung ============ */
+let voterId = null;
+try{ voterId = localStorage.getItem("noun-voter"); if(!voterId){ voterId = crypto.randomUUID(); localStorage.setItem("noun-voter", voterId); } }catch(e){ voterId = "anon-"+Math.random().toString(36).slice(2); }
+let myVote = null; try{ myVote = localStorage.getItem("noun-myvote"); }catch(e){}
+let counts = {};
+async function loadCounts(){
+  if(!LIVE){ counts = {}; if(myVote) counts[myVote] = 1; renderRoad(); return; }
+  try{
+    const r = await sb("vote_counts?select=app,votes");
+    counts = {}; (await r.json()).forEach(x => counts[x.app] = x.votes); renderRoad();
+  }catch(e){ renderRoad(); }
+}
+function renderRoad(){
+  const dev = APPS.filter(a => a.status==="dev");
+  const max = Math.max(1, ...dev.map(a => counts[a.id]||0));
+  document.getElementById("road").innerHTML = dev.map(a => {
+    const c = counts[a.id]||0, mine = myVote===a.id;
+    return `<div class="road-item">
+      <div class="icon" style="background:${a.color}" aria-hidden="true">${a.letter}</div>
+      <div><h3><a href="#app-${a.id}">${esc(a.name)}</a></h3><div class="muted" style="font-size:.9rem">${esc(L(a.genre))}</div>${phaseHtml(a.phase)}</div>
+      <div class="vote-box">
+        <div class="bar" aria-hidden="true"><i style="width:${Math.round(c/max*100)}%"></i></div>
+        <span class="vote-count">${c} ${t(c===1?"vote1":"votes")}</span>
+        <button class="btn small vote-btn" type="button" data-vote="${a.id}" aria-pressed="${mine}">${mine ? "✓ "+t("voted") : t("vote")}</button>
+      </div></div>`;
+  }).join("");
+}
+document.getElementById("road").addEventListener("click", async e => {
+  const b = e.target.closest("[data-vote]"); if(!b || b.disabled) return;
+  const app = b.dataset.vote; if(app===myVote) return;
+  const prev = myVote; myVote = app;
+  try{ localStorage.setItem("noun-myvote", app); }catch(err){}
+  if(!LIVE){ counts = {[app]:1}; renderRoad(); return; }
+  counts[app] = (counts[app]||0)+1; if(prev) counts[prev] = Math.max(0,(counts[prev]||1)-1); renderRoad();
+  try{
+    await sb("votes?on_conflict=voter_id", {method:"POST", headers:{Prefer:"resolution=merge-duplicates,return=minimal"}, body:JSON.stringify({voter_id:voterId, app})});
+    loadCounts();
+  }catch(err){ myVote = prev; toast(t("err_send")); loadCounts(); }
+});
+
+/* ============ Formulare ============ */
+const mailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+function notice(form, msg, err){ const n = form.querySelector(".notice"); n.innerHTML = msg; n.classList.toggle("err", !!err); n.classList.add("show"); }
+async function submitTo(form, table, row, okKey){
+  const btn = form.querySelector("button[type=submit]"); btn.disabled = true;
+  try{
+    const mode = await save(table, row);
+    notice(form, esc(t(okKey)) + (mode==="preview" ? " <span class='muted'>"+esc(t("ok_preview"))+"</span>" : ""));
+    form.reset();
+  }catch(e){ notice(form, esc(t("err_send")), true); }
+  btn.disabled = false;
+}
+function renderTesterApps(){
+  const box = document.getElementById("tester-apps");
+  const checked = new Set([...box.querySelectorAll("input:checked")].map(i=>i.value));
+  box.innerHTML = APPS.filter(a => a.status!=="dev").map(a =>
+    `<label class="check"><input type="checkbox" value="${a.id}" ${checked.has(a.id)?"checked":""}> ${esc(a.name)}</label>`).join("");
+}
+document.getElementById("idea-form").addEventListener("submit", e => {
+  e.preventDefault(); const f = e.target;
+  const noun = f.querySelector("#i-noun").value.trim(), text = f.querySelector("#i-text").value.trim();
+  if(!noun) return notice(f, esc(t("err_idea")), true);
+  submitTo(f, "ideas", {noun, text, lang}, "ok_idea");
+});
+document.getElementById("tester-form").addEventListener("submit", e => {
+  e.preventDefault(); const f = e.target;
+  const email = f.querySelector("#t-mail").value.trim();
+  const apps = [...f.querySelectorAll("#tester-apps input:checked")].map(i=>i.value);
+  if(!mailOk(email)) return notice(f, esc(t("err_mail")), true);
+  if(!apps.length) return notice(f, esc(t("err_apps")), true);
+  if(!f.querySelector("#t-ok").checked) return notice(f, esc(t("err_consent")), true);
+  submitTo(f, "testers", {email, apps, lang}, "ok_test");
+});
+document.getElementById("news-form").addEventListener("submit", e => {
+  e.preventDefault(); const f = e.target;
+  const email = f.querySelector("#n-mail").value.trim();
+  if(!mailOk(email)) return notice(f, esc(t("err_mail")), true);
+  if(!f.querySelector("#n-ok").checked) return notice(f, esc(t("err_consent")), true);
+  submitTo(f, "newsletter", {email, lang:f.querySelector("#n-lang").value}, "ok_news");
+});
+document.getElementById("contact-form").addEventListener("submit", e => {
+  e.preventDefault(); const f = e.target;
+  const name = f.querySelector("#c-name").value.trim(), topic = f.querySelector("#c-topic").value, msg = f.querySelector("#c-msg").value.trim();
+  if(!msg) return notice(f, esc(t("err_msg")), true);
+  const href = "mailto:nounnounstudio@gmail.com?subject="+encodeURIComponent(topic)+"&body="+encodeURIComponent(msg+(name?"\n\n"+name:""));
+  notice(f, `${esc(t("ok_msg"))} <a href="${href}">${esc(t("open_mail"))}</a> ${esc(t("or_send"))}`);
+});
+
+/* ============ Blog + Lexikon ============ */
+function renderPosts(){
+  document.getElementById("post-list").innerHTML = POSTS.map(p => `
+    <a class="post-row" href="#${p.id}">
+      <time class="mono" datetime="${p.date}">${fmt(p.date)}</time>
+      <div><h3>${esc(L(p.title))}</h3><p>${esc(L(p.teaser))}</p></div>
+      <span class="tag">${esc(L(p.tag))}</span>
+    </a>`).join("");
+}
+function renderWords(){
+  const used = Object.keys(WORDS).filter(w => APPS.some(a=>a.words.includes(w)) || POSTS.some(p=>p.words.includes(w)));
+  used.sort((a,b) => L(WORDS[a]).localeCompare(L(WORDS[b]), lang));
+  document.getElementById("all-words").innerHTML = used.map(wordChip).join("");
+}
+function renderWordPage(w){
+  const apps = APPS.filter(a => a.words.includes(w)), posts = POSTS.filter(p => p.words.includes(w));
+  document.getElementById("word-body").innerHTML = `
+    <a class="btn back small" href="#lexikon">${t("back")}</a>
+    <div class="mono muted">${t("word_h")}</div>
+    <h1>${esc(L(WORDS[w]))}</h1>
+    <h2 style="font-size:1.3rem;margin:28px 0 14px">${t("word_apps")}</h2>
+    ${apps.length ? `<div class="apps">${apps.map(a=>`<a class="app" href="#app-${a.id}"><div class="app-top"><div class="icon" style="background:${a.color}">${a.letter}</div><div><h3>${esc(a.name)}</h3><div class="genre">${esc(L(a.genre))}</div></div></div></a>`).join("")}</div>` : `<p class="muted">${t("none")}</p>`}
+    <h2 style="font-size:1.3rem;margin:34px 0 6px">${t("word_posts")}</h2>
+    ${posts.length ? `<div class="posts">${posts.map(p=>`<a class="post-row" href="#${p.id}"><time class="mono">${fmt(p.date)}</time><div><h3>${esc(L(p.title))}</h3><p>${esc(L(p.teaser))}</p></div><span class="tag">${esc(L(p.tag))}</span></a>`).join("")}</div>` : `<p class="muted">${t("none")}</p>`}`;
+}
+
+/* ============ Presse: Logo ============ */
+function logoSvg(dark){
+  const fg = dark ? "#FFFFFF" : "#14121F", lastBg = dark ? "#FFFFFF" : "#14121F", lastFg = dark ? "#14121F" : "#FFFFFF";
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 150" role="img" aria-label="NOUN Studio"><rect x="0" width="100" height="100" fill="#2A3BE8"/><g transform="translate(22 22) scale(.56)"><path d="M0 0H28L72 56V0H100V100H72L28 44V100H0Z" fill="#FFFFFF"/></g><rect x="100" width="100" height="100" fill="#FFC400"/><g transform="translate(122 22) scale(.56)"><circle cx="50" cy="50" r="50" fill="#14121F"/><circle cx="50" cy="50" r="22" fill="#FFC400"/></g><rect x="200" width="100" height="100" fill="#FF5A36"/><g transform="translate(222 22) scale(.56)"><path d="M0 0H28V52A22 22 0 0 0 72 52V0H100V50A50 50 0 0 1 0 50Z" fill="#14121F"/></g><rect x="300" width="100" height="100" fill="${lastBg}"/><g transform="translate(322 22) scale(.56)"><path d="M0 0H28L72 56V0H100V100H72L28 44V100H0Z" fill="${lastFg}"/></g><text x="200" y="140" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" font-size="34" letter-spacing="38" fill="${fg}">STUDIO</text></svg>`;
+}
+document.getElementById("logo-light").innerHTML = logoSvg(false);
+document.getElementById("logo-dark").innerHTML = logoSvg(true);
+document.querySelectorAll("[data-dl]").forEach(b => b.addEventListener("click", async () => {
+  const dark = b.dataset.dl==="dark", svg = logoSvg(dark), filename = dark ? "noun-studio-logo-dunkel.svg" : "noun-studio-logo-hell.svg";
+  try{
+    if(window.claude && typeof window.claude.use==="function"){
+      const dl = await window.claude.use("downloads");
+      if(dl){ await dl.save({filename, data:new Blob([svg],{type:"image/svg+xml"})}); return; }
+      throw new Error("no downloads");
+    }
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([svg],{type:"image/svg+xml"})); a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+  }catch(e){ if(await copyText(svg)) toast(t("dl_fail")); }
+}));
+
+/* ============ Summstau Mini ============ */
+const SS_COL = {r:"#e5484d",p:"#f27ab5",y:"#f5c518",g:"#46a758",w:"#fbfaf4",b:"#a0673a",k:"#3a2a10",o:"#f08c2e",u:"#3e7be0",l:"#9ad94f"};
+const SS_PICS = [
+  {name:{de:"Herz",en:"Heart"}, rows:[
+    ".rr....rr.","rrrr..rrrr","rppprrrrrr","rpprrrrrrr","rrrrrrrrrr",".rrrrrrrr.","..rrrrrr..","...rrrr...","....rr....",".........."]},
+  {name:{de:"Blume",en:"Flower"}, rows:[
+    "...pppp...","..pppppp..",".ppyyyypp.",".ppyyyypp.",".ppyyyypp.","..pppppp..","...pggp...","..gg.g....","....ggg...","....g....."]},
+  {name:{de:"Pilz",en:"Mushroom"}, rows:[
+    "...rrrr...",".rrwrrrrr.","rrrrrrwrrr","rwrrrrrrrr","rrrrwrrrwr","..bbbbbb..","...bbbb...","...bbbb...","...bbbb...","llllllllll"]},
+  {name:{de:"Bienenstock",en:"Beehive"}, rows:[
+    "....kk....","...oooo...","..yyyyyy..",".oooooooo.",".yyyykyyy.","oooookoooo","yyyykkyyyy",".oooooooo.","..yyyyyy..","gggggggggg"]},
+  {name:{de:"Fisch",en:"Fish"}, rows:[
+    "..........","....uuu...","u..uuuuu..","uu.uuuwkuu","uuuuuuuuuu","uu.uuuuuu.","u..uuoouu.","....uuu...","..........",".........."]}
+];
+const SS_N = 10, JC = 5;
+let ss = null, ssTimer = null, ssBusy = 0;
+
+function ssRng(seed){ let s = seed>>>0; return () => (s = (s*1664525 + 1013904223)>>>0) / 4294967296; }
+function ssExposed(pic){
+  const out = [];
+  for(let r=0;r<SS_N;r++) for(let c=0;c<SS_N;c++){
+    if(!pic[r][c]) continue;
+    if(r===0||c===0||r===SS_N-1||c===SS_N-1||!pic[r-1][c]||!pic[r+1][c]||!pic[r][c-1]||!pic[r][c+1]) out.push([r,c]);
+  }
+  return out;
+}
+/* immer derselbe Pixel: der unterste, dann der linkeste */
+function ssPick(pic, color){
+  let best = null;
+  for(const [r,c] of ssExposed(pic)) if(pic[r][c]===color && (!best || r>best[0] || (r===best[0] && c<best[1]))) best = [r,c];
+  return best;
+}
+function ssCanExit(grid, r, c){
+  if(r===0) return true;
+  const R = grid.length, seen = new Set(), st = [];
+  for(let x=0;x<JC;x++) if(!grid[0][x]){ seen.add(x); st.push([0,x]); }
+  while(st.length){ const [y,x] = st.pop();
+    for(const [dy,dx] of [[1,0],[-1,0],[0,1],[0,-1]]){ const ny=y+dy, nx=x+dx;
+      if(ny<0||nx<0||ny>=R||nx>=JC||grid[ny][nx]) continue; const k=ny*JC+nx; if(!seen.has(k)){ seen.add(k); st.push([ny,nx]); } } }
+  for(const [dy,dx] of [[1,0],[-1,0],[0,1],[0,-1]]){ const ny=r+dy, nx=c+dx;
+    if(ny>=0&&nx>=0&&ny<R&&nx<JC&&seen.has(ny*JC+nx)) return true; }
+  return false;
+}
+function ssBuild(level){
+  const def = SS_PICS[(level-1) % SS_PICS.length], rnd = ssRng(level*7919+3);
+  const pic = def.rows.map(row => [...row].map(ch => ch==="." ? null : ch));
+  /* Reihenfolge der Bienen: jede Biene kann ihre Ladung abbauen, wenn alle davor fertig sind */
+  const sim = pic.map(r => r.slice()), seq = [];
+  while(sim.some(r => r.some(Boolean))){
+    const cols = [...new Set(ssExposed(sim).map(([r,c]) => sim[r][c]))];
+    const color = cols[Math.floor(rnd()*cols.length)], cap = 3 + Math.floor(rnd()*4);
+    let n = 0; while(n<cap){ const p = ssPick(sim,color); if(!p) break; sim[p[0]][p[1]] = null; n++; }
+    seq.push({color, cap:n, ice:0});
+  }
+  if(level>=3) seq.forEach((b,i) => { if(i>=3 && rnd()<0.18) b.ice = 2; });
+  /* rückwärts in den Stau legen: wer zuletzt dran ist, liegt tief unten */
+  let grid = null;
+  for(let rows = Math.max(3, Math.ceil(seq.length/JC)); !grid; rows++){
+    for(let attempt=0; attempt<80 && !grid; attempt++){
+      const g = Array.from({length:rows}, () => Array(JC).fill(null)); let ok = true;
+      for(let i=seq.length-1;i>=0;i--){
+        const opts = [];
+        for(let r=0;r<rows;r++) for(let c=0;c<JC;c++) if(!g[r][c] && ssCanExit(g,r,c)) opts.push([r,c]);
+        if(!opts.length){ ok = false; break; }
+        opts.sort((a,b) => b[0]-a[0] + rnd()*1.6 - .8);
+        const [r,c] = opts[Math.floor(rnd()*Math.min(3,opts.length))];
+        g[r][c] = {...seq[i], id:i};
+      }
+      if(ok) grid = g;
+    }
+  }
+  return {level, name:def.name, pic, grid, docks:Array(6).fill(null), avail:5, extraUsed:false, over:false, arrive:0};
+}
+
+function beeSvg(color){
+  return `<svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="10" cy="15" rx="7" ry="5" fill="#fff" opacity=".9" transform="rotate(-30 10 15)"/><ellipse cx="30" cy="15" rx="7" ry="5" fill="#fff" opacity=".9" transform="rotate(30 30 15)"/><ellipse cx="20" cy="23" rx="12" ry="13" fill="${color}" stroke="#2b1d05" stroke-width="1.6"/><path d="M9 19h22M8.4 26h23.2" stroke="#2b1d05" stroke-width="2.4" opacity=".55"/><circle cx="15.5" cy="15" r="2.2" fill="#2b1d05"/><circle cx="24.5" cy="15" r="2.2" fill="#2b1d05"/><path d="M15 6 12 2M25 6l3-4" stroke="#2b1d05" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+}
+function beeHtml(b, tag){
+  const ice = b.ice>0 ? `<span class="ice">❄ ${b.ice}</span>` : "";
+  return `<${tag} class="bee" ${tag==="button"?`type="button" data-bee="${b.id}"`:""} aria-label="${esc(t("g_level"))}">${beeSvg(SS_COL[b.color])}<span class="n">${b.cap}</span>${ice}</${tag}>`;
+}
+function ssHint(key){ document.getElementById("g-hint").textContent = key ? t(key) : ""; }
+function ssPxLeft(){ return ss.pic.reduce((n,r) => n + r.filter(Boolean).length, 0); }
+
+function ssRenderPic(){
+  const el = document.getElementById("pic"), ex = new Set(ssExposed(ss.pic).map(([r,c]) => r*SS_N+c));
+  if(el.children.length !== SS_N*SS_N || el.dataset.level != ss.level){
+    el.dataset.level = ss.level;
+    el.innerHTML = ss.pic.map((row,r) => row.map((ch,c) => `<i class="px" data-p="${r*SS_N+c}" style="background:${ch?SS_COL[ch]:"transparent"}"></i>`).join("")).join("");
+  }
+  [...el.children].forEach((px,i) => {
+    const r = Math.floor(i/SS_N), c = i%SS_N, has = !!ss.pic[r][c];
+    px.classList.toggle("gone", !has && px.style.background!=="transparent");
+    px.classList.toggle("ex", has && ex.has(i));
+  });
+  document.getElementById("g-px").textContent = ssPxLeft();
+}
+function ssRenderDocks(){
+  document.getElementById("docks").innerHTML = ss.docks.map((d,i) =>
+    `<div class="dock ${i>=ss.avail?"locked":""}" id="dock${i}">${d ? beeHtml({...d, cap:d.left, ice:0}, "div") : ""}</div>`).join("");
+}
+function ssRenderJam(){
+  document.getElementById("jam").innerHTML = ss.grid.map(row => row.map(b =>
+    `<div class="cell">${b ? beeHtml(b, "button") : ""}</div>`).join("")).join("");
+}
+function ssRenderAll(){
+  document.getElementById("g-level").textContent = ss.level;
+  document.getElementById("g-pic").textContent = L(ss.name);
+  document.getElementById("g-extra").disabled = ss.extraUsed || ss.over;
+  ssRenderPic(); ssRenderDocks(); ssRenderJam();
+}
+function ssFly(fromRect, toRect, html, ms){
+  return new Promise(res => {
+    const el = document.createElement("div"); el.className = "fly"; el.innerHTML = html;
+    Object.assign(el.style, {left:fromRect.left+"px", top:fromRect.top+"px", width:fromRect.width+"px", height:fromRect.height+"px"});
+    document.body.appendChild(el);
+    const dx = toRect.left-fromRect.left + (toRect.width-fromRect.width)/2, dy = toRect.top-fromRect.top + (toRect.height-fromRect.height)/2;
+    let a; try{ a = el.animate([{transform:"translate(0,0)"},{transform:`translate(${dx}px,${dy-20}px)`,offset:.6},{transform:`translate(${dx}px,${dy}px)`}],{duration:ms,easing:"ease-in-out"}); }catch(e){}
+    const done = () => { el.remove(); res(); };
+    if(a) a.onfinish = done; else setTimeout(done, ms);
+  });
+}
+function ssStart(level){
+  clearInterval(ssTimer); ssBusy = 0;
+  ss = ssBuild(level);
+  document.getElementById("g-over").hidden = true;
+  ssRenderAll(); ssHint("g_hint_start");
+  try{ localStorage.setItem("noun-ss-level", level); }catch(e){}
+  ssTimer = setInterval(ssTick, 110);
+}
+async function ssTap(id, btn){
+  if(ss.over) return;
+  let pos = null;
+  ss.grid.forEach((row,r) => row.forEach((b,c) => { if(b && b.id===id) pos = [r,c]; }));
+  if(!pos) return;
+  const b = ss.grid[pos[0]][pos[1]];
+  const wob = key => { btn.classList.remove("wobble"); void btn.offsetWidth; btn.classList.add("wobble"); ssHint(key); };
+  if(b.ice>0) return wob("g_hint_ice");
+  if(!ssCanExit(ss.grid, pos[0], pos[1])) return wob("g_hint_blocked");
+  const di = ss.docks.findIndex((d,i) => i<ss.avail && !d);
+  if(di<0) return wob("g_hint_full");
+  ss.grid[pos[0]][pos[1]] = null;
+  ss.grid.forEach(row => row.forEach(o => { if(o && o.ice>0) o.ice--; }));
+  ss.docks[di] = {color:b.color, left:b.cap, id:b.id, order:++ss.arrive, ready:false};
+  const from = btn.getBoundingClientRect();
+  ssRenderJam(); ssHint("");
+  const dockEl = document.getElementById("dock"+di);
+  ssBusy++;
+  await ssFly(from, dockEl.getBoundingClientRect(), beeHtml({...b, ice:0}, "div"), 360);
+  ssBusy--;
+  if(ss.docks[di] && ss.docks[di].id===b.id) ss.docks[di].ready = true;
+  ssRenderDocks();
+}
+function ssTick(){
+  if(!ss || ss.over) return;
+  let moved = false;
+  const order = ss.docks.map((d,i) => [d,i]).filter(([d]) => d && d.ready && d.left>0).sort((a,b) => a[0].order-b[0].order);
+  for(const [d,i] of order){
+    const p = ssPick(ss.pic, d.color); if(!p) continue;
+    const pxEl = document.querySelector(`#pic [data-p="${p[0]*SS_N+p[1]}"]`), dockEl = document.getElementById("dock"+i);
+    if(pxEl && dockEl){ const fr = pxEl.getBoundingClientRect(); ssFly(fr, dockEl.getBoundingClientRect(), `<i style="display:block;width:100%;height:100%;border-radius:3px;background:${SS_COL[d.color]}"></i>`, 300); }
+    ss.pic[p[0]][p[1]] = null; d.left--; moved = true;
+    if(d.left===0){ d.ready = false; ssLeave(i); }
+  }
+  if(moved){ ssRenderPic(); ssRenderDocks(); }
+  const beesLeft = ss.grid.some(r => r.some(Boolean)) || ss.docks.some(Boolean);
+  if(!ssPxLeft() && !beesLeft) return ssEnd(true);
+  if(!moved && !ssBusy && beesLeft){
+    const canHarvest = ss.docks.some(d => d && d.left>0 && ssPick(ss.pic,d.color));
+    const free = ss.docks.some((d,i) => i<ss.avail && !d);
+    let canLaunch = false;
+    if(free) ss.grid.forEach((row,r) => row.forEach((b,c) => { if(b && b.ice===0 && ssCanExit(ss.grid,r,c)) canLaunch = true; }));
+    if(!canHarvest && !canLaunch){
+      if(!free && !ss.extraUsed) ssHint("g_hint_full"); else ssEnd(false);
+    }
+  }
+}
+async function ssLeave(i){
+  ssBusy++;
+  await new Promise(r => setTimeout(r, 260));
+  const dockEl = document.getElementById("dock"+i), d = ss.docks[i];
+  if(dockEl && d){
+    const fr = dockEl.getBoundingClientRect();
+    ss.docks[i] = null; ssRenderDocks();
+    await ssFly(fr, {left:fr.left, top:fr.top-160, width:fr.width, height:fr.height}, beeHtml({...d, cap:"✓", ice:0}, "div"), 380);
+  }
+  ssBusy--;
+}
+function ssEnd(win){
+  ss.over = true; clearInterval(ssTimer);
+  document.getElementById("g-over-h").textContent = t(win ? "g_win_h" : "g_lose_h");
+  document.getElementById("g-over-p").textContent = win ? `${L(ss.name)} ${t("g_win_p")}` : t("g_lose_p");
+  const btn = document.getElementById("g-over-btn");
+  btn.textContent = t(win ? "g_win_btn" : "g_lose_btn");
+  btn.dataset.next = win ? ss.level+1 : ss.level;
+  document.getElementById("g-over").hidden = false;
+  document.getElementById("g-extra").disabled = true;
+}
+document.getElementById("jam").addEventListener("click", e => {
+  const b = e.target.closest("button.bee"); if(b) ssTap(+b.dataset.bee, b);
+});
+document.getElementById("g-extra").addEventListener("click", () => {
+  if(ss.extraUsed || ss.over) return; ss.extraUsed = true; ss.avail = 6; ssRenderAll();
+});
+document.getElementById("g-reset").addEventListener("click", () => ssStart(ss.level));
+document.getElementById("g-over-btn").addEventListener("click", e => ssStart(+e.target.dataset.next));
+function ssRelabel(){ if(!ss) return; document.getElementById("g-pic").textContent = L(ss.name); if(!ss.over) ssHint("g_hint_start"); else ssEnd(!ssPxLeft()); }
+
+/* ============ Werkstatt-Ticker ============
+   Live kommen die Einträge aus der Supabase-Tabelle "ticker". Diese Liste ist der Ersatz, solange keine Verbindung besteht. */
+const TICKER_FALLBACK = [
+  {datum:"2026-11-09", text_de:"Summstau und 1 Million Spiele gehen heute zu Google Play.", text_en:"Summstau and 1 Million Games go to Google Play today.", link:"#vier-releases"},
+  {datum:"2026-11-10", text_de:"Spieleschrank mit 555 Spielen folgt.", text_en:"Spieleschrank with 555 games is next.", link:"#app-spieleschrank"},
+  {datum:"2026-11-11", text_de:"Schnapszahl 55.555 macht die Woche voll.", text_en:"Schnapszahl 55,555 rounds off the week.", link:"#app-schnapszahl"},
+  {datum:"2026-11-08", text_de:"Flatterhörnchen: Das nächste Update bringt die Rettung per Werbevideo.", text_en:"Flatterhörnchen: the next update adds a revive via ad video.", link:"#app-flatterhoernchen"},
+  {datum:"2026-11-07", text_de:"Trödelradar: Saisonmärkte wie Weihnachtsmärkte kommen im Januar.", text_en:"Trödelradar: seasonal markets like Christmas fairs arrive in January.", link:"#app-troedelradar"},
+  {datum:"2026-11-03", text_de:"Saunameister: Fünf Häuser von der Waldhütte bis zur Polar-Therme stehen.", text_en:"Saunameister: five houses from forest hut to polar spa are built.", link:"#app-saunameister"}
+];
+let tickerItems = TICKER_FALLBACK.slice(), tickerIdx = 0, tickerTimer = null;
+function tickerShow(){
+  const el = document.getElementById("tk-text"); if(!el || !tickerItems.length) return;
+  const it = tickerItems[tickerIdx % tickerItems.length];
+  el.classList.add("out");
+  setTimeout(() => {
+    const d = it.datum ? new Date(it.datum+"T12:00:00").toLocaleDateString(lang==="en"?"en-GB":"de-DE",{day:"2-digit",month:"2-digit"}) : "";
+    el.innerHTML = (d ? `<span class="tk-date">${esc(d)}</span>` : "") + esc(lang==="en" ? (it.text_en || it.text_de) : it.text_de);
+    el.setAttribute("href", it.link || "#werkstatt");
+    el.classList.remove("out");
+  }, 220);
+}
+function tickerStart(){
+  clearInterval(tickerTimer); tickerShow();
+  let reduce = false; try{ reduce = matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){}
+  if(!reduce) tickerTimer = setInterval(() => { tickerIdx++; tickerShow(); }, 5000);
+}
+document.getElementById("tk-next").addEventListener("click", () => { tickerIdx++; tickerShow(); tickerStart(); });
+async function tickerLoad(){
+  if(!LIVE) return tickerStart();
+  try{
+    const r = await sb("ticker?select=datum,text_de,text_en,link&aktiv=eq.true&order=datum.desc&limit=12");
+    const rows = await r.json(); if(rows.length) tickerItems = rows;
+  }catch(e){}
+  tickerStart();
+}
+
+/* ============ Ding des Monats ============
+   Live: Kandidaten aus "ding_kandidaten" (du wählst sie im Supabase-Dashboard aus dem Ideenkasten aus),
+   Stimmen in "ding_votes", Gewinner der Vormonate in "ding_gewinner". */
+const DING_DEMO = [
+  {id:"demo-1", noun:"Gießkanne", text_de:"Ein Spiel, in dem man einen ganzen Garten mit nur einer Kanne retten muss.", text_en:"A game where you save a whole garden with just one watering can."},
+  {id:"demo-2", noun:"Kaugummiautomat", text_de:"Sammelspiel: Jede Kurbel bringt eine zufällige Figur.", text_en:"Collecting game: every turn of the crank brings a random figure."},
+  {id:"demo-3", noun:"Schneekugel", text_de:"Eine kleine Welt im Glas, die man schüttelt und baut.", text_en:"A tiny world in a glass that you shake and build."}
+];
+const dingMonth = () => { const d = new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0"); };
+let dingItems = [], dingCounts = {}, dingWinners = [], dingDemo = !LIVE, dingMine = null;
+try{ dingMine = localStorage.getItem("noun-ding-"+dingMonth()); }catch(e){}
+function renderDing(){
+  const m = dingMonth(), [y,mo] = m.split("-");
+  document.getElementById("ding-month").textContent = new Date(+y, +mo-1, 15).toLocaleDateString(lang==="en"?"en-GB":"de-DE",{month:"long",year:"numeric"});
+  const list = document.getElementById("ding-list");
+  document.getElementById("ding-demo").hidden = !dingDemo;
+  if(!dingItems.length){ list.innerHTML = `<p class="muted">${esc(t("ding_empty"))}</p>`; }
+  else {
+    const max = Math.max(1, ...dingItems.map(k => dingCounts[k.id]||0));
+    list.innerHTML = dingItems.map(k => {
+      const c = dingCounts[k.id]||0, mine = dingMine==String(k.id);
+      return `<div class="ding-item">
+        <div class="ding-noun"><b>${esc(k.noun)}</b><span class="muted">${esc(lang==="en" ? (k.text_en||k.text_de||"") : (k.text_de||""))}</span></div>
+        <div class="vote-box">
+          <div class="bar" aria-hidden="true"><i style="width:${Math.round(c/max*100)}%"></i></div>
+          <span class="vote-count">${c} ${t(c===1?"vote1":"votes")}</span>
+          <button class="btn small vote-btn" type="button" data-ding="${esc(k.id)}" aria-pressed="${mine}">${mine ? "✓ "+t("voted") : t("ding_vote")}</button>
+        </div></div>`;
+    }).join("");
+  }
+  const w = document.getElementById("ding-winners");
+  w.innerHTML = dingWinners.length
+    ? dingWinners.map(x => `<li><span class="mono">${esc(x.monat)}</span> <b>${esc(x.noun)}</b>${x.link ? ` · <a href="${esc(x.link)}">${esc(t("ding_more"))}</a>` : ""}</li>`).join("")
+    : `<li class="muted">${esc(t("ding_first"))}</li>`;
+}
+async function dingLoad(){
+  if(!LIVE){ dingItems = DING_DEMO; dingCounts = dingMine ? {[dingMine]:1} : {}; return renderDing(); }
+  try{
+    const m = dingMonth();
+    const [k, c, w] = await Promise.all([
+      sb(`ding_kandidaten?select=id,noun,text_de,text_en&monat=eq.${m}&aktiv=eq.true&order=id`).then(r=>r.json()),
+      sb(`ding_counts?select=kandidat_id,votes&monat=eq.${m}`).then(r=>r.json()),
+      sb("ding_gewinner?select=monat,noun,link&order=monat.desc&limit=12").then(r=>r.json())
+    ]);
+    dingItems = k; dingDemo = false; dingCounts = {}; c.forEach(x => dingCounts[x.kandidat_id] = x.votes); dingWinners = w;
+  }catch(e){ dingItems = []; }
+  renderDing();
+}
+document.getElementById("ding-list").addEventListener("click", async e => {
+  const b = e.target.closest("[data-ding]"); if(!b) return;
+  const id = b.dataset.ding; if(id===dingMine) return;
+  const prev = dingMine; dingMine = id;
+  try{ localStorage.setItem("noun-ding-"+dingMonth(), id); }catch(err){}
+  if(!LIVE){ dingCounts = {[id]:1}; return renderDing(); }
+  dingCounts[id] = (dingCounts[id]||0)+1; if(prev) dingCounts[prev] = Math.max(0,(dingCounts[prev]||1)-1); renderDing();
+  try{
+    await sb("ding_votes?on_conflict=voter_id,monat", {method:"POST", headers:{Prefer:"resolution=merge-duplicates,return=minimal"}, body:JSON.stringify({voter_id:voterId, monat:dingMonth(), kandidat_id:+id})});
+    dingLoad();
+  }catch(err){ dingMine = prev; toast(t("err_send")); dingLoad(); }
+});
+
+/* ============ Social Media ============
+   Neue Plattform: einfach einen Eintrag in SOCIAL ergänzen (id, name, handle, url, color, icon).
+   Instagram-Posts kommen automatisch über einen JSON-Feed von behold.so (Adresse bei BEHOLD_FEED eintragen).
+   Posts von allen anderen Plattformen kommen aus der Supabase-Tabelle "social_posts". */
+const BEHOLD_FEED = "";
+const SOCIAL = [
+  {id:"instagram", name:"Instagram", handle:"@nounnounstudio", url:"https://www.instagram.com/nounnounstudio/", color:"#d6336c",
+   icon:'<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/>'},
+  {id:"x", name:"X", handle:"@NOUNNOUNStudio", url:"https://x.com/NOUNNOUNStudio", color:"#14121F",
+   icon:'<path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>'}
+];
+const SOCIAL_SOON = ["TikTok","YouTube"];
+const SOCIAL_DEMO = [
+  {platform:"instagram", datum:"2026-11-09", text_de:"Summstau ist unterwegs zu Google Play. Wer will mittesten?", text_en:"Summstau is on its way to Google Play. Who wants to test?", url:"https://www.instagram.com/nounnounstudio/"},
+  {platform:"x", datum:"2026-11-08", text_de:"Vier neue Apps in drei Tagen. Diese Woche wird voll.", text_en:"Four new apps in three days. Busy week ahead.", url:"https://x.com/NOUNNOUNStudio"},
+  {platform:"instagram", datum:"2026-11-06", text_de:"Ein Blick in die Werkstatt: So entsteht ein Pixelbild für Summstau.", text_en:"A look into the workshop: how a Summstau pixel picture comes together.", url:"https://www.instagram.com/nounnounstudio/"}
+];
+const socialIcon = (p, size=20) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true">${p.icon}</svg>`;
+let socialPosts = [], socialDemo = false;
+
+function renderSocialProfiles(){
+  const cards = SOCIAL.map(p => `
+    <a class="soc-card" href="${esc(p.url)}" target="_blank" rel="noopener">
+      <span class="soc-ico" style="background:${p.color}">${socialIcon(p, 22)}</span>
+      <span><b>${esc(p.name)}</b><span class="muted">${esc(p.handle)}</span></span>
+      <span class="soc-go">${esc(t("soc_follow"))} ↗</span>
+    </a>`).join("");
+  const soon = SOCIAL_SOON.length ? `<div class="soc-soon">${esc(t("soc_soon"))} ${SOCIAL_SOON.map(esc).join(", ")}</div>` : "";
+  document.getElementById("soc-profiles").innerHTML = cards + soon;
+  document.getElementById("foot-social").innerHTML = SOCIAL.map(p =>
+    `<a href="${esc(p.url)}" target="_blank" rel="noopener" aria-label="${esc(p.name)} ${esc(p.handle)}" title="${esc(p.name)}">${socialIcon(p, 18)}</a>`).join("");
+}
+function renderSocialFeed(){
+  const box = document.getElementById("soc-feed");
+  document.getElementById("soc-demo").hidden = !socialDemo;
+  if(!socialPosts.length){ box.innerHTML = `<p class="muted">${esc(t("soc_empty"))}</p>`; return; }
+  box.innerHTML = socialPosts.slice(0, 12).map(post => {
+    const p = SOCIAL.find(s => s.id===post.platform) || {name:post.platform, color:"#5d6068", icon:'<circle cx="12" cy="12" r="8" fill="currentColor"/>'};
+    const text = lang==="en" ? (post.text_en || post.text_de || "") : (post.text_de || post.text_en || "");
+    const d = post.datum ? new Date(post.datum.length>10 ? post.datum : post.datum+"T12:00:00").toLocaleDateString(lang==="en"?"en-GB":"de-DE",{day:"numeric",month:"short",year:"numeric"}) : "";
+    return `<a class="post-card" href="${esc(post.url)}" target="_blank" rel="noopener">
+      ${post.bild ? `<img src="${esc(post.bild)}" alt="" loading="lazy">` : ""}
+      <div class="post-meta"><span class="soc-ico small" style="background:${p.color}">${socialIcon(p, 14)}</span><span>${esc(p.name)}</span><span class="muted">${esc(d)}</span></div>
+      <p>${esc(text)}</p>
+      <span class="more">${esc(t("soc_open"))} ${esc(p.name)} ↗</span>
+    </a>`;
+  }).join("");
+}
+async function socialLoad(){
+  const all = [];
+  if(BEHOLD_FEED){
+    try{
+      const f = await (await fetch(BEHOLD_FEED)).json();
+      (f.posts || []).forEach(x => all.push({platform:"instagram", datum:x.timestamp, url:x.permalink,
+        text_de:(x.prunedCaption || x.caption || "").slice(0, 280),
+        bild:(x.sizes && x.sizes.medium && x.sizes.medium.mediaUrl) || x.thumbnailUrl || x.mediaUrl}));
+    }catch(e){}
+  }
+  if(LIVE){
+    try{
+      const rows = await (await sb("social_posts?select=platform,datum,url,text_de,text_en,bild&aktiv=eq.true&order=datum.desc&limit=20")).json();
+      all.push(...rows);
+    }catch(e){}
+  }
+  socialDemo = !BEHOLD_FEED && !LIVE;
+  socialPosts = socialDemo ? SOCIAL_DEMO : all.sort((a,b) => String(b.datum).localeCompare(String(a.datum)));
+  renderSocialFeed();
+}
+
+/* ============ Rechtliches ============ */
+function renderLegal(k){ document.getElementById("legal-body").innerHTML = L(LEGAL[k]); }
+
+/* ============ Navigation ============ */
+const SECTIONS = ["start","apps","werkstatt","ding","social","spielen","blog","lexikon","ueber-mich","mitmachen","kontakt","presse"];
+function scrollToSection(id){
+  const el = document.getElementById(id); if(!el) return;
+  const head = document.querySelector("header.top").offsetHeight;
+  const pad = id==="start" ? 0 : 40;
+  window.scrollTo({top: Math.max(0, el.getBoundingClientRect().top + window.scrollY - head + pad), behavior:"auto"});
+}
+function route(rerender){
+  const h = decodeURIComponent(location.hash.slice(1));
+  let view = "home";
+  if(h.startsWith("app-") && appById(h.slice(4))){ view = "app"; renderAppPage(appById(h.slice(4))); }
+  else if(POSTS.some(p=>p.id===h)){
+    view = "post"; const p = POSTS.find(x=>x.id===h);
+    document.getElementById("p-meta").textContent = fmt(p.date)+" · "+L(p.tag);
+    document.getElementById("p-title").textContent = L(p.title);
+    document.getElementById("p-body").innerHTML = L(p.body);
+    document.getElementById("p-words").innerHTML = p.words.map(wordChip).join("");
+  }
+  else if(h.startsWith("wort-") && WORDS[h.slice(5)]){ view = "word"; renderWordPage(h.slice(5)); }
+  else if(LEGAL[h]){ view = "legal"; renderLegal(h); }
+  document.body.dataset.view = view;
+  if(!rerender){
+    if(view==="home" && SECTIONS.includes(h)) scrollToSection(h);
+    else window.scrollTo({top:0, behavior:"auto"});
+  }
+  document.querySelectorAll("nav.main a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href")==="#"+h ? "true":"false"));
+}
+/* Interne Links sofort selbst ausführen: ein Tipp reicht, auch beim zweiten Mal auf denselben Link */
+let skipHash = false;
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]'); if(!a) return;
+  e.preventDefault();
+  const h = a.getAttribute("href");
+  if(location.hash !== h){ skipHash = true; try{ location.hash = h; }catch(err){ skipHash = false; } }
+  route(false);
+});
+window.addEventListener("hashchange", () => { if(skipHash){ skipHash = false; return; } route(false); });
+
+/* ============ Start ============ */
+applyStatic(); renderApps("alle"); renderRoad(); renderPosts(); renderWords(); renderTesterApps(); rollNoun(false);
+let ssStartLevel = 1; try{ ssStartLevel = Math.max(1, +localStorage.getItem("noun-ss-level") || 1); }catch(e){}
+ssStart(ssStartLevel);
+renderSocialProfiles(); loadCounts(); tickerLoad(); dingLoad(); socialLoad(); route(false);
+/* nach dem Laden der Schriften stimmt die Höhe: Sprungziel nachziehen */
+const reScroll = () => { const h = location.hash.slice(1); if(document.body.dataset.view==="home" && SECTIONS.includes(h)) scrollToSection(h); };
+window.addEventListener("load", reScroll);
+try{ document.fonts.ready.then(reScroll); }catch(e){}
+</script>
+</body>
+</html>
