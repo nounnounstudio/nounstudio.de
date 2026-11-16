@@ -8,7 +8,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://nounstudio.de/">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"NOUN Studio","url":"https://nounstudio.de/","logo":"https://nounstudio.de/icon-512.png","email":"nounnounstudio@gmail.com","founder":{"@type":"Person","name":"Jason Wühr"},"address":{"@type":"PostalAddress","addressLocality":"Rothenburg ob der Tauber","postalCode":"91541","addressCountry":"DE"},"sameAs":["https://www.instagram.com/nounnounstudio/","https://x.com/NOUNNOUNStudio"]}
+{"@context":"https://schema.org","@type":"Organization","name":"NOUN Studio","url":"https://nounstudio.de/","logo":"https://nounstudio.de/icon-512.png","email":"nounnounstudio@gmail.com","founder":{"@type":"Person","name":"Jason"},"address":{"@type":"PostalAddress","addressLocality":"Rothenburg ob der Tauber","postalCode":"91541","addressCountry":"DE"},"sameAs":["https://www.instagram.com/nounnounstudio/","https://x.com/NOUNNOUNStudio"]}
 </script>
 <!-- Vorschaubild für geteilte Links. Bei anderer Domain hier die Adresse ändern. -->
 <meta property="og:type" content="website">
@@ -250,7 +250,6 @@ body:not([data-view="home"]) .site-sections{display:none}
 .dict .head{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}
 .dict .head b{font-family:var(--display);font-size:1.4rem}
 .dict p{margin:8px 0 0}
-.shots{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px;margin-bottom:36px}
 .phone{flex:none;width:170px;aspect-ratio:9/19;border-radius:24px;border:6px solid var(--ink);display:grid;place-items:center;text-align:center;padding:14px;color:#fff;font-family:var(--display);font-weight:700;position:relative}
 .phone small{display:block;font:500 .72rem var(--mono);opacity:.85;margin-top:6px}
 .app-grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
@@ -325,6 +324,19 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
 footer a{color:var(--muted)}
 .toast{position:fixed;left:50%;bottom:22px;translate:-50% 0;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:8px;font-size:.92rem;z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.show{opacity:1}
+
+.shots{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px;margin:0 0 24px;-webkit-overflow-scrolling:touch}
+.shot{flex:none;width:clamp(150px,42vw,210px);padding:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#000;scroll-snap-align:start;cursor:zoom-in}
+.shot img{display:block;width:100%;height:auto}
+#lightbox{position:fixed;inset:0;z-index:200;background:rgba(10,10,14,.92);display:grid;place-items:center;padding:20px}
+#lightbox[hidden]{display:none}
+#lightbox img{max-width:min(92vw,460px);max-height:88vh;border-radius:18px}
+#lightbox button{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;font-size:1.3rem;cursor:pointer}
+.soc-embeds{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;align-items:start}
+.soc-embeds>div{min-width:0;overflow-wrap:anywhere}
+.soc-embeds blockquote{margin:0}
+.soc-consent{border:1px dashed var(--line);border-radius:14px;padding:18px;background:var(--paper)}
+.soc-consent p{margin:0 0 12px}
 </style>
 </head>
 <body data-view="home">
@@ -482,7 +494,6 @@ footer a{color:var(--muted)}
       <div class="soc">
         <div class="soc-profiles" id="soc-profiles"></div>
         <div>
-          <p class="preview-note" id="soc-demo" style="margin:0 0 14px" data-i="soc_demo">Beispiele: Deine echten Posts erscheinen hier automatisch, sobald die Verbindung eingerichtet ist.</p>
           <div class="soc-feed" id="soc-feed"></div>
         </div>
       </div>
@@ -497,13 +508,13 @@ footer a{color:var(--muted)}
       </div>
       <div class="about">
         <div class="prose" style="font-size:1.05rem" data-i="about_text">
-          <p>Ich bin Jason Wühr und mache unter dem Namen NOUN Studio Apps und Spiele für Android und iPhone. Mein Studio ist mein Schreibtisch in Rothenburg ob der Tauber, mein Testgerät ist mein Handy.</p>
+          <p>Ich bin Jason und mache unter dem Namen NOUN Studio Apps und Spiele für Android und iPhone. Mein Studio ist mein Schreibtisch in Rothenburg ob der Tauber, mein Testgerät ist mein Handy.</p>
           <p>Meine Ideen fangen fast immer mit einem Ding an: einem Kratzbaum, einem Ameisenhaus, einer Eieruhr, einem Gorilla aus Gummi. Dann frage ich mich, was man daraus machen kann, das es so noch nicht gibt. Manchmal wird daraus ein gemütliches Spiel, manchmal ein nützliches Werkzeug, manchmal etwas ziemlich Albernes.</p>
           <p>Was mir wichtig ist: Apps, die man versteht, ohne ein Handbuch zu lesen, faire Werbung statt Abzocke und Ideen, die sich trauen, anders zu sein.</p>
         </div>
         <div class="card">
           <dl>
-            <dt>Name</dt><dd>Jason Wühr</dd>
+            <dt>Name</dt><dd>Jason</dd>
             <dt>Studio</dt><dd>NOUN Studio</dd>
             <dt data-i="ab_place">Ort</dt><dd>Rothenburg ob der Tauber</dd>
             <dt data-i="ab_plat">Plattform</dt><dd data-i="ab_plat_v">Android und iOS</dd>
@@ -641,7 +652,7 @@ footer a{color:var(--muted)}
           <h2 data-i="fact_h">Fakten</h2>
           <dl class="factsheet">
             <dt>Studio</dt><dd>NOUN Studio</dd>
-            <dt data-i="fs_founder">Gründer</dt><dd>Jason Wühr</dd>
+            <dt data-i="fs_founder">Gründer</dt><dd>Jason</dd>
             <dt data-i="fs_seat">Sitz</dt><dd>Rothenburg ob der Tauber</dd>
             <dt data-i="fs_since">Seit</dt><dd data-i="fs_since_v">November 2026</dd>
             <dt data-i="fs_plat">Plattform</dt><dd data-i="ab_plat_v">Android und iOS</dd>
@@ -682,9 +693,10 @@ footer a{color:var(--muted)}
 </div></div>
 </main>
 
+<div id="lightbox" hidden><button type="button" aria-label="Schließen">×</button><img alt=""></div>
 <footer>
   <div class="wrap">
-    <span>© 2026 NOUN Studio · Jason Wühr</span>
+    <span>© 2026 NOUN Studio</span>
     <span id="foot-social"></span>
     <span><a href="#impressum" data-i="imp">Impressum</a> · <a href="#datenschutz" data-i="priv">Datenschutz</a></span>
   </div>
@@ -702,7 +714,7 @@ const LIVE = !!(BACKEND.url && BACKEND.anonKey);
 /* status: test = geschlossener Test bei Google Play, soon = Upload steht an, dev = in Arbeit
    play: Link zur Play-Store-Seite, sobald vorhanden */
 const APPS = [
-  {id:"kratzbaum-krawall", img:"icons/kratzbaum-krawall.webp", name:"Kratzbaum-Krawall", status:"test", badge:{de:"Google-Play-Test · iOS freigegeben",en:"Play testing · approved for iOS"}, color:"#d9682b", letter:"K",
+  {id:"kratzbaum-krawall", img:"icons/kratzbaum-krawall.webp", shots:5, name:"Kratzbaum-Krawall", status:"test", badge:{de:"Google-Play-Test · iOS freigegeben",en:"Play testing · approved for iOS"}, color:"#d9682b", letter:"K",
    genre:{de:"3D-Bauspiel",en:"3D building game"},
    text:{de:"Bau mit deinem Leckerli-Budget einen Kratzbaum. Dann kommen Archie, May, Dori, Leopold und Nala und testen ihn, ohne Gnade.",en:"Build a cat tree on a budget of treats. Then Archie, May, Dori, Leopold and Nala arrive and test it. Without mercy."},
    dict:{art:{de:"der",en:"noun"},pron:"/ˈkʁatsbaʊ̯m kʁaˈval/",def:{de:"Lautstarker Belastungstest eines selbst gebauten Kratzbaums durch mehrere Katzen. Endet selten leise.",en:"A noisy stress test of a home-built cat tree by several cats. Rarely ends quietly."}},
@@ -712,7 +724,7 @@ const APPS = [
         {v:"iOS",d:"13.11.2026",t:{de:"Apple-Prüfung bestanden",en:"Passed Apple review"}},
         {v:"1.0",d:"Nov 2026",t:{de:"Erste Version im geschlossenen Test bei Google Play",en:"First version in closed testing on Google Play"}}],
    faq:[], words:["kratzbaum","katze"], play:""},
-  {id:"flatterhoernchen", img:"icons/flatterhoernchen.webp", name:"Flatterhörnchen", status:"test", color:"#c8783a", letter:"F",
+  {id:"flatterhoernchen", img:"icons/flatterhoernchen.webp", shots:3, name:"Flatterhörnchen", status:"test", color:"#c8783a", letter:"F",
    genre:{de:"Arcade",en:"Arcade"},
    text:{de:"Ein Flughörnchen, ein Wald voller Baumstämme und zwei Daumen. Flattern, gleiten, Eicheln sammeln.",en:"A flying squirrel, a forest full of tree trunks and two thumbs. Flap, glide, collect acorns."},
    dict:{art:{de:"das",en:"noun"},pron:"/ˈflatɐˌhœʁnçən/",def:{de:"Flughörnchen, das deutlich öfter flattert, als ihm guttut.",en:"A flying squirrel that flaps a lot more often than is good for it."}},
@@ -721,7 +733,7 @@ const APPS = [
    log:[{v:"next",d:"bald",t:{de:"Im nächsten Update: Leben bis zu dreimal pro Versuch per Werbevideo retten",en:"Next update: revive up to three times per run via an ad video"}},
         {v:"1.0",d:"Nov 2026",t:{de:"Erste Version im geschlossenen Test bei Google Play",en:"First version in closed testing on Google Play"}}],
    faq:[], words:["hoernchen"], play:""},
-  {id:"troedelradar", img:"icons/troedelradar.webp", name:"Trödelradar", status:"test", color:"#2f8f6b", letter:"T",
+  {id:"troedelradar", img:"icons/troedelradar.webp", shots:3, name:"Trödelradar", status:"test", color:"#2f8f6b", letter:"T",
    genre:{de:"Flohmarkt-App",en:"Flea market app"},
    text:{de:"Rund 1.800 Flohmärkte mit über 9.000 Terminen. Postleitzahl eingeben, Märkte in der Nähe finden, Route planen, losgehen.",en:"Around 1,800 flea markets with more than 9,000 dates. Enter your postcode, find markets nearby, plan a route, off you go."},
    dict:{art:{de:"das",en:"noun"},pron:"/ˈtʁøːdl̩ʁaˌdaːɐ̯/",def:{de:"Gerät zum Aufspüren von Flohmärkten in der Umgebung. Schlägt besonders samstags früh aus.",en:"A device for detecting flea markets nearby. Most active early on Saturday mornings."}},
@@ -731,7 +743,7 @@ const APPS = [
    faq:[{q:{de:"Gibt es auch eine Webseite?",en:"Is there a website too?"},a:{de:"Ja, unter troedelradar.de. Trödelradar hat auch eigene Kanäle bei Instagram, TikTok und Facebook.",en:"Yes, at troedelradar.de. Trödelradar also has its own channels on Instagram, TikTok and Facebook."}},
         {q:{de:"Kommen auch Weihnachtsmärkte rein?",en:"Will Christmas markets be included?"},a:{de:"Saisonmärkte wie Pfingst- und Weihnachtsmärkte kommen im Januar 2027 dazu.",en:"Seasonal markets like Whitsun and Christmas markets arrive in January 2027."}}],
    words:["flohmarkt"], play:""},
-  {id:"hoerspur", img:"icons/hoerspur.webp", name:"Hörspur", status:"test", badge:{de:"Im App Store · Android im Test",en:"On the App Store · Android in testing"}, color:"#2a3be8", letter:"H",
+  {id:"hoerspur", img:"icons/hoerspur.webp", shots:4, name:"Hörspur", status:"test", badge:{de:"Im App Store · Android im Test",en:"On the App Store · Android in testing"}, color:"#2a3be8", letter:"H",
    genre:{de:"Podcast-Tracker",en:"Podcast tracker"},
    text:{de:"Wie eine Serien-App, nur für Podcasts: Folgen abhaken, Fortschritt sehen, Neues entdecken. Hörspur spielt nichts ab, es merkt sich alles.",en:"Like a TV tracker, but for podcasts: tick off episodes, see your progress, discover new shows. Hörspur doesn't play anything, it remembers everything."},
    dict:{art:{de:"die",en:"noun"},pron:"/ˈhøːɐ̯ˌʃpuːɐ̯/",def:{de:"Spur, die jede gehörte Folge hinterlässt. Führt meistens zur nächsten.",en:"The trail every episode you've heard leaves behind. Usually leads to the next one."}},
@@ -741,7 +753,7 @@ const APPS = [
         {v:"1.0",d:"13.11.2026",t:{de:"Geschlossener Test bei Google Play",en:"Closed testing on Google Play"}}],
    faq:[{q:{de:"Spielt Hörspur Podcasts ab?",en:"Does Hörspur play podcasts?"},a:{de:"Nein, Hörspur ist ein reiner Tracker. Hören kannst du weiter in deiner Lieblings-App.",en:"No, Hörspur is purely a tracker. Keep listening in your favourite app."}}],
    words:["podcast"], play:""},
-  {id:"top-fragger", img:"icons/top-fragger.webp", name:"Top Fragger", status:"test", color:"#ff5a36", letter:"TF",
+  {id:"top-fragger", img:"icons/top-fragger.webp", shots:5, name:"Top Fragger", status:"test", color:"#ff5a36", letter:"TF",
    genre:{de:"E-Sport-Manager Idle",en:"Esports manager idle"},
    text:{de:"Gründe deine E-Sport-Organisation, hol Talente in die Akademie, steig durch die Ligen auf und schau deinen Teams live beim Spielen zu.",en:"Found your esports organisation, bring talent into the academy, climb the leagues and watch your teams play live."},
    dict:{art:{de:"der",en:"noun"},pron:"/tɔp ˈfʁɛɡɐ/",def:{de:"Spieler mit den meisten Abschüssen im Team. Will trotzdem mehr Gehalt.",en:"The player with the most eliminations on the team. Still wants a raise."}},
@@ -749,7 +761,7 @@ const APPS = [
          en:["A classic league system with tables","Long matches with live broadcasts","Academy instead of training, season review","Rankings for world, country and city"]},
    log:[{v:"1.0",d:"Nov 2026",t:{de:"Geschlossener Test bei Google Play",en:"Closed testing on Google Play"}}],
    faq:[], words:["team"], play:""},
-  {id:"schlittensause", img:"icons/schlittensause.webp", name:"Schlittensause", status:"soon", badge:{de:"Eingereicht · zu Weihnachten",en:"Submitted · for Christmas"}, color:"#1f8fd6", letter:"S",
+  {id:"schlittensause", img:"icons/schlittensause.webp", shots:6, name:"Schlittensause", status:"soon", badge:{de:"Eingereicht · zu Weihnachten",en:"Submitted · for Christmas"}, color:"#1f8fd6", letter:"S",
    genre:{de:"3D-Rennspiel",en:"3D racing game"},
    text:{de:"Ein Schlittenrennen im Schnee, mit Abkürzungen, Raketenstart und Windschatten. Ziel: als Erster unten ankommen.",en:"A sled race in the snow, with shortcuts, rocket starts and slipstreams. Goal: reach the bottom first."},
    dict:{art:{de:"die",en:"noun"},pron:"/ˈʃlɪtn̩ˌzaʊ̯zə/",def:{de:"Fahrt bergab, bei der niemand bremst. Am wenigsten der Schlitten.",en:"A ride downhill where nobody brakes. Least of all the sled."}},
@@ -788,71 +800,6 @@ const APPS = [
          en:["55,555 real rule variants with their own names and logos","A map of islands ties it all together","Four bot levels in every game","German and English, fully offline"]},
    log:[], faq:[{q:{de:"Brauche ich Internet?",en:"Do I need internet?"},a:{de:"Nein, alle Spiele laufen komplett offline.",en:"No, every game runs completely offline."}}],
    words:["insel","zahl","spiel"], play:""},
-  {id:"zeitzauberer", name:"Zeitzauberer", status:"dev", phase:2, color:"#6a4cd6", letter:"Z",
-   genre:{de:"Idle-Spiel",en:"Idle game"},
-   text:{de:"Ein Zauberer, sehr viele Zeitkristalle und noch mehr Epochen. Tippen, sammeln, Zeitbosse besiegen.",en:"A wizard, a great many time crystals and even more eras. Tap, collect, defeat time bosses."},
-   dict:{art:{de:"der",en:"noun"},pron:"/ˈtsaɪ̯tˌtsaʊ̯bəʁɐ/",def:{de:"Person, die Zeit in Kristalle verwandelt. Hat trotzdem nie welche.",en:"A person who turns time into crystals. Still never has any."}},
-   feat:{de:["Reise durch viele Epochen mit eigenen Welten","Zeitbosse mit Beute, Schmiede und Zauberlabor","Haustiere, vier Mini-Spiele und 38 Erfolge","Tagesaufgaben, Glücksrad und 30-Tage-Kalender"],
-         en:["Travel through many eras, each with its own world","Time bosses with loot, a forge and a spell lab","Pets, four mini games and 38 achievements","Daily quests, a lucky wheel and a 30-day calendar"]},
-   log:[], faq:[], words:["zeit","kristall"], play:""},
-  {id:"saunameister", name:"Saunameister", status:"dev", phase:2, color:"#b4532a", letter:"S",
-   genre:{de:"3D-Tycoon",en:"3D tycoon"},
-   text:{de:"Vom Waldhüttchen zur Polar-Therme: Lauf selbst zur Kasse, hol Handtücher, mach den Aufguss und stell Personal ein.",en:"From a forest hut to a polar spa: run to the till yourself, fetch towels, do the steam ritual and hire staff."},
-   dict:{art:{de:"der",en:"noun"},pron:"/ˈzaʊ̯naˌmaɪ̯stɐ/",def:{de:"Person, die mit einem Handtuch Wind macht und dafür Applaus bekommt.",en:"A person who makes wind with a towel and gets applause for it."}},
-   feat:{de:["Fünf Häuser: Waldhütte, Seebad, Bergresort, Kurhaus, Polar-Therme","Aufgaben erledigst du, indem du in leuchtende Kreise läufst","Personal für jede Station, Stammgäste und Hausschatz"],
-         en:["Five houses: forest hut, lake spa, mountain resort, spa house, polar spa","Do jobs by walking into glowing circles","Staff for every station, regular guests and a house safe"]},
-   log:[], faq:[], words:["sauna"], play:""},
-  {id:"der-letzte-zug", name:"Der letzte Zug", status:"dev", phase:2, color:"#2b2f3a", letter:"Z",
-   genre:{de:"Schach-Krimi",en:"Chess mystery"},
-   text:{de:"Eine verlassene Partie, ein Diebstahl im Café Zugzwang. Finde heraus, welcher Zug zuletzt gespielt wurde.",en:"An abandoned game, a theft at Café Zugzwang. Work out which move was played last."},
-   dict:{art:{de:"der",en:"noun"},pron:"/deːɐ̯ ˈlɛtstə tsuːk/",def:{de:"Zug, nach dem nichts mehr kommt. Außer der Frage, wer ihn gespielt hat.",en:"The move after which nothing follows. Except the question of who played it."}},
-   feat:{de:["Rückwärts-Schach: Rekonstruiere den letzten Zug statt vorwärts zu spielen","Krimi-Geschichte im Film-noir-Stil","47 Rätsel und 158 Tagesfälle","Deutsch und Englisch, offline"],
-         en:["Retro chess: reconstruct the last move instead of playing forward","A film-noir detective story","47 puzzles and 158 daily cases","German and English, offline"]},
-   log:[], faq:[], words:["schach"], play:""},
-  {id:"dotter", name:"Dotter", status:"dev", phase:2, color:"#f2a900", letter:"D",
-   genre:{de:"Eieruhr",en:"Egg timer"},
-   text:{de:"Die Eieruhr, die rechnet: Größe, Temperatur aus dem Kühlschrank, Höhe über dem Meer und Eiersorte fließen in die Kochzeit ein.",en:"The egg timer that does the maths: size, fridge temperature, altitude and type of egg all go into the cooking time."},
-   dict:{art:{de:"der",en:"noun"},pron:"/ˈdɔtɐ/",def:{de:"Gelber Kern eines Eis. Entscheidet, ob der Morgen gelingt.",en:"The yellow heart of an egg. Decides whether the morning goes well."}},
-   feat:{de:["Kochzeit nach wissenschaftlicher Formel","Hühner-, Wachtel-, Enten- und Gänseeier","Mehrere Eier markieren, jedes mit eigenem Wunsch","„Fertig um“-Planung und Eiervorrat"],
-         en:["Cooking time from a scientific formula","Hen, quail, duck and goose eggs","Mark several eggs, each cooked its own way","'Ready by' planning and egg stock"]},
-   log:[], faq:[], words:["ei"], play:""},
-  {id:"kruemelbuch", name:"Krümelbuch", status:"dev", phase:2, color:"#5a8f3d", letter:"K",
-   genre:{de:"Für Tagesmütter",en:"For childminders"},
-   text:{de:"Zeiten erfassen, Monatsnachweise als PDF, Abrechnung mit den Eltern. Gemacht für Tagesmütter und Tagesväter.",en:"Track times, monthly attendance as PDF, billing for parents. Made for childminders."},
-   dict:{art:{de:"das",en:"noun"},pron:"/ˈkʁyːml̩ˌbuːx/",def:{de:"Buch, in dem steht, wer wann gebracht und abgeholt wurde. Krümel inklusive.",en:"A book recording who was dropped off and picked up when. Crumbs included."}},
-   feat:{de:["Bringen und Abholen mit einem Tipp","Monatsnachweis und Rechnung als PDF","Feiertage nach Bundesland, Jahresübersicht","Mit PIN gesperrt und verschlüsselt, ohne Server"],
-         en:["Drop-off and pick-up with one tap","Monthly record and invoice as PDF","Public holidays by German state, yearly overview","PIN lock and encryption, no server"]},
-   log:[], faq:[], words:["buch"], play:""},
-  {id:"wackelturm", name:"Wackelturm", status:"dev", phase:1, color:"#3a7bd5", letter:"W",
-   genre:{de:"3D-Stapelspiel",en:"3D stacking game"},
-   text:{de:"Du sitzt am Küchentisch und stapelst, was gerade herumliegt. Bücher, Dosen, Quietscheentchen. Nur umfallen darf nichts.",en:"You sit at the kitchen table and stack whatever is lying around. Books, cans, rubber ducks. Just don't let anything fall."},
-   dict:{art:{de:"der",en:"noun"},pron:"/ˈvakl̩ˌtʊʁm/",def:{de:"Turm, der genau einen Gegenstand zu hoch ist.",en:"A tower that is exactly one object too tall."}},
-   feat:{de:["Echte Physik in 3D","Über 20 Gegenstände in drei Schwierigkeitsstufen","Höhenrekorde und verschiedene Orte"],en:["Real physics in 3D","20+ objects in three difficulty tiers","Height records and different places"]},
-   log:[], faq:[], words:["turm"], play:""},
-  {id:"das-ameisenhaus", name:"Das Ameisenhaus", status:"dev", phase:1, color:"#7a3d1e", letter:"A",
-   genre:{de:"Simulation",en:"Simulation"},
-   text:{de:"Eine Ameisenkolonie in Echtzeit, so nah an der Realität wie möglich. Deckel ab, umbauen, beobachten.",en:"An ant colony in real time, as close to reality as possible. Lift the lid, rearrange, observe."},
-   dict:{art:{de:"das",en:"noun"},pron:"/ˈaːmaɪ̯zn̩ˌhaʊ̯s/",def:{de:"Durchsichtiges Nest, in das eine Kolonie über eine Röhre einzieht. Zum Umbauen muss der Deckel ab.",en:"A transparent nest a colony moves into through a tube. To rearrange it, the lid has to come off."}},
-   feat:{de:["Kolonie wie in echt: Ameisenhaus, Röhre, Arena","Tageslicht nach der echten Uhrzeit","Benachrichtigungen und Replays für wichtige Momente"],en:["A colony like the real thing: nest, tube, arena","Daylight follows the real time of day","Notifications and replays for key moments"]},
-   log:[], faq:[], words:["ameise"], play:""},
-  {id:"only-1-match", name:"Only 1 Match", status:"dev", phase:1, color:"#22252c", letter:"1",
-   genre:{de:"Schach",en:"Chess"},
-   text:{de:"Ein Gegner. Ein extrem starker Bot. Und eine Statistik, die jeden deiner Versuche festhält.",en:"One opponent. An extremely strong bot. And statistics that record every single attempt."},
-   dict:{art:{de:"das",en:"noun"},pron:"/ˈoʊnli wʌn mætʃ/",def:{de:"Eine einzige Partie gegen einen einzigen Gegner, die man so lange spielt, bis man gewinnt. Oder auch nicht.",en:"A single game against a single opponent that you keep playing until you win. Or don't."}},
-   feat:{de:["Nur ein Gegner: ein Bot auf Weltklasse-Niveau","Statistik zu Versuchen, geschlagenen und verlorenen Figuren"],en:["Only one opponent: a world-class bot","Stats on attempts, captured and lost pieces"]},
-   log:[], faq:[], words:["schach"], play:""},
-  {id:"feierabendwerkstatt", name:"Feierabendwerkstatt", status:"dev", phase:1, color:"#9a6b4b", letter:"F",
-   genre:{de:"ASMR-Spiel",en:"ASMR game"},
-   text:{de:"Alte Dinge reinigen und restaurieren, in 3D drehen, in Ruhe. Gemütliches ASMR zum Abschalten.",en:"Clean and restore old things, turn them in 3D, take your time. Cosy ASMR to switch off."},
-   dict:{art:{de:"die",en:"noun"},pron:"/ˈfaɪ̯ɐʔaːbn̩tˌvɛʁkʃtat/",def:{de:"Ort, an dem man nach getaner Arbeit alte Dinge wieder schön macht.",en:"A place where, after a day's work, you make old things beautiful again."}},
-   feat:{de:["Gegenstände in 3D drehen und sauber machen","Aufträge annehmen oder ablehnen","Ruhige Geräusche zum Entspannen"],en:["Turn objects in 3D and clean them up","Accept or decline jobs","Calm sounds to unwind"]},
-   log:[], faq:[], words:["werkstatt"], play:""},
-  {id:"flitsch-kampf", name:"Flitsch-Kampf", status:"dev", phase:1, color:"#4a9a8a", letter:"F",
-   genre:{de:"3D-Kampfspiel",en:"3D fighting game"},
-   text:{de:"Dehnbare Gummi-Gorillas im Ring. Ziehen, zielen, loslassen, aus der Ego-Perspektive.",en:"Stretchy rubber gorillas in the ring. Pull, aim, let go, in first person."},
-   dict:{art:{de:"der",en:"noun"},pron:"/ˈflɪtʃˌkampf/",def:{de:"Ringkampf zwischen dehnbaren Gummigorillas. Gewonnen hat, wer zuletzt zurückschnalzt.",en:"A wrestling match between stretchy rubber gorillas. Whoever snaps back last wins."}},
-   feat:{de:["Ring-Kampf in 3D","Ziehen hat echten Sinn: Spannung bestimmt den Treffer","Ego-Perspektive"],en:["Ring fights in 3D","Pulling matters: tension decides the hit","First-person view"]},
-   log:[], faq:[], words:["gorilla"], play:""},
   {id:"pfotenjagd", name:"Pfotenjagd", status:"dev", phase:1, color:"#e07a2f", letter:"P",
    genre:{de:"Spiel für echte Katzen",en:"A game for real cats"},
    text:{de:"Ein Spiel, das nicht du spielst, sondern deine Katze. Beute huscht über den Bildschirm, lernt dazu und versteckt sich. Und du kannst mitspielen.",en:"A game that isn't played by you, but by your cat. Prey darts across the screen, learns and hides. And you can join in."},
@@ -860,12 +807,6 @@ const APPS = [
    feat:{de:["Beute, die von deiner Katze lernt","Mensch gegen Katze: Du steuerst die Beute","Katzenprofile, Jagd-Tagebuch und Statistik","Farben, Bewegungen und Geräusche für Katzenaugen und -ohren"],
          en:["Prey that learns from your cat","Human vs cat: you control the prey","Cat profiles, a hunting diary and stats","Colours, movement and sounds made for cat eyes and ears"]},
    log:[], faq:[], words:["katze","pfote"], play:""},
-  {id:"brezelband", name:"Brezelband", status:"dev", phase:1, color:"#a8642a", letter:"B",
-   genre:{de:"3D-Idle-Spiel",en:"3D idle game"},
-   text:{de:"Teig rein, Brezel raus: Bau eine Brezel-Fertigungsstraße auf, verbessere jede Maschine und schau dem Band beim Laufen zu.",en:"Dough in, pretzel out: build a pretzel production line, upgrade every machine and watch the belt run."},
-   dict:{art:{de:"das",en:"noun"},pron:"/ˈbʁeːtsl̩ˌbant/",def:{de:"Förderband, auf dem Brezeln schneller entstehen, als man sie essen kann. Fast.",en:"A conveyor belt that makes pretzels faster than you can eat them. Almost."}},
-   feat:{de:["Fertigungsstraße in 3D","Maschinen per Tippen oder Gedrückthalten verbessern","Musik, Sounds, Deutsch und Englisch"],en:["Production line in 3D","Upgrade machines by tapping or holding","Music, sounds, German and English"]},
-   log:[], faq:[], words:["brezel"], play:""},
   {id:"dummy-pruefstand", name:"Dummy-Prüfstand", status:"dev", phase:1, color:"#f0b400", letter:"D",
    genre:{de:"Physik-Parcours",en:"Physics obstacle course"},
    text:{de:"Ein Crashtest-Dummy, ein Fahrzeug und eine Halle voller Hindernisse. Kommt er heil ins Ziel? Meistens nicht ganz.",en:"A crash test dummy, a vehicle and a hall full of obstacles. Will it reach the finish in one piece? Usually not quite."},
@@ -873,44 +814,13 @@ const APPS = [
    feat:{de:["Physik-Parcours ohne Brutalität","Hallen-Editor: eigene Strecken bauen, benennen und speichern","Prüfaufträge, Werkstatt und Geisterfahrt","Duell mit herumgereichtem Handy"],
          en:["A physics course without the gore","Hall editor: build, name and save your own courses","Test jobs, a workshop and ghost runs","Pass-the-phone duels"]},
    log:[], faq:[], words:["dummy"], play:""},
-  {id:"kopfsache", name:"Kopfsache", status:"dev", phase:1, color:"#14121f", letter:"K",
-   genre:{de:"Denksport-Manager Idle",en:"Mind sports manager idle"},
-   text:{de:"Führe einen Denksport-Verein: Schach, Zauberwürfel, Go, Skat, Backgammon und Gedächtnissport. Pokal gewinnen, für die Meisterschaft qualifizieren.",en:"Run a mind sports club: chess, Rubik's cube, Go, skat, backgammon and memory sports. Win the cup, qualify for the championship."},
-   dict:{art:{de:"die",en:"noun"},pron:"/ˈkɔp͡fˌzaxə/",def:{de:"Angelegenheit, die sich im Kopf entscheidet. Bei einem Schachverein: alles.",en:"A matter decided in the head. At a chess club: everything."}},
-   feat:{de:["Sechs Disziplinen mit eigenen Verbesserungen","Ligen, Pokal und Meisterschaft","Vereinsheim, Minispiele zum Selbstmitspielen"],en:["Six disciplines with their own upgrades","Leagues, cup and championship","Clubhouse and mini games to play yourself"]},
-   log:[], faq:[], words:["schach","verein"], play:""},
-  {id:"medaillenschmiede", name:"Medaillenschmiede", status:"dev", phase:1, color:"#c9a227", letter:"M",
-   genre:{de:"Sportverein-Manager Idle",en:"Sports club manager idle"},
-   text:{de:"Eiskunstlauf, Turnen, Rhythmische Gymnastik, Synchronschwimmen, Cheerleading und Trampolin: Bau einen Verein, der Höchstnoten holt.",en:"Figure skating, gymnastics, rhythmic gymnastics, synchronised swimming, cheerleading and trampoline: build a club that scores top marks."},
-   dict:{art:{de:"die",en:"noun"},pron:"/meˈdaljən̩ˌʃmiːdə/",def:{de:"Werkstatt, in der Medaillen nicht gegossen, sondern ertanzt, erturnt und erschwommen werden.",en:"A workshop where medals aren't cast but danced, vaulted and swum for."}},
-   feat:{de:["Sechs ästhetische Sportarten","Weltspiele-Event und Sammelalbum","Trainerstab und Gold-Pass"],en:["Six aesthetic sports","World Games event and a collector's album","Coaching staff and Gold Pass"]},
-   log:[], faq:[], words:["medaille"], play:""},
   {id:"mauerlaeufer", name:"Mauerläufer", status:"dev", phase:1, color:"#8b4a2b", letter:"M",
    genre:{de:"3D-Rothenburg",en:"3D Rothenburg"},
    text:{de:"Rothenburg ob der Tauber zum Durchlaufen: Gassen, Türme, Läden und die Stadtmauer, durch die Epochen und mit dem Nachtwächter an der Seite.",en:"Rothenburg ob der Tauber to walk through: lanes, towers, shops and the town wall, through the ages, with the night watchman at your side."},
    dict:{art:{de:"der",en:"noun"},pron:"/ˈmaʊ̯ɐˌlɔɪ̯fɐ/",def:{de:"Person, die die Stadtmauer einmal ganz umrundet. Meistens mit Kamera.",en:"A person who walks all the way round the town wall. Usually with a camera."}},
    feat:{de:["Begehbare Altstadt in 3D, auch in die Läden","Epochen, Geschichte und Events wie der Meistertrunk","Besuchsplaner, digitale Postkarten und Stempelpass","10 % der Einnahmen gehen an die Stadtmauer"],
          en:["Walkable old town in 3D, including the shops","Eras, history and events like the Meistertrunk","Visit planner, digital postcards and a stamp pass","10% of revenue goes to the town wall"]},
-   log:[], faq:[], words:["mauer"], play:""},
-  {id:"versiegelt", name:"Versiegelt bis Silvester", status:"dev", phase:1, color:"#6b2fb3", letter:"V",
-   genre:{de:"Partyspiel",en:"Party game"},
-   text:{de:"Die Silvesterrunde gibt Vorhersagen fürs neue Jahr ab. Die App versiegelt sie, am nächsten Silvester wird aufgelöst und gepunktet.",en:"The New Year's Eve crowd makes predictions for the year ahead. The app seals them, and next New Year's Eve they get revealed and scored."},
-   dict:{art:{de:"",en:"adj."},pron:"/fɛɐ̯ˈziːɡl̩t/",def:{de:"Zustand einer Vorhersage, die erst in einem Jahr wieder aufgemacht werden darf. Ausreden inklusive.",en:"The state of a prediction that may only be opened again in a year. Excuses included."}},
-   feat:{de:["Vorhersagen in der Runde abgeben","Ein Jahr lang versiegelt","Auflösen und Punkten am nächsten Silvester"],en:["Make predictions as a group","Sealed for a whole year","Reveal and score next New Year's Eve"]},
-   log:[], faq:[], words:["silvester"], play:""},
-  {id:"christbaum-krise", name:"Christbaum-Krise", status:"dev", phase:0, color:"#2e7d4f", letter:"C",
-   genre:{de:"3D-Geschicklichkeit",en:"3D skill game"},
-   text:{de:"Der Baum muss gerade in den Ständer. Klingt einfach. War es noch nie.",en:"The tree has to go straight into the stand. Sounds easy. Never has been."},
-   dict:{art:{de:"die",en:"noun"},pron:"/ˈkʁɪstbaʊ̯m ˈkʁiːzə/",def:{de:"Jährlich wiederkehrender Zustand am 24. Dezember gegen 16 Uhr.",en:"A recurring state every 24 December, around 4 pm."}},
-   feat:{de:["Christbaum in 3D gerade aufstellen","Weihnachtsmusik und echte Geräusche","Viele Bäume, Ständer und Wohnzimmer"],en:["Set up a Christmas tree straight, in 3D","Christmas music and real sounds","Lots of trees, stands and living rooms"]},
-   log:[], faq:[], words:["baum"], play:""},
-  {id:"leaf-it-to-us", name:"Leaf It To Us", status:"dev", phase:0, color:"#3f8f3a", letter:"L",
-   genre:{de:"PC-Spiel · Pflanzenladen",en:"PC game · plant shop"},
-   text:{de:"Ein Pflanzenladen zum Selbermachen: anziehen, pflegen, beraten, verkaufen. Später auch zu viert im Koop. Geplant für Steam.",en:"A plant shop of your own: grow, care, advise, sell. Later in co-op with up to four players. Planned for Steam."},
-   dict:{art:{de:"",en:"phrase"},pron:"/liːf ɪt tə ʌs/",def:{de:"Englisch für: Überlass das uns. Gesagt von Leuten, die gerade einen Kaktus umgetopft haben.",en:"What people say right after repotting a cactus."}},
-   feat:{de:["Lebende Ware, eigene Anzucht, Schädlinge","Kundenberatung, Raritäten und Kreuzungen","Entspannter Modus oder Chaos-Modus","Koop für bis zu vier Spieler als späteres Update"],
-         en:["Living stock, your own propagation, pests","Customer advice, rarities and cross-breeds","Relaxed mode or chaos mode","Co-op for up to four players as a later update"]},
-   log:[], faq:[], words:["pflanze"], play:""}
+   log:[], faq:[], words:["mauer"], play:""}
 ];
 const PHASES = {de:["Idee","Prototyp","Feinschliff","Testphase"],en:["Idea","Prototype","Polish","Testing"]};
 const FAQ_ALL = [
@@ -983,15 +893,15 @@ const NOUNS = {
 const PRESS = {
   short:{de:"NOUN Studio ist ein Ein-Mann-Studio aus Rothenburg ob der Tauber, das Apps und Spiele für Android und iOS entwickelt. Jede Idee beginnt mit einem Ding.",
          en:"NOUN Studio is a one-person studio from Rothenburg ob der Tauber, Germany, making apps and games for Android and iOS. Every idea starts with a thing."},
-  long:{de:"NOUN Studio wurde im November 2026 von Jason Wühr in Rothenburg ob der Tauber gegründet. Der Name kommt vom englischen Wort für Substantiv: Fast jede App des Studios beginnt mit einem Gegenstand, vom Kratzbaum über den Bienenstock bis zum Flohmarkt. Im geschlossenen Test bei Google Play sind das 3D-Bauspiel Kratzbaum-Krawall, das Arcade-Spiel Flatterhörnchen und die Flohmarkt-App Trödelradar. Im November 2026 folgen das Bienen-Puzzle Summstau, der Spielgenerator 1 Million Spiele, die Sammlung Spieleschrank und Schnapszahl 55.555.",
-        en:"NOUN Studio was founded in November 2026 by Jason Wühr in Rothenburg ob der Tauber, Germany. The name says it all: almost every app the studio makes starts with an object, from a cat tree to a beehive to a flea market. In closed testing on Google Play are the 3D building game Kratzbaum-Krawall, the arcade game Flatterhörnchen and the flea market app Trödelradar. In November 2026 they are joined by the bee puzzle Summstau, the game generator 1 Million Games, the collection Spieleschrank and Schnapszahl 55,555."}
+  long:{de:"NOUN Studio wurde im November 2026 von Jason in Rothenburg ob der Tauber gegründet. Der Name kommt vom englischen Wort für Substantiv: Fast jede App des Studios beginnt mit einem Gegenstand, vom Kratzbaum über den Bienenstock bis zum Flohmarkt. Im geschlossenen Test bei Google Play sind das 3D-Bauspiel Kratzbaum-Krawall, das Arcade-Spiel Flatterhörnchen und die Flohmarkt-App Trödelradar. Im November 2026 folgen das Bienen-Puzzle Summstau, der Spielgenerator 1 Million Spiele, die Sammlung Spieleschrank und Schnapszahl 55.555.",
+        en:"NOUN Studio was founded in November 2026 by Jason in Rothenburg ob der Tauber, Germany. The name says it all: almost every app the studio makes starts with an object, from a cat tree to a beehive to a flea market. In closed testing on Google Play are the 3D building game Kratzbaum-Krawall, the arcade game Flatterhörnchen and the flea market app Trödelradar. In November 2026 they are joined by the bee puzzle Summstau, the game generator 1 Million Games, the collection Spieleschrank and Schnapszahl 55,555."}
 };
 
 const LEGAL = {
   impressum:{de:`<h1>Impressum</h1><p>Angaben gemäß § 5 DDG</p><p>Jason Wühr<br>NOUN Studio<br>Milchmarkt 6<br>91541 Rothenburg ob der Tauber</p><h2>Kontakt</h2><p>E-Mail: nounnounstudio@gmail.com</p><h2>Verantwortlich für den Inhalt</h2><p>Jason Wühr, Anschrift wie oben</p>`,
              en:`<h1>Legal notice</h1><p>Information according to § 5 DDG (German Digital Services Act)</p><p>Jason Wühr<br>NOUN Studio<br>Milchmarkt 6<br>91541 Rothenburg ob der Tauber<br>Germany</p><h2>Contact</h2><p>Email: nounnounstudio@gmail.com</p><h2>Responsible for content</h2><p>Jason Wühr, address as above</p>`},
-  datenschutz:{de:`<h1>Datenschutz</h1><p>Diese Webseite setzt keine Tracking-Cookies und nutzt keine Analyse-Dienste.</p><h2>Verantwortlicher</h2><p>Jason Wühr, NOUN Studio, Milchmarkt 6, 91541 Rothenburg ob der Tauber, nounnounstudio@gmail.com</p><h2>Newsletter</h2><p>Wenn du dich für den Newsletter anmeldest, speichere ich deine E-Mail-Adresse und die gewünschte Sprache, um dir Neuigkeiten zu NOUN Studio zu schicken. Grundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die du jederzeit per Mail widerrufen kannst. Die Anmeldung wird per Bestätigungsmail abgesichert.</p><h2>Tester-Anmeldung</h2><p>Für Testeinladungen speichere ich die E-Mail-Adresse deines Google-Kontos und die gewählten Apps. Grundlage ist deine Einwilligung, die du jederzeit widerrufen kannst.</p><h2>Ideenkasten und Abstimmung</h2><p>Ideen werden ohne Namen gespeichert. Für die Abstimmung speichert dein Browser eine zufällige Kennung, damit jede Person nur einmal abstimmt.</p><h2>Speicherort</h2><p>Die Daten liegen bei Supabase, einem Datenbank-Anbieter, mit dem ein Vertrag zur Auftragsverarbeitung besteht.</p><h2>Kontakt per E-Mail</h2><p>Wenn du mir schreibst, verwende ich deine Angaben nur, um deine Anfrage zu beantworten.</p><h2>Schriftarten</h2><p>Für die Darstellung werden Schriftarten von Google Fonts geladen. Dabei wird deine IP-Adresse an Google übertragen.</p><h2>Social-Media-Posts</h2><p>Im Bereich Social zeigt die Seite meine neuesten Instagram-Posts über den Dienst Behold (behold.so) an. Beim Laden werden die Bilder von dort und von Servern von Meta abgerufen, dabei wird deine IP-Adresse übertragen. Links zu Instagram, X und anderen Plattformen öffnen deren Seiten, dort gelten deren Datenschutzbestimmungen.</p><h2>Deine Rechte</h2><p>Du hast das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung sowie auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde.</p>`,
-                en:`<h1>Privacy</h1><p>This website sets no tracking cookies and uses no analytics services.</p><h2>Controller</h2><p>Jason Wühr, NOUN Studio, Milchmarkt 6, 91541 Rothenburg ob der Tauber, Germany, nounnounstudio@gmail.com</p><h2>Newsletter</h2><p>If you sign up for the newsletter, I store your email address and preferred language to send you NOUN Studio news. The legal basis is your consent (Art. 6(1)(a) GDPR), which you can withdraw at any time by email. Sign-up is confirmed by email.</p><h2>Tester sign-up</h2><p>For test invitations I store the email address of your Google account and the apps you chose, based on your consent, which you can withdraw at any time.</p><h2>Idea box and voting</h2><p>Ideas are stored without names. For voting, your browser stores a random ID so each person votes only once.</p><h2>Where data is stored</h2><p>Data is stored with Supabase, a database provider under a data processing agreement.</p><h2>Email contact</h2><p>If you write to me, I only use your details to answer your request.</p><h2>Fonts</h2><p>Fonts are loaded from Google Fonts, which transmits your IP address to Google.</p><h2>Social media posts</h2><p>The Social section shows my latest Instagram posts via the service Behold (behold.so). Images are loaded from there and from Meta servers, which transmits your IP address. Links to Instagram, X and other platforms open their sites, where their privacy policies apply.</p><h2>Your rights</h2><p>You have the right to access, rectification, erasure and restriction of processing, and to lodge a complaint with a data protection authority.</p>`}
+  datenschutz:{de:`<h1>Datenschutz</h1><p>Diese Webseite setzt keine Tracking-Cookies und nutzt keine Analyse-Dienste.</p><h2>Verantwortlicher</h2><p>Jason Wühr, NOUN Studio, Milchmarkt 6, 91541 Rothenburg ob der Tauber, nounnounstudio@gmail.com</p><h2>Newsletter</h2><p>Wenn du dich für den Newsletter anmeldest, speichere ich deine E-Mail-Adresse und die gewünschte Sprache, um dir Neuigkeiten zu NOUN Studio zu schicken. Grundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die du jederzeit per Mail widerrufen kannst. Die Anmeldung wird per Bestätigungsmail abgesichert.</p><h2>Tester-Anmeldung</h2><p>Für Testeinladungen speichere ich die E-Mail-Adresse deines Google-Kontos und die gewählten Apps. Grundlage ist deine Einwilligung, die du jederzeit widerrufen kannst.</p><h2>Ideenkasten und Abstimmung</h2><p>Ideen werden ohne Namen gespeichert. Für die Abstimmung speichert dein Browser eine zufällige Kennung, damit jede Person nur einmal abstimmt.</p><h2>Speicherort</h2><p>Die Daten liegen bei Supabase, einem Datenbank-Anbieter, mit dem ein Vertrag zur Auftragsverarbeitung besteht.</p><h2>Kontakt per E-Mail</h2><p>Wenn du mir schreibst, verwende ich deine Angaben nur, um deine Anfrage zu beantworten.</p><h2>Schriftarten</h2><p>Für die Darstellung werden Schriftarten von Google Fonts geladen. Dabei wird deine IP-Adresse an Google übertragen.</p><h2>Social-Media-Posts</h2><p>Im Bereich Social können meine Posts von Instagram und X eingebettet angezeigt werden. Sie werden erst geladen, wenn du auf „Posts anzeigen“ tippst. Dann werden Inhalte von Meta (Instagram) und X geladen, wobei deine IP-Adresse und technische Daten an diese Anbieter übertragen werden und dort Cookies gesetzt werden können. Grundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Deine Wahl merkt sich dein Browser; du kannst sie widerrufen, indem du die Websitedaten löschst. Links zu Instagram, X und anderen Plattformen öffnen deren Seiten, dort gelten deren Datenschutzbestimmungen.</p><h2>Deine Rechte</h2><p>Du hast das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung sowie auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde.</p>`,
+                en:`<h1>Privacy</h1><p>This website sets no tracking cookies and uses no analytics services.</p><h2>Controller</h2><p>Jason Wühr, NOUN Studio, Milchmarkt 6, 91541 Rothenburg ob der Tauber, Germany, nounnounstudio@gmail.com</p><h2>Newsletter</h2><p>If you sign up for the newsletter, I store your email address and preferred language to send you NOUN Studio news. The legal basis is your consent (Art. 6(1)(a) GDPR), which you can withdraw at any time by email. Sign-up is confirmed by email.</p><h2>Tester sign-up</h2><p>For test invitations I store the email address of your Google account and the apps you chose, based on your consent, which you can withdraw at any time.</p><h2>Idea box and voting</h2><p>Ideas are stored without names. For voting, your browser stores a random ID so each person votes only once.</p><h2>Where data is stored</h2><p>Data is stored with Supabase, a database provider under a data processing agreement.</p><h2>Email contact</h2><p>If you write to me, I only use your details to answer your request.</p><h2>Fonts</h2><p>Fonts are loaded from Google Fonts, which transmits your IP address to Google.</p><h2>Social media posts</h2><p>The Social section can show my posts from Instagram and X as embeds. They only load after you tap “Show posts”. Content is then loaded from Meta (Instagram) and X, which transmits your IP address and technical data to those providers and may set cookies. The legal basis is your consent (Art. 6(1)(a) GDPR). Your browser remembers the choice; you can withdraw it by clearing the site data. Links to Instagram, X and other platforms open their sites, where their privacy policies apply.</p><h2>Your rights</h2><p>You have the right to access, rectification, erasure and restriction of processing, and to lodge a complaint with a data protection authority.</p>`}
 };
 
 /* ============ Oberflächentexte ============ */
@@ -1022,7 +932,7 @@ const I = {
   blog_side:["das Logbuch","the logbook"], lex_h:["Werkstatt-Lexikon","Workshop glossary"],
   lex_lead:["Alle Dinge, um die es hier geht. Tipp auf ein Wort, um alles dazu zu sehen.","All the things this site is about. Tap a word to see everything about it."],
   about_h:["Über mich","About me"], about_side:["der Mensch hinter dem Substantiv","the human behind the noun"],
-  about_text:[null,`<p>I'm Jason Wühr, and under the name NOUN Studio I make apps and games for Android and iPhone. My studio is my desk in Rothenburg ob der Tauber, my test device is my phone.</p><p>My ideas almost always start with a thing: a cat tree, an ant nest, an egg timer, a rubber gorilla. Then I ask myself what I could make from it that doesn't exist yet. Sometimes it becomes a cosy game, sometimes a useful tool, sometimes something rather silly.</p><p>What matters to me: apps you understand without reading a manual, fair ads instead of rip-offs, and ideas that dare to be different.</p>`],
+  about_text:[null,`<p>I'm Jason, and under the name NOUN Studio I make apps and games for Android and iPhone. My studio is my desk in Rothenburg ob der Tauber, my test device is my phone.</p><p>My ideas almost always start with a thing: a cat tree, an ant nest, an egg timer, a rubber gorilla. Then I ask myself what I could make from it that doesn't exist yet. Sometimes it becomes a cosy game, sometimes a useful tool, sometimes something rather silly.</p><p>What matters to me: apps you understand without reading a manual, fair ads instead of rip-offs, and ideas that dare to be different.</p>`],
   ab_place:["Ort","Based in"], ab_plat:["Plattform","Platform"], ab_plat_v:["Android und iOS","Android and iOS"],
   ab_fav:["Am liebsten","Favourite"], ab_fav_v:["Spiele mit ungewöhnlichen Themen","Games with unusual themes"],
   tl1:["Gewerbe angemeldet, Google-Play-Konto eingerichtet","Business registered, Google Play account set up"],
@@ -1081,6 +991,8 @@ Object.assign(I, {
   soc_lead:["Folg NOUN Studio, und sieh hier alle neuen Posts von allen Plattformen an einem Ort.","Follow NOUN Studio and see every new post from every platform in one place."],
   soc_side:["die neuesten Posts","the latest posts"], soc_follow:["Folgen","Follow"], soc_soon:["Bald auch auf:","Coming soon:"],
   soc_open:["Auf","Open on"], soc_empty:["Noch keine Posts.","No posts yet."],
+  soc_consent:["Die neuesten Posts werden direkt von Instagram und X geladen. Dabei werden Daten wie deine IP-Adresse an diese Dienste übertragen. Mehr dazu im Datenschutz.","The latest posts are loaded directly from Instagram and X. This sends data such as your IP address to those services. See the privacy policy for details."],
+  soc_allow:["Posts anzeigen","Show posts"],
   soc_demo:["Beispiele: Deine echten Posts erscheinen hier automatisch, sobald die Verbindung eingerichtet ist.","Examples: real posts appear here automatically once the connection is set up."],
   vote1:["Stimme","vote"],
   nav_ding:["Ding des Monats","Thing of the month"], tk_label:["Werkstatt","Workshop"],
@@ -1198,7 +1110,7 @@ function phaseHtml(p){
 
 function renderAppPage(a){
   const faqs = [...a.faq, ...FAQ_ALL];
-  const shots = [1,2,3].map(i => `<div class="phone" style="background:linear-gradient(160deg,${a.color},#16181d)">${esc(a.name)}<small>${t("shots")}</small></div>`).join("");
+  const shots = a.shots ? Array.from({length:a.shots},(_,i)=>`<button type="button" class="shot" data-src="shots/${a.id}-${i+1}.webp" aria-label="Screenshot ${i+1}"><img src="shots/${a.id}-${i+1}.webp" alt="${esc(a.name)} Screenshot ${i+1}" loading="lazy" width="360" height="740"></button>`).join("") : "";
   const store = a.status==="dev"
     ? `<a class="btn primary" href="#mitmachen">${t("want_test")}</a><a class="btn" href="#werkstatt">${t("vote_this")}</a>`
     : (a.play ? `<a class="btn primary" href="${esc(a.play)}" target="_blank" rel="noopener">${t("get_play")}</a>` : `<a class="btn primary" href="#mitmachen">${t("test_join")}</a>`);
@@ -1218,7 +1130,7 @@ function renderAppPage(a){
     </div>
     <p style="font-size:1.15rem;max-width:62ch;margin:0 0 24px">${esc(L(a.text))}</p>
     <div class="store-row">${store}</div>
-    <div class="shots" aria-label="Screenshots">${shots}</div>
+    ${shots ? `<div class="shots" aria-label="Screenshots">${shots}</div>` : ""}
     <div class="app-grid2">
       <div class="panel"><h2>${t("features")}</h2><ul class="feat">${L(a.feat).map(f=>`<li>${esc(f)}</li>`).join("")}</ul></div>
       <div class="panel"><h2>${t("changelog")}</h2>${log}</div>
@@ -1687,10 +1599,7 @@ document.getElementById("ding-list").addEventListener("click", async e => {
 });
 
 /* ============ Social Media ============
-   Neue Plattform: einfach einen Eintrag in SOCIAL ergänzen (id, name, handle, url, color, icon).
-   Instagram-Posts kommen automatisch über einen JSON-Feed von behold.so (Adresse bei BEHOLD_FEED eintragen).
-   Posts von allen anderen Plattformen kommen aus der Supabase-Tabelle "social_posts". */
-const BEHOLD_FEED = "";
+   Neue Plattform: Eintrag in SOCIAL ergänzen. Neue Posts: Link in SOCIAL_EMBEDS oder in der Supabase-Tabelle "social_posts". */
 const SOCIAL = [
   {id:"instagram", name:"Instagram", handle:"@nounnounstudio", url:"https://www.instagram.com/nounnounstudio/", color:"#d6336c",
    icon:'<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/>'},
@@ -1698,13 +1607,15 @@ const SOCIAL = [
    icon:'<path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>'}
 ];
 const SOCIAL_SOON = ["TikTok","YouTube"];
-const SOCIAL_DEMO = [
-  {platform:"instagram", datum:"2026-11-09", text_de:"Summstau ist unterwegs zu Google Play. Wer will mittesten?", text_en:"Summstau is on its way to Google Play. Who wants to test?", url:"https://www.instagram.com/nounnounstudio/"},
-  {platform:"x", datum:"2026-11-08", text_de:"Vier neue Apps in drei Tagen. Diese Woche wird voll.", text_en:"Four new apps in three days. Busy week ahead.", url:"https://x.com/NOUNNOUNStudio"},
-  {platform:"instagram", datum:"2026-11-06", text_de:"Ein Blick in die Werkstatt: So entsteht ein Pixelbild für Summstau.", text_en:"A look into the workshop: how a Summstau pixel picture comes together.", url:"https://www.instagram.com/nounnounstudio/"}
+/* Eingebettete Posts: neuen Post-Link oben ergänzen (Instagram oder X).
+   Mit Supabase kommen sie zusätzlich aus der Tabelle "social_posts" (Spalten platform, datum, url). */
+const SOCIAL_EMBEDS = [
+  {platform:"instagram", datum:"2026-11-16", url:"https://www.instagram.com/p/DfU3NlKowMp/"},
+  {platform:"x", datum:"2026-11-16", url:"https://x.com/NOUNNOUNStudio/status/2118012169287856131"}
 ];
 const socialIcon = (p, size=20) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true">${p.icon}</svg>`;
-let socialPosts = [], socialDemo = false;
+let socialPosts = SOCIAL_EMBEDS.slice(), socialOn = false;
+try{ socialOn = localStorage.getItem("noun-social")==="1"; }catch(e){}
 
 function renderSocialProfiles(){
   const cards = SOCIAL.map(p => `
@@ -1718,42 +1629,44 @@ function renderSocialProfiles(){
   document.getElementById("foot-social").innerHTML = SOCIAL.map(p =>
     `<a href="${esc(p.url)}" target="_blank" rel="noopener" aria-label="${esc(p.name)} ${esc(p.handle)}" title="${esc(p.name)}">${socialIcon(p, 18)}</a>`).join("");
 }
+function loadScript(src){ if(document.querySelector(`script[src="${src}"]`)) return; const sc = document.createElement("script"); sc.async = true; sc.src = src; document.body.appendChild(sc); }
 function renderSocialFeed(){
   const box = document.getElementById("soc-feed");
-  document.getElementById("soc-demo").hidden = !socialDemo;
   if(!socialPosts.length){ box.innerHTML = `<p class="muted">${esc(t("soc_empty"))}</p>`; return; }
-  box.innerHTML = socialPosts.slice(0, 12).map(post => {
-    const p = SOCIAL.find(s => s.id===post.platform) || {name:post.platform, color:"#5d6068", icon:'<circle cx="12" cy="12" r="8" fill="currentColor"/>'};
-    const text = lang==="en" ? (post.text_en || post.text_de || "") : (post.text_de || post.text_en || "");
-    const d = post.datum ? new Date(post.datum.length>10 ? post.datum : post.datum+"T12:00:00").toLocaleDateString(lang==="en"?"en-GB":"de-DE",{day:"numeric",month:"short",year:"numeric"}) : "";
-    return `<a class="post-card" href="${esc(post.url)}" target="_blank" rel="noopener">
-      ${post.bild ? `<img src="${esc(post.bild)}" alt="" loading="lazy">` : ""}
-      <div class="post-meta"><span class="soc-ico small" style="background:${p.color}">${socialIcon(p, 14)}</span><span>${esc(p.name)}</span><span class="muted">${esc(d)}</span></div>
-      <p>${esc(text)}</p>
-      <span class="more">${esc(t("soc_open"))} ${esc(p.name)} ↗</span>
-    </a>`;
-  }).join("");
-}
-async function socialLoad(){
-  const all = [];
-  if(BEHOLD_FEED){
-    try{
-      const f = await (await fetch(BEHOLD_FEED)).json();
-      (f.posts || []).forEach(x => all.push({platform:"instagram", datum:x.timestamp, url:x.permalink,
-        text_de:(x.prunedCaption || x.caption || "").slice(0, 280),
-        bild:(x.sizes && x.sizes.medium && x.sizes.medium.mediaUrl) || x.thumbnailUrl || x.mediaUrl}));
-    }catch(e){}
+  if(!socialOn){
+    box.innerHTML = `<div class="soc-consent"><p>${t("soc_consent")}</p><button class="btn primary" type="button" id="soc-allow">${esc(t("soc_allow"))}</button></div>`;
+    return;
   }
+  const list = socialPosts.slice(0, 9);
+  box.innerHTML = `<div class="soc-embeds">${list.map(post => post.platform==="x"
+    ? `<div><blockquote class="twitter-tweet" data-dnt="true" data-lang="${lang}"><a href="${esc(post.url)}">${esc(post.url)}</a></blockquote></div>`
+    : `<div><blockquote class="instagram-media" data-instgrm-permalink="${esc(post.url)}" data-instgrm-version="14" style="margin:0;min-width:0;width:100%"><a href="${esc(post.url)}">${esc(post.url)}</a></blockquote></div>`).join("")}</div>`;
+  if(list.some(p=>p.platform==="x")){ if(window.twttr && twttr.widgets) twttr.widgets.load(box); else loadScript("https://platform.twitter.com/widgets.js"); }
+  if(list.some(p=>p.platform!=="x")){ if(window.instgrm) instgrm.Embeds.process(); else loadScript("https://www.instagram.com/embed.js"); }
+}
+document.addEventListener("click", e => {
+  if(e.target.id!=="soc-allow") return;
+  socialOn = true; try{ localStorage.setItem("noun-social","1"); }catch(err){}
+  renderSocialFeed();
+});
+async function socialLoad(){
   if(LIVE){
     try{
-      const rows = await (await sb("social_posts?select=platform,datum,url,text_de,text_en,bild&aktiv=eq.true&order=datum.desc&limit=20")).json();
-      all.push(...rows);
+      const rows = await (await sb("social_posts?select=platform,datum,url&aktiv=eq.true&order=datum.desc&limit=20")).json();
+      const seen = new Set(SOCIAL_EMBEDS.map(p=>p.url));
+      socialPosts = [...rows.filter(r=>!seen.has(r.url)), ...SOCIAL_EMBEDS].sort((a,b) => String(b.datum).localeCompare(String(a.datum)));
     }catch(e){}
   }
-  socialDemo = !BEHOLD_FEED && !LIVE;
-  socialPosts = socialDemo ? SOCIAL_DEMO : all.sort((a,b) => String(b.datum).localeCompare(String(a.datum)));
   renderSocialFeed();
 }
+/* Screenshot-Großansicht */
+document.addEventListener("click", e => {
+  const b = e.target.closest(".shot");
+  const lbx = document.getElementById("lightbox");
+  if(b){ lbx.querySelector("img").src = b.dataset.src; lbx.hidden = false; history.pushState({lb:1}, ""); return; }
+  if(!lbx.hidden && (e.target===lbx || e.target.closest("#lightbox button"))){ history.back(); }
+});
+window.addEventListener("popstate", () => { const l = document.getElementById("lightbox"); if(l && !l.hidden) l.hidden = true; });
 
 /* ============ Rechtliches ============ */
 function renderLegal(k){ document.getElementById("legal-body").innerHTML = L(LEGAL[k]); }
